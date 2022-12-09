@@ -263,8 +263,8 @@ function config.catppuccin()
 					LspDiagnosticsUnderlineHint = { sp = cp.rosewater },
 
 					-- For fidget.
-					-- FidgetTask = { bg = cp.none, fg = cp.surface2 },
-					-- FidgetTitle = { fg = cp.blue, style = { "bold" } },
+					FidgetTask = { bg = cp.none, fg = cp.surface2 },
+					FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
 					-- For treesitter.
 					["@field"] = { fg = cp.rosewater },
@@ -589,7 +589,7 @@ function config.nvim_tree()
 					none = "  ",
 				},
 			},
-			root_folder_modifier = ":e",
+			root_folder_modifier = ":.:s?.*?/..?",
 			icons = {
 				webdev_colors = true,
 				git_placement = "before",
@@ -645,7 +645,7 @@ function config.nvim_tree()
 			exclude = {},
 		},
 		actions = {
-			use_system_clipboard = true,
+			use_system_clipboard = false,
 			change_dir = {
 				enable = true,
 				global = false,

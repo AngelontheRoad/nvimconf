@@ -303,6 +303,7 @@ function config.dap()
 		end
 		api.nvim_set_keymap("n", "L", '<Cmd>lua require("dap.ui.widgets").hover()<CR>', { silent = true })
 	end
+
 	dap.listeners.after["event_terminated"]["me"] = function()
 		for _, keymap in pairs(keymap_restore) do
 			api.nvim_buf_set_keymap(keymap.buffer, keymap.mode, keymap.lhs, keymap.rhs, { silent = keymap.silent == 1 })
@@ -341,13 +342,13 @@ function config.dap()
 
 	dap.adapters.lldb = {
 		type = "executable",
-		command = "/home/chris/codelldb/extension/adapter/codelldb",
+		command = "/home/chris/codelldb/extension/lldb/bin/lldb",
 		name = "lldb",
 	}
 	dap.configurations.cpp = {
 		{
 			-- https://github.com/vadimcn/vscode-lldb/blob/master/MANUAL.md
-			name = "Launch file",
+			name = "Launch",
 			type = "lldb",
 			request = "launch",
 			program = function()
