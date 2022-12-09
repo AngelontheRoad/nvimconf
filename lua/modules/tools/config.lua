@@ -6,6 +6,7 @@ function config.telescope()
 	vim.api.nvim_command([[packadd telescope-project.nvim]])
 	vim.api.nvim_command([[packadd telescope-frecency.nvim]])
 	vim.api.nvim_command([[packadd telescope-zoxide]])
+	vim.api.nvim_command([[packadd telescope-live-grep-args.nvim]])
 
 	local icons = { ui = require("modules.ui.icons").get("ui", true) }
 	local telescope_actions = require("telescope.actions.set")
@@ -20,6 +21,7 @@ function config.telescope()
 			return true
 		end,
 	}
+	local lga_actions = require("telescope-live-grep-args.actions")
 
 	require("telescope").setup({
 		defaults = {
@@ -66,6 +68,16 @@ function config.telescope()
 				show_unindexed = true,
 				ignore_patterns = { "*.git/*", "*/tmp/*" },
 			},
+			live_grep_args = {
+				auto_quoting = true, -- enable/disable auto-quoting
+				-- define mappings, e.g.
+				mappings = { -- extend mappings
+					i = {
+						["<C-k>"] = lga_actions.quote_prompt(),
+						["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+					},
+				},
+			},
 		},
 		pickers = {
 			buffers = fixfolds,
@@ -82,6 +94,7 @@ function config.telescope()
 	require("telescope").load_extension("project")
 	require("telescope").load_extension("zoxide")
 	require("telescope").load_extension("frecency")
+	require("telescope").load_extension("live_grep_args")
 end
 
 function config.trouble()
@@ -99,6 +112,8 @@ function config.trouble()
 		mode = "document_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
 		fold_open = icons.ui.ArrowOpen, -- icon used for open folds
 		fold_closed = icons.ui.ArrowClosed, -- icon used for closed folds
+		group = true,
+		padding = true,
 		action_keys = {
 			-- key mappings for actions in the trouble list
 			-- map to {} to remove a mapping, for example:
@@ -135,7 +150,7 @@ function config.trouble()
 			information = icons.diagnostics.Information_alt,
 			other = icons.diagnostics.Question_alt,
 		},
-		use_lsp_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
+		use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 	})
 end
 
@@ -276,11 +291,14 @@ function config.legendary()
 				name = "Bufferline commands",
 				d = "buffer: Sort by directory",
 				e = "buffer: Sort by extension",
+				l = "buffer: List buffers",
 			},
 
 			d = {
 				name = "Dap commands",
 				b = "debug: Toggle breakpoint",
+				B = "debug: Set condition breakpoint",
+				C = "debug: Set log breakpoint",
 				d = "debug: Terminate debug session",
 				r = "debug: Continue",
 				l = "debug: Open repl",
@@ -291,7 +309,7 @@ function config.legendary()
 			f = {
 				name = "Telescope commands",
 				p = "find: Project",
-				w = "find: Word",
+				w = "find: Live grep",
 				r = "find: File by frecency",
 				e = "find: File by history",
 				c = "ui: Change color scheme",

@@ -33,7 +33,7 @@ local plug_map = {
 	["n|<A-t>"] = map_cr("LSoutlineToggle"):with_noremap():with_silent(),
 	["n|g["] = map_cr("Lspsaga diagnostic_jump_prev"):with_noremap():with_silent(),
 	["n|g]"] = map_cr("Lspsaga diagnostic_jump_next"):with_noremap():with_silent(),
-	["n|gs"] = map_cr("Lspsaga signature_help"):with_noremap():with_silent(),
+	["n|gs"] = map_cr("lua vim.lsp.buf.signature_help()"):with_noremap():with_silent(),
 	["n|gr"] = map_cr("Lspsaga rename"):with_noremap():with_silent(),
 	["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
 	["n|ga"] = map_cr("Lspsaga code_action"):with_noremap():with_silent(),
@@ -75,15 +75,15 @@ local plug_map = {
 	["n|<Leader>u"] = map_cr("UndotreeToggle"):with_noremap():with_silent(),
 	-- Plugin Telescope
 	["n|<Leader>fp"] = map_cu("lua require('telescope').extensions.project.project{}"):with_noremap():with_silent(),
-	["n|<Leader>fr"] = map_cu("lua require('telescope.built').extensions.frecency.frecency{}")
+	["n|<Leader>fr"] = map_cu("lua require('telescope').extensions.frecency.frecency{}"):with_noremap():with_silent(),
+	["n|<Leader>fw"] = map_cu("lua require('telescope').extensions.live_grep_args.live_grep_args{}")
 		:with_noremap()
 		:with_silent(),
 	["n|<Leader>fe"] = map_cu("Telescope oldfiles"):with_noremap():with_silent(),
 	["n|<Leader>ff"] = map_cu("Telescope find_files"):with_noremap():with_silent(),
-	["n|<Leader>fb"] = map_cu("Telescope buffers"):with_noremap():with_silent(),
+	["n|<Leader>bl"] = map_cu("Telescope buffers"):with_noremap():with_silent(),
 	["n|<Leader>fc"] = map_cu("Telescope colorscheme"):with_noremap():with_silent(),
 	["n|<Leader>fn"] = map_cu(":enew"):with_noremap():with_silent(),
-	["n|<Leader>fw"] = map_cu("Telescope live_grep"):with_noremap():with_silent(),
 	["n|<Leader>fg"] = map_cu("Telescope git_files"):with_noremap():with_silent(),
 	["n|<Leader>fz"] = map_cu("Telescope zoxide list"):with_noremap():with_silent(),
 	-- Plugin accelerate-jk
@@ -115,6 +115,9 @@ local plug_map = {
 	["n|<leader>dd"] = map_cr("lua require('dap').terminate() require('dapui').close()"):with_noremap():with_silent(),
 	["n|<leader>db"] = map_cr("lua require('dap').toggle_breakpoint()"):with_noremap():with_silent(),
 	["n|<leader>dB"] = map_cr("lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))")
+		:with_noremap()
+		:with_silent(),
+	["n|<leader>dC"] = map_cr("lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ))")
 		:with_noremap()
 		:with_silent(),
 	["n|<leader>dcb"] = map_cr("lua require('dap').clear_breakpoints()"):with_noremap():with_silent(),
