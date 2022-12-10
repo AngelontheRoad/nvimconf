@@ -182,7 +182,6 @@ function config.cmp()
 			comparators = {
 				-- require("copilot_cmp.comparators").prioritize,
 				-- require("copilot_cmp.comparators").score,
-				-- require("cmp_tabnine.compare"),
 				compare.offset,
 				compare.exact,
 				compare.score,
@@ -248,7 +247,8 @@ function config.cmp()
 			{ name = "luasnip" },
 			{ name = "path" },
 			{ name = "spell" },
-			-- { name = "orgmode" },
+			{ name = "tmux" },
+			{ name = "orgmode" },
 			{ name = "buffer" },
 			{ name = "latex_symbols" },
 			{ name = "copilot" },
@@ -267,6 +267,9 @@ function config.luasnip()
 		updateevents = "TextChanged,TextChangedI",
 		delete_check_events = "TextChanged,InsertLeave",
 	})
+	require("luasnip.loaders.from_lua").lazy_load()
+	require("luasnip.loaders.from_vscode").lazy_load()
+	require("luasnip.loaders.from_snipmate").lazy_load()
 end
 
 function config.autopairs()

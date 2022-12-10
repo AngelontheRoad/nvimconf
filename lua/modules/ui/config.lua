@@ -246,6 +246,7 @@ function config.catppuccin()
 					Keyword = { fg = cp.pink },
 					Type = { fg = cp.blue },
 					Typedef = { fg = cp.yellow },
+					StorageClass = { fg = cp.red, style = { "italic" } },
 
 					-- For nvim-tree
 					NvimTreeNormal = { bg = cp.none },
@@ -288,6 +289,7 @@ function config.catppuccin()
 					["@constant.builtin"] = { fg = cp.lavender },
 					-- ["@function.builtin"] = { fg = cp.peach, style = { "italic" } },
 					-- ["@type.builtin"] = { fg = cp.yellow, style = { "italic" } },
+					["@type.qualifier"] = { link = "@keyword" },
 					["@variable.builtin"] = { fg = cp.red, style = { "italic" } },
 
 					-- ["@function"] = { fg = cp.blue },

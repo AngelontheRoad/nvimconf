@@ -113,17 +113,17 @@ local plug_map = {
 	["n|<F6>"] = map_cr("lua require('dap').continue()"):with_noremap():with_silent(),
 	["n|<leader>dr"] = map_cr("lua require('dap').continue()"):with_noremap():with_silent(),
 	["n|<leader>dd"] = map_cr("lua require('dap').terminate() require('dapui').close()"):with_noremap():with_silent(),
-	["n|<leader>db"] = map_cr("lua require('dap').toggle_breakpoint()"):with_noremap():with_silent(),
-	["n|<leader>dB"] = map_cr("lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))")
+	["n|<leader>dbb"] = map_cr("lua require('dap').toggle_breakpoint()"):with_noremap():with_silent(),
+	["n|<leader>dbc"] = map_cr("lua require('dap').clear_breakpoints()"):with_noremap():with_silent(),
+	["n|<leader>dbl"] = map_cr("lua require('dap').list_breakpoints()"):with_noremap():with_silent(),
+	["n|<leader>dbB"] = map_cr("lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))")
 		:with_noremap()
 		:with_silent(),
-	["n|<leader>dC"] = map_cr("lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ))")
+	["n|<leader>dbC"] = map_cr("lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ))")
 		:with_noremap()
 		:with_silent(),
-	["n|<leader>dcb"] = map_cr("lua require('dap').clear_breakpoints()"):with_noremap():with_silent(),
-	["n|<leader>dlb"] = map_cr("lua require('dap').list_breakpoints()"):with_noremap():with_silent(),
-	["n|<leader>drc"] = map_cr("lua require('dap').run_to_cursor()"):with_noremap():with_silent(),
-	["n|<leader>drl"] = map_cr("lua require('dap').run_last()"):with_noremap():with_silent(),
+	["n|<leader>dc"] = map_cr("lua require('dap').run_to_cursor()"):with_noremap():with_silent(),
+	["n|<leader>dl"] = map_cr("lua require('dap').run_last()"):with_noremap():with_silent(),
 	["n|<F9>"] = map_cr("lua require('dap').step_over()"):with_noremap():with_silent(),
 	["n|<leader>dv"] = map_cr("lua require('dap').step_over()"):with_noremap():with_silent(),
 	["n|<F10>"] = map_cr("lua require('dap').step_into()"):with_noremap():with_silent(),
@@ -131,10 +131,11 @@ local plug_map = {
 	["n|<F11>"] = map_cr("lua require('dap').step_out()"):with_noremap():with_silent(),
 	["n|<leader>do"] = map_cr("lua require('dap').step_out()"):with_noremap():with_silent(),
 	["n|<leader>dk"] = map_cr("lua require('dap').step_back()"):with_noremap():with_silent(),
-	["n|<leader>dl"] = map_cr("lua require('dap').repl.open()"):with_noremap():with_silent(),
+	["n|<leader>dp"] = map_cr("lua require('dap').repl.open()"):with_noremap():with_silent(),
 	["o|m"] = map_cu([[lua require('tsht').nodes()]]):with_silent(),
 	["x|m"] = map_cr([[lua require('tsht').nodes()]]):with_silent(),
 	["c|Q"] = map_cu([[%SnipRun]]):with_silent(),
+
 	-- Plugin Tabout
 	["i|<A-l>"] = map_cmd([[<Plug>(TaboutMulti)]]):with_silent(),
 	["i|<A-h>"] = map_cmd([[<Plug>(TaboutBackMulti)]]):with_silent(),

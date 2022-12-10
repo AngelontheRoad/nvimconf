@@ -22,6 +22,7 @@ mason_lsp.setup({
 		"sumneko_lua",
 		"clangd",
 		"marksman",
+		"gopls",
 		"pyright",
 	},
 })
