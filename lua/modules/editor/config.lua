@@ -434,13 +434,14 @@ function config.dap()
 			-- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
 			program = "${file}", -- This configuration will launch the current file if used.
 			pythonPath = function()
-				local cwd = vim.fn.getcwd()
-				if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
-					return cwd .. "/venv/bin/python"
-				elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
-					return cwd .. "/.venv/bin/python"
-				elseif vim.fn.executable("/home/chris/anaconda3/envs/py310/bin/python") then
-					return "/home/chris/anaconda3/envs/py310/bin/python"
+				-- local cwd = vim.fn.getcwd()
+				-- if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
+				-- 	return cwd .. "/venv/bin/python"
+				-- elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
+				-- return cwd .. "/.venv/bin/python"
+				if vim.fn.executable("/home/chris/anaconda3/envs/sci/bin/python") then
+					-- return "/home/chris/anaconda3/bin/python"
+					return "/home/chris/anaconda3/envs/sci/bin/python"
 				else
 					return "/home/chris/anaconda3/bin/python"
 				end
@@ -577,4 +578,28 @@ function config.matchup()
 	vim.api.nvim_set_hl(0, "MatchParen", { italic = true, underline = true, fg = "#B5E8E0" })
 end
 
+function config.overseer()
+	require("overseer").setup({
+		strategy = {
+			"toggleterm",
+			-- load your default shell before starting the task
+			use_shell = false,
+			-- overwrite the default toggleterm "direction" parameter
+			direction = nil,
+			-- overwrite the default toggleterm "dir" parameter
+			dir = nil,
+			-- overwrite the default toggleterm "highlights" parameter
+			highlights = nil,
+			-- overwrite the default toggleterm "auto_scroll" parameter
+			auto_scroll = nil,
+			-- have the toggleterm window close automatically after the task exits
+			close_on_exit = false,
+			-- open the toggleterm window when a task starts
+			open_on_start = true,
+			-- mirrors the toggleterm "hidden" parameter, and keeps the task from
+			-- being rendered in the toggleable window
+			hidden = false,
+		},
+	})
+end
 return config

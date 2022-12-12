@@ -102,7 +102,7 @@ local clipboard_config = function()
 			name = "win32yank-wsl",
 			copy = {
 				["+"] = "win32yank.exe -i --crlf",
-				["*"] = "win32yank.exe -i --lf",
+				["*"] = "win32yank.exe -i --crlf",
 			},
 			paste = {
 				["+"] = "win32yank.exe -o --lf",
@@ -115,19 +115,19 @@ end
 
 local load_core = function()
 	local pack = require("core.pack")
- 	createdir()
- 	disable_distribution_plugins()
- 	leader_map()
- 
- 	pack.ensure_plugins()
- 	neovide_config()
- 	clipboard_config()
- 
- 	require("core.options")
- 	require("core.mapping")
- 	require("keymap")
- 	require("core.event")
- 	pack.load_compile()
+	createdir()
+	disable_distribution_plugins()
+	leader_map()
+
+	pack.ensure_plugins()
+	neovide_config()
+	clipboard_config()
+
+	require("core.options")
+	require("core.mapping")
+	require("keymap")
+	require("core.event")
+	pack.load_compile()
 
 	-- vim.api.nvim_command([[set background=light]])
 	vim.api.nvim_command([[colorscheme catppuccin]])

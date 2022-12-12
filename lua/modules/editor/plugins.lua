@@ -114,6 +114,12 @@ editor["rmagatti/auto-session"] = {
 -- 	event = "BufReadPost",
 -- 	config = conf.better_escape,
 -- }
+
+editor["stevearc/overseer.nvim"] = {
+	opt = false,
+	config = conf.overseer,
+}
+
 editor["mfussenegger/nvim-dap"] = {
 	opt = true,
 	cmd = {
@@ -129,10 +135,6 @@ editor["mfussenegger/nvim-dap"] = {
 	},
 	module = "dap",
 	config = conf.dap,
-}
-editor["mfussenegger/nvim-dap-python"] = {
-	opt = true,
-	after = "nvim-dap",
 }
 editor["rcarriga/nvim-dap-ui"] = {
 	opt = true,

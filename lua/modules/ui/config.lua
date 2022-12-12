@@ -202,7 +202,7 @@ function config.catppuccin()
 			vimwiki = true,
 			beacon = false,
 			navic = { enabled = false },
-			overseer = false,
+			overseer = true,
 			fidget = true,
 		},
 		color_overrides = {
@@ -358,6 +358,25 @@ function config.catppuccin()
 	})
 end
 
+function config.neodim()
+	vim.api.nvim_command([[packadd nvim-treesitter]])
+	local normal_background = vim.api.nvim_get_hl_by_name("Normal", true).background
+	local blend_color = normal_background ~= nil and string.format("#%06x", normal_background) or "#000000"
+	require("neodim").setup({
+		alpha = 0.45,
+		blend_color = blend_color,
+		update_in_insert = {
+			enable = true,
+			delay = 100,
+		},
+		hide = {
+			virtual_text = true,
+			signs = false,
+			underline = false,
+		},
+	})
+end
+
 function config.notify()
 	local notify = require("notify")
 	local icons = {
@@ -402,10 +421,10 @@ function config.lualine()
 		ui = require("modules.ui.icons").get("ui", true),
 	}
 
-	local function escape_status()
-		local ok, m = pcall(require, "better_escape")
-		return ok and m.waiting and icons.misc.EscapeST or ""
-	end
+	-- local function escape_status()
+	-- 	local ok, m = pcall(require, "better_escape")
+	-- 	return ok and m.waiting and icons.misc.EscapeST or ""
+	-- end
 
 	local function diff_source()
 		local gitsigns = vim.b.gitsigns_status_dict
@@ -469,6 +488,7 @@ function config.lualine()
 	-- 	return string.format()
 	-- end
 
+	local overseer = require("overseer")
 	require("lualine").setup({
 		options = {
 			icons_enabled = true,
@@ -482,7 +502,22 @@ function config.lualine()
 			lualine_b = { { "branch" }, { "diff", source = diff_source } },
 			lualine_c = { { get_cwd } },
 			lualine_x = {
-				{ escape_status },
+				{
+					"overseer",
+					label = "",
+					colored = true,
+					symbols = {
+						[overseer.STATUS.FAILURE] = "F:",
+						[overseer.STATUS.CANCELED] = "C:",
+						[overseer.STATUS.SUCCESS] = "S:",
+						[overseer.STATUS.RUNNING] = "R:",
+					},
+					unique = false, -- Unique-ify non-running task count by name
+					name = nil, -- List of task names to search for
+					name_not = false, -- When true, invert the name search
+					status = nil, -- List of task statuses to display
+					status_not = false, -- When true, invert the status search
+				},
 				{
 					"diagnostics",
 					sources = { "nvim_diagnostic" },
@@ -637,7 +672,7 @@ function config.nvim_tree()
 		},
 		update_focused_file = {
 			enable = true,
-			update_root = false,
+			update_root = true,
 			ignore_list = {},
 		},
 		ignore_ft_on_setup = {},

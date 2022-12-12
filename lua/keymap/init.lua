@@ -113,6 +113,7 @@ local plug_map = {
 	["n|<F6>"] = map_cr("lua require('dap').continue()"):with_noremap():with_silent(),
 	["n|<leader>dr"] = map_cr("lua require('dap').continue()"):with_noremap():with_silent(),
 	["n|<leader>dd"] = map_cr("lua require('dap').terminate() require('dapui').close()"):with_noremap():with_silent(),
+	["n|<F2>"] = map_cr("lua require('dap').toggle_breakpoint()"):with_noremap():with_silent(),
 	["n|<leader>dbb"] = map_cr("lua require('dap').toggle_breakpoint()"):with_noremap():with_silent(),
 	["n|<leader>dbc"] = map_cr("lua require('dap').clear_breakpoints()"):with_noremap():with_silent(),
 	["n|<leader>dbl"] = map_cr("lua require('dap').list_breakpoints()"):with_noremap():with_silent(),
