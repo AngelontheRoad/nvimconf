@@ -198,7 +198,11 @@ function config.wilder()
 	local wilder = require("wilder")
 	local icons = { ui = require("modules.ui.icons").get("ui") }
 
-	wilder.setup({ modes = { ":", "/", "?" } })
+	wilder.setup({
+		modes = { ":", "/", "?" },
+		accept_key = "<Right>",
+		reject_key = "<Left>",
+	})
 	wilder.set_option("use_python_remote_plugin", 0)
 	wilder.set_option("pipeline", {
 		wilder.branch(
