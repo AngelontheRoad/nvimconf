@@ -407,6 +407,7 @@ function config.legendary()
 		["<leader>c"] = "jump: Goto one char",
 		["<leader>cc"] = "jump: Goto two chars",
 		["<leader>o"] = "edit: Check spell",
+		["<leader>q"] = "quit",
 	})
 end
 
