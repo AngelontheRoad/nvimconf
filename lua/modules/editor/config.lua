@@ -422,7 +422,7 @@ function config.dap()
 	dap.adapters.python = {
 		-- for help https://github.com/mfussenegger/nvim-dap/blob/master/doc/dap.txt
 		type = "executable",
-		command = "/home/chris/anaconda3/envs/py310/bin/python",
+		command = "/home/chris/anaconda3/bin/python",
 		args = { "-m", "debugpy.adapter" },
 	}
 	dap.configurations.python = {
