@@ -600,6 +600,13 @@ function config.overseer()
 			-- being rendered in the toggleable window
 			hidden = false,
 		},
+		templates = {
+			"builtin",
+			"cpp.gcc_build",
+			"cpp.clang_build",
+			"c.gcc_build",
+			"c.clang_build",
+		},
 	})
 end
 return config
