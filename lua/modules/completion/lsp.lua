@@ -273,7 +273,7 @@ efmls.setup({
 	lua = { formatter = stylua },
 	c = { formatter = clangfmt },
 	cpp = { formatter = clangfmt },
-	python = { formatter = black },
+	python = { formatter = flake8 },
 	vue = { formatter = prettier },
 	typescript = { formatter = prettier, linter = eslint },
 	javascript = { formatter = prettier, linter = eslint },
