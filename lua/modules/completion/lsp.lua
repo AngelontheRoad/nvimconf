@@ -259,7 +259,8 @@ local clangfmt = require("modules.completion.efm.formatters.clangfmt")
 -- Override default config here
 
 flake8 = vim.tbl_extend("force", flake8, {
-	prefix = "flake8: max-line-length=160, ignore F403 and F405",
+	-- prefix = "flake8: max-line-length=160, ignore F403 and F405",
+	prefix = "flake8:",
 	lintStdin = true,
 	lintIgnoreExitCode = true,
 	lintFormats = { "%f:%l:%c: %t%n%n%n %m" },

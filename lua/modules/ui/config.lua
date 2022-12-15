@@ -575,7 +575,7 @@ function config.nvim_tree()
 
 	require("nvim-tree").setup({
 		create_in_closed_folder = false,
-		respect_buf_cwd = false,
+		respect_buf_cwd = true,
 		auto_reload_on_write = true,
 		disable_netrw = false,
 		hijack_cursor = true,
@@ -682,7 +682,7 @@ function config.nvim_tree()
 			exclude = {},
 		},
 		actions = {
-			use_system_clipboard = false,
+			use_system_clipboard = true,
 			change_dir = {
 				enable = true,
 				global = false,
