@@ -99,7 +99,7 @@ editor["akinsho/toggleterm.nvim"] = {
 -- show color of color code (hex etc.)
 editor["NvChad/nvim-colorizer.lua"] = {
 	opt = true,
-	event = "BufReadPost",
+    after = "nvim-treesitter",
 	config = conf.nvim_colorizer,
 }
 -- for session file

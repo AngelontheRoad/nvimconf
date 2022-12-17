@@ -46,6 +46,8 @@ function config.lspsaga()
 	local colors = get_palette()
 
 	require("lspsaga").init_lsp_saga({
+        saga_winblend = 30,
+        rename_in_select = false,
 		diagnostic_header = {
 			icons.diagnostics.Error_alt,
 			icons.diagnostics.Warning_alt,
@@ -361,6 +363,16 @@ function config.mason_install()
 		-- Default: 0
 		start_delay = 1000, -- 3 second delay
 	})
+end
+
+function config.copilot()
+	vim.defer_fn(function()
+		require("copilot").setup({
+			filetypes = {
+				["dap-repl"] = false,
+			},
+		})
+	end, 100)
 end
 
 return config
