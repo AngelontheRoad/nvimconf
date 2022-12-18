@@ -26,7 +26,7 @@ local def_map = {
 	["n|<A-q>"] = map_cmd(":bwipeout<CR>"),
 	-- ["n|<A-S-q>"] = map_cmd(":q!<CR>"),
 	["n|<leader>q"] = map_cmd(":q!<CR>"),
-	["n|<leader>o"] = map_cr("setlocal spell! spelllang=en_us"),
+	["n|<leader><leader>o"] = map_cr("setlocal spell! spelllang=en_us"),
 	-- Insert
 	["i|<C-u>"] = map_cmd("<C-G>u<C-U>"):with_noremap(),
 	["i|<C-b>"] = map_cmd("<Left>"):with_noremap(),

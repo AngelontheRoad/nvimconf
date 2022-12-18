@@ -406,8 +406,6 @@ function config.legendary()
 			d = "lsp: Preview definition",
 			D = "lsp: Goto definition",
 			h = "lsp: Show reference",
-			o = "lsp: Toggle outline",
-			r = "lsp: Rename",
 			s = "lsp: Signature help",
 			t = "lsp: Toggle trouble list",
 			b = "buffer: Buffer pick",
@@ -417,6 +415,8 @@ function config.legendary()
 				l = "git: pull",
 			},
 		},
+		["<leader>o"] = "lsp: Toggle outline",
+		["<leader>r"] = "lsp: Rename",
 		["<leader>G"] = "git: Show fugitive",
 		["<leader>g"] = "git: Show lazygit",
 		["<leader>D"] = "git: Show diff",
@@ -428,7 +428,7 @@ function config.legendary()
 		["<leader>k"] = "jump: Goto line",
 		["<leader>c"] = "jump: Goto one char",
 		["<leader>cc"] = "jump: Goto two chars",
-		["<leader>o"] = "edit: Check spell",
+		["<leader><leader>o"] = "edit: Check spell",
 		["<leader>q"] = "quit",
 	})
 end
