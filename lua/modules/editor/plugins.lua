@@ -99,7 +99,7 @@ editor["akinsho/toggleterm.nvim"] = {
 -- show color of color code (hex etc.)
 editor["NvChad/nvim-colorizer.lua"] = {
 	opt = true,
-    after = "nvim-treesitter",
+	after = "nvim-treesitter",
 	config = conf.nvim_colorizer,
 }
 -- for session file
@@ -181,6 +181,12 @@ editor["ibhagwan/smartyank.nvim"] = {
 	opt = true,
 	event = "BufReadPost",
 	config = conf.smartyank,
+}
+
+-- replace by register
+editor["vim-scripts/ReplaceWithRegister"] = {
+	opt = true,
+	event = "BufReadPost",
 }
 
 -- only for fcitx5 user who uses non-English language during coding

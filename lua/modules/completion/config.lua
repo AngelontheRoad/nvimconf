@@ -46,8 +46,8 @@ function config.lspsaga()
 	local colors = get_palette()
 
 	require("lspsaga").init_lsp_saga({
-        saga_winblend = 30,
-        rename_in_select = false,
+		saga_winblend = 30,
+		rename_in_select = false,
 		diagnostic_header = {
 			icons.diagnostics.Error_alt,
 			icons.diagnostics.Warning_alt,
@@ -87,6 +87,15 @@ function config.lspsaga()
 			TypeAlias = { icons.kind.TypeAlias, colors.green },
 			Parameter = { icons.kind.Parameter, colors.blue },
 			StaticMethod = { icons.kind.StaticMethod, colors.peach },
+		},
+		code_action_lightbulb = {
+			enable = false,
+			enable_in_insert = true,
+			cache_code_action = true,
+			sign = true,
+			update_time = 150,
+			sign_priority = 20,
+			virtual_text = true,
 		},
 		symbol_in_winbar = {
 			enable = true,

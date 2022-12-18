@@ -253,12 +253,13 @@ local shfmt = require("efmls-configs.formatters.shfmt")
 
 -- Add your own config for formatter and linter here
 
+local isort = require("modules.completion.efm.formatters.isort")
 local rustfmt = require("modules.completion.efm.formatters.rustfmt")
 local clangfmt = require("modules.completion.efm.formatters.clangfmt")
 
 -- Override default config here
 
-flake8 = vim.tbl_extend("force", flake8,{
+flake8 = vim.tbl_extend("force", flake8, {
 	-- prefix = "flake8: max-line-length=160, ignore F403 and F405",
 	prefix = "flake8:",
 	lintStdin = true,
@@ -274,7 +275,7 @@ efmls.setup({
 	lua = { formatter = stylua },
 	c = { formatter = clangfmt },
 	cpp = { formatter = clangfmt },
-	python = { formatter = flake8 },
+	python = { formatter = { isort, black } },
 	vue = { formatter = prettier },
 	typescript = { formatter = prettier, linter = eslint },
 	javascript = { formatter = prettier, linter = eslint },
