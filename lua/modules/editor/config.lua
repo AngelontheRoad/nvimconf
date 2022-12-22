@@ -29,9 +29,9 @@ function config.nvim_treesitter()
 		incremental_selection = {
 			enable = true,
 			keymaps = {
-				init_selection = "<CR>",
-				node_incremental = "<CR>",
-				node_decremental = "<BS>",
+				init_selection = "<A-W>",
+				node_incremental = "<A-W>",
+				node_decremental = "<A-W>",
 				scope_incremental = "<TAB>",
 			},
 		},
