@@ -34,7 +34,7 @@ local plug_map = {
 	["n|g["] = map_cr("Lspsaga diagnostic_jump_prev"):with_noremap():with_silent(),
 	["n|g]"] = map_cr("Lspsaga diagnostic_jump_next"):with_noremap():with_silent(),
 	["n|gs"] = map_cr("lua vim.lsp.buf.signature_help()"):with_noremap():with_silent(),
-	["n|<leader>r"] = map_cr("Lspsaga rename"):with_noremap():with_silent(),
+	["n|<leader>n"] = map_cr("Lspsaga rename"):with_noremap():with_silent(),
 	["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
 	["n|ga"] = map_cr("Lspsaga code_action"):with_noremap():with_silent(),
 	["n|gd"] = map_cr("Lspsaga peek_definition"):with_noremap():with_silent(),
@@ -108,6 +108,7 @@ local plug_map = {
 	["n|<leader>sd"] = map_cu("DeleteSession"):with_noremap():with_silent(),
 	-- Plugin SnipRun
 	["v|<leader>r"] = map_cr("SnipRun"):with_noremap():with_silent(),
+	["n|<leader>r"] = map_cu([[%SnipRun]]):with_noremap():with_silent(),
 	-- Plugin dap
 	["n|<F6>"] = map_cr("lua require('dap').continue()"):with_noremap():with_silent(),
 	["n|<leader>dr"] = map_cr("lua require('dap').continue()"):with_noremap():with_silent(),
@@ -134,7 +135,6 @@ local plug_map = {
 	["n|<leader>dp"] = map_cr("lua require('dap').repl.open()"):with_noremap():with_silent(),
 	["o|m"] = map_cu([[lua require('tsht').nodes()]]):with_silent(),
 	["x|m"] = map_cr([[lua require('tsht').nodes()]]):with_silent(),
-	["c|Q"] = map_cu([[%SnipRun]]):with_silent(),
 
 	-- Plugin Tabout
 	["i|<A-l>"] = map_cmd([[<Plug>(TaboutMulti)]]):with_silent(),
