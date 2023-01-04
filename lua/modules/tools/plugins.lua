@@ -2,7 +2,7 @@ local tools = {}
 local conf = require("modules.tools.config")
 
 -- lua function library
-tools["nvim-lua/plenary.nvim"] = { opt = false }
+tools["nvim-lua/plenary.nvim"] = { opt = true, module = "plenary" }
 -- find
 tools["nvim-telescope/telescope.nvim"] = {
 	opt = true,
@@ -10,7 +10,7 @@ tools["nvim-telescope/telescope.nvim"] = {
 	cmd = "Telescope",
 	config = conf.telescope,
 	requires = {
-		{ "nvim-lua/plenary.nvim", opt = false },
+		"nvim-lua/plenary.nvim",
 		{ "nvim-lua/popup.nvim", opt = true },
 		{ "debugloop/telescope-undo.nvim", opt = true },
 	},

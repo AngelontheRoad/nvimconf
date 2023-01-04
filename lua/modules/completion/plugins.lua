@@ -25,7 +25,7 @@ completion["williamboman/mason.nvim"] = {
 }
 completion["glepnir/lspsaga.nvim"] = {
 	opt = true,
-	event = "LspAttach",
+	after = "nvim-lspconfig",
 	config = conf.lspsaga,
 }
 completion["ray-x/lsp_signature.nvim"] = {
@@ -38,7 +38,7 @@ completion["hrsh7th/nvim-cmp"] = {
 	requires = {
 		{ "onsails/lspkind.nvim", module = "lspkind" },
 		{ "lukas-reineke/cmp-under-comparator", module = "cmp-under-comparator" },
-		{ "saadparwaiz1/cmp_luasnip", after = { "nvim-cmp", "LuaSnip" } },
+		{ "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
 		{ "hrsh7th/cmp-nvim-lsp", after = "cmp_luasnip" },
 		{ "hrsh7th/cmp-nvim-lua", after = "cmp-nvim-lsp" },
 		{ "hrsh7th/cmp-path", after = "cmp-nvim-lua" },

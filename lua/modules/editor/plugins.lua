@@ -23,11 +23,6 @@ editor["kylechui/nvim-surround"] = {
 }
 editor["nvim-treesitter/nvim-treesitter"] = {
 	opt = true,
-	module = {
-		"nvim-treesitter",
-		"nvim-treesitter.parsers",
-		"nvim-treesitter.ts_utils",
-	},
 	run = ":TSUpdate",
 	event = "BufReadPost",
 	config = conf.nvim_treesitter,
@@ -153,9 +148,9 @@ editor["nvim-telescope/telescope-dap.nvim"] = {
 -- for git
 editor["tpope/vim-fugitive"] = { opt = true, cmd = { "Git", "G" } }
 -- for :bdelete :bwipeout not mess up window layout
-editor["famiu/bufdelete.nvim"] = {
+editor["ojroques/nvim-bufdel"] = {
 	opt = true,
-	cmd = { "Bdelete", "Bwipeout", "Bdelete!", "Bwipeout!" },
+	event = "BufReadPost",
 }
 -- show cursor moves when jumping large distances
 editor["edluffy/specs.nvim"] = {
@@ -167,7 +162,6 @@ editor["edluffy/specs.nvim"] = {
 editor["abecodes/tabout.nvim"] = {
 	opt = true,
 	event = "InsertEnter",
-	wants = "nvim-treesitter",
 	after = "nvim-cmp",
 	config = conf.tabout,
 }
