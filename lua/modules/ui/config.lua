@@ -124,6 +124,7 @@ function config.nord()
 end
 
 function config.catppuccin()
+	local transparent_background = true -- Set background transparency here!
 	require("catppuccin").setup({
 		flavour = "mocha", -- Can be one of: latte, frappe, macchiato, mocha
 		background = { light = "latte", dark = "mocha" },
@@ -134,7 +135,7 @@ function config.catppuccin()
 			shade = "dark",
 			percentage = 0.15,
 		},
-		transparent_background = true,
+		transparent_background = transparent_background,
 		term_colors = true,
 		compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 		styles = {
@@ -244,6 +245,7 @@ function config.catppuccin()
 			mocha = function(cp)
 				return {
 					-- For base configs.
+					NormalFloat = { fg = cp.text, bg = transparent_background and cp.none or cp.base },
 					CursorLineNr = { fg = cp.green },
 					Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
 					IncSearch = { bg = cp.pink, fg = cp.surface1 },
@@ -353,7 +355,10 @@ function config.catppuccin()
 					["@type.css"] = { fg = cp.lavender },
 					["@property.css"] = { fg = cp.yellow, style = { "italic" } },
 
+					["@type.builtin.c"] = { fg = cp.yellow, style = {} },
+
 					["@property.cpp"] = { fg = cp.text },
+					["@type.builtin.cpp"] = { fg = cp.yellow, style = {} },
 
 					-- ["@symbol"] = { fg = cp.flamingo },
 				}
@@ -533,7 +538,7 @@ function config.lualine()
 		sections = {
 			lualine_a = { { "mode" } },
 			lualine_b = { { "branch" }, { "diff", source = diff_source } },
-			lualine_c = {{ lspsaga_symbols, cond = conditions.check_code_context }},
+			lualine_c = { { lspsaga_symbols, cond = conditions.check_code_context } },
 			lualine_x = {
 				{
 					"overseer",
@@ -560,7 +565,7 @@ function config.lualine()
 						info = icons.diagnostics.Information,
 					},
 				},
-                { get_cwd },
+				{ get_cwd },
 			},
 
 			lualine_y = {
