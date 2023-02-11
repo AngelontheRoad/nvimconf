@@ -60,13 +60,63 @@ return function()
 
 	local leader = "\\"
 	dashboard.section.buttons.val = {
-		button("\\ f c", " Scheme change", leader, "<cmd>Telescope colorscheme<cr>"),
-		button("\\ f r", " File frecency", leader, "<cmd>Telescope frecency<cr>"),
-		button("\\ f e", " File history", leader, "<cmd>Telescope oldfiles<cr>"),
-		button("\\ f p", " Project find", leader, "<cmd>Telescope projects<cr>"),
-		button("\\ f f", " File find", leader, "<cmd>Telescope find_files<cr>"),
-		button("\\ f n", " File new", leader, "<cmd>enew<cr>"),
-		button("\\ f w", " Word find", leader, "<cmd>Telescope live_grep<cr>"),
+		button("leader f c", " Scheme change", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope.builtin").colorscheme()
+			end,
+		}),
+		button("leader f r", " File frecency", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope").extensions.frecency.frecency()
+			end,
+		}),
+		button("leader f e", " File history", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope.builtin").oldfiles()
+			end,
+		}),
+		button("leader f p", " Project find", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope").extensions.projects.projects({})
+			end,
+		}),
+		button("leader f f", " File find", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope.builtin").find_files()
+			end,
+		}),
+		button("leader f n", " File new", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				vim.api.nvim_command("enew")
+			end,
+		}),
+		button("leader f w", " Word find", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope.builtin").live_grep()
+			end,
+		}),
+
 	}
 	dashboard.section.buttons.opts.hl = "String"
 

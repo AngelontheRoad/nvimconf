@@ -21,12 +21,12 @@ editor["ojroques/nvim-bufdel"] = {
 }
 editor["rhysd/clever-f.vim"] = {
 	lazy = true,
-	event = "BufReadPost",
+	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("editor.cleverf"),
 }
 editor["numToStr/Comment.nvim"] = {
 	lazy = true,
-	event = { "BufNewFile", "BufReadPre" },
+	event = { "CursorHold", "CursorHoldI" },
 	config = require("editor.comment"),
 }
 editor["sindrets/diffview.nvim"] = {
@@ -45,7 +45,7 @@ editor["phaazon/hop.nvim"] = {
 }
 editor["RRethy/vim-illuminate"] = {
 	lazy = true,
-	event = "BufReadPost",
+	event = { "CursorHold", "CursorHoldI" },
 	config = require("editor.vim-illuminate"),
 }
 editor["luukvbaal/stabilize.nvim"] = {
@@ -73,23 +73,20 @@ editor["stevearc/overseer.nvim"] = {
 	event = "VeryLazy",
 	config = require("editor.overseer"),
 }
-editor["mfussenegger/nvim-treehopper"] = {
-	lazy = true,
-	event = "BufReadPost",
-}
+
 ----------------------------------------------------------------------
 --                  :treesitter related plugins                    --
 ----------------------------------------------------------------------
 editor["nvim-treesitter/nvim-treesitter"] = {
 	lazy = true,
 	build = ":TSUpdate",
-	event = "BufReadPost",
+	event = { "CursorHold", "CursorHoldI" },
 	config = require("editor.treesitter"),
 	dependencies = {
 		{ "nvim-treesitter/nvim-treesitter-textobjects" },
-		{ "p00f/nvim-ts-rainbow" },
+		{ "mrjones2014/nvim-ts-rainbow" },
 		{ "JoosepAlviste/nvim-ts-context-commentstring" },
-		{ "mfussenegger/nvim-ts-hint-textobject" },
+		{ "mfussenegger/nvim-treehopper" },
 		{ "andymass/vim-matchup" },
 		{
 			"windwp/nvim-ts-autotag",
