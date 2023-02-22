@@ -57,10 +57,9 @@ return function()
 		}
 	end
 
-
-	local leader = "\\"
+	local leader = " "
 	dashboard.section.buttons.val = {
-		button("leader f c", " Scheme change", leader, nil, {
+		button("space f c", " Scheme change", leader, nil, {
 			noremap = true,
 			silent = true,
 			nowait = true,
@@ -68,7 +67,7 @@ return function()
 				require("telescope.builtin").colorscheme()
 			end,
 		}),
-		button("leader f r", " File frecency", leader, nil, {
+		button("space f r", " File frecency", leader, nil, {
 			noremap = true,
 			silent = true,
 			nowait = true,
@@ -76,7 +75,7 @@ return function()
 				require("telescope").extensions.frecency.frecency()
 			end,
 		}),
-		button("leader f e", " File history", leader, nil, {
+		button("space f e", " File history", leader, nil, {
 			noremap = true,
 			silent = true,
 			nowait = true,
@@ -84,7 +83,7 @@ return function()
 				require("telescope.builtin").oldfiles()
 			end,
 		}),
-		button("leader f p", " Project find", leader, nil, {
+		button("space f p", " Project find", leader, nil, {
 			noremap = true,
 			silent = true,
 			nowait = true,
@@ -92,7 +91,7 @@ return function()
 				require("telescope").extensions.projects.projects({})
 			end,
 		}),
-		button("leader f f", " File find", leader, nil, {
+		button("space f f", " File find", leader, nil, {
 			noremap = true,
 			silent = true,
 			nowait = true,
@@ -100,7 +99,7 @@ return function()
 				require("telescope.builtin").find_files()
 			end,
 		}),
-		button("leader f n", " File new", leader, nil, {
+		button("space f n", " File new", leader, nil, {
 			noremap = true,
 			silent = true,
 			nowait = true,
@@ -108,7 +107,7 @@ return function()
 				vim.api.nvim_command("enew")
 			end,
 		}),
-		button("leader f w", " Word find", leader, nil, {
+		button("space f w", " Word find", leader, nil, {
 			noremap = true,
 			silent = true,
 			nowait = true,
@@ -116,7 +115,6 @@ return function()
 				require("telescope.builtin").live_grep()
 			end,
 		}),
-
 	}
 	dashboard.section.buttons.opts.hl = "String"
 

@@ -27,6 +27,9 @@ return function()
 			null_reg(btnf.markdownlint)
 			null_reg(btnd.markdownlint.with({ extra_args = { "--disable MD033" } }))
 		end,
+		flake8 = function()
+			null_reg(btnd.flake8.with({ extra_args = { "--extend-ignore F403, F405 --max-line-length 160" } }))
+		end,
 		-- example for changing diagnostics_format
 		-- shellcheck = function()
 		-- 	null_reg(btnd.shellcheck.with({ diagnostics_format = "#{m} [#{s} #{c}]" }))
