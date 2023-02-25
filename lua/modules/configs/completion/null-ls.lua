@@ -9,6 +9,10 @@ return function()
 		debug = false,
 		update_in_insert = false,
 		diagnostics_format = "[#{s} #{c}] #{m}",
+		-- sources = {
+		-- 	-- Set sources that are not supported by `mason.nvim` here like `dart_format`
+		-- 	btnf.dart_format,
+		-- },
 	})
 
 	mason_null_ls.setup({
@@ -28,7 +32,7 @@ return function()
 			null_reg(btnd.markdownlint.with({ extra_args = { "--disable MD033" } }))
 		end,
 		flake8 = function()
-			null_reg(btnd.flake8.with({ extra_args = { "--extend-ignore F403, F405 --max-line-length 160" } }))
+			null_reg(btnd.flake8.with({ extra_args = { "--extend-ignore", "F403, F405, W292", "--max-line-length", "160" } }))
 		end,
 		-- example for changing diagnostics_format
 		-- shellcheck = function()
