@@ -220,7 +220,8 @@ return function()
 
 					["@field.lua"] = { fg = cp.lavender },
 					["@constructor.lua"] = { fg = cp.flamingo },
-
+					["@variable.builtin.lua"] = { fg = cp.flamingo, style = { "italic" } },
+					
 					["@constant.java"] = { fg = cp.teal },
 
 					["@property.typescript"] = { fg = cp.lavender, style = { "italic" } },
