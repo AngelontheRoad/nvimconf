@@ -143,8 +143,9 @@ local function load_options()
 	-- custom python provider
 	local conda_prefix = os.getenv("CONDA_PREFIX")
 	if not isempty(conda_prefix) then
-		vim.g.python_host_prog = conda_prefix .. "/envs/py310/bin/python"
-		vim.g.python3_host_prog = conda_prefix .. "/envs/py310/bin/python"
+		-- to use py310, conda activate py310 first
+		vim.g.python_host_prog = conda_prefix .. "/bin/python"
+		vim.g.python3_host_prog = conda_prefix .. "/bin/python"
 	elseif global.is_mac then
 		vim.g.python_host_prog = "/usr/bin/python"
 		vim.g.python3_host_prog = "/usr/local/bin/python3"

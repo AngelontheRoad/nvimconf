@@ -78,6 +78,11 @@ editor["stevearc/overseer.nvim"] = {
 	event = "VeryLazy",
 	config = require("editor.overseer"),
 }
+editor["pixelneo/vim-python-docstring"] = {
+	lazy = true,
+	event = "BufEnter *.py",
+	init = require("editor.vim-python-docstring"),
+}
 
 ----------------------------------------------------------------------
 --                  :treesitter related plugins                    --
