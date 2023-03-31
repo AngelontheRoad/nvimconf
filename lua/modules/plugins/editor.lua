@@ -71,7 +71,7 @@ editor["vim-scripts/ReplaceWithRegister"] = {
 -- for surround
 editor["kylechui/nvim-surround"] = {
 	lazy = true,
-	event = { "BufNewFile", "BufReadPre" },
+	event = "BufReadPost",
 }
 editor["stevearc/overseer.nvim"] = {
 	lazy = true,

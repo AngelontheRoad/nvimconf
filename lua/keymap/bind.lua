@@ -161,7 +161,7 @@ function bind.nvim_load_mapping(mapping)
 				else
 					vim.api.nvim_set_keymap(mode, keymap, rhs, options)
 				end
-
+			end
 		end
 	end
 end
