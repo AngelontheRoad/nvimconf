@@ -70,8 +70,10 @@ editor["vim-scripts/ReplaceWithRegister"] = {
 }
 -- for surround
 editor["kylechui/nvim-surround"] = {
+	version = "*", -- Use for stability; omit to use `main` branch for the latest features
 	lazy = true,
-	event = "BufReadPost",
+	event = "VeryLazy",
+	config = require("editor.nvim-surround"),
 }
 editor["stevearc/overseer.nvim"] = {
 	lazy = true,
