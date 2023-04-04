@@ -132,6 +132,7 @@ local plug_map = {
 	["n|<leader>fs"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
 
 	-- Plugin: dap
+	-- use C-w_q to close float window
 	["n|<F6>"] = map_callback(function()
 			require("dap").continue()
 		end)
@@ -181,6 +182,19 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Run to cursor"),
+	["n|<leader>df"] = map_callback(function()
+			local widgets = require("dap.ui.widgets")
+			widgets.centered_float(widgets.frames)
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Center frames"),
+	["nv|<leader>dh"] = map_callback(function()
+			require("dap.ui.widgets").hover()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Hover"),
 	["n|<leader>dl"] = map_callback(function()
 			require("dap").run_last()
 		end)
@@ -193,6 +207,25 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Open REPL"),
+	["nv|<leader>dp"] = map_callback(function()
+			require("dap.ui.widgets").preview()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Preview"),
+	["n|<leader>dr"] = map_callback(function()
+			require("dap").repl.open()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Open REPL"),
+	["n|<leader>ds"] = map_callback(function()
+			local widgets = require("dap.ui.widgets")
+			widgets.centered_float(widgets.scopes)
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Center scopes"),
 }
 
 bind.nvim_load_mapping(plug_map)
