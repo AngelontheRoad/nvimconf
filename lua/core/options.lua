@@ -53,7 +53,7 @@ local function load_options()
 		-- time settings
 		timeout = true,
 		ttimeout = true,
-		timeoutlen = 0,
+		timeoutlen = 300,
 		ttimeoutlen = 0,
 		updatetime = 200,
 		redrawtime = 1500,

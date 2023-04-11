@@ -28,11 +28,11 @@ settings["load_big_files_faster"] = true
 settings["palette_overwrite"] = {}
 
 -- Set the colorscheme to use here.
--- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `edge`, `nord`.
+-- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `edge`, `everforest`, `nord`.
 ---@type string
-settings["colorscheme"] = "catppuccin"
+settings["colorscheme"] = "everforest"
 
--- Useful if you would like to use a colorscheme that has a light and dark variant like `edge`.
+-- Useful if you would like to use a colorscheme that has a light and dark variant like `edge`, `everforest`.
 -- Valid values are: `dark`, `light`.
 ---@type "dark"|"light"
 settings["background"] = "dark"
