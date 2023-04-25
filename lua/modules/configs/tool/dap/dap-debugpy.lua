@@ -7,7 +7,7 @@ end
 dap.adapters.python = {
 	-- for help https://github.com/mfussenegger/nvim-dap/blob/master/doc/dap.txt
 	type = "executable",
-	command = "/home/chris/anaconda3/bin/python",
+	command = "/home/chris/mambaforge/bin/python",
 	args = { "-m", "debugpy.adapter" },
 }
 dap.configurations.python = {
@@ -20,9 +20,8 @@ dap.configurations.python = {
 
 		program = "${file}", -- This configuration will launch the current file if used.
 		pythonPath = function()
-			if vim.fn.executable("/home/chris/anaconda3/envs/sci/bin/python") then
-				-- return "/home/chris/anaconda3/bin/python"
-				return "/home/chris/anaconda3/envs/sci/bin/python"
+			if vim.fn.executable("/home/chris/mambaforge/bin/python") then
+				return "/home/chris/mambaforge/bin/python"
 			else
 				return "/home/chris/anaconda3/bin/python"
 			end

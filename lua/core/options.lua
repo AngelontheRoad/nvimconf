@@ -78,12 +78,13 @@ local function load_options()
 		-- split settings
 		splitbelow = true,
 		splitright = true,
+		splitkeep = "screen",
 		equalalways = false,
 		switchbuf = "usetab,uselast",
 		-- backspace settings
 		backspace = "indent,eol,start",
 		-- diff settings
-		diffopt = "filler,iwhite,internal,algorithm:patience",
+		diffopt = "filler,iwhite,internal,linematch:60,algorithm:patience",
 		-- jump settings
 		jumpoptions = "stack",
 		-- scrolloff settings
@@ -150,8 +151,8 @@ local function load_options()
 		vim.g.python_host_prog = "/usr/bin/python"
 		vim.g.python3_host_prog = "/usr/local/bin/python3"
 	else
-		vim.g.python_host_prog = "D:\\Anaconda\\envs\\py310\\python.exe"
-		vim.g.python3_host_prog = "D:\\Anaconda\\envs\\py310\\python.exe"
+		vim.g.python_host_prog = "/usr/bin/python3"
+		vim.g.python3_host_prog = "/usr/bin/python3"
 	end
 
 	for name, value in pairs(global_local) do

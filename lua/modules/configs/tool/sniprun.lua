@@ -1,9 +1,14 @@
 return function()
 	require("sniprun").setup({
-		selected_interpreters = {}, -- " use those instead of the default for the current filetype
+		selected_interpreters = { "Python3_original" }, -- " use those instead of the default for the current filetype
 		repl_enable = {}, -- " enable REPL-like behavior for the given interpreters
 		repl_disable = {}, -- " disable REPL-like behavior for the given interpreters
-		interpreter_options = {}, -- " intepreter-specific options, consult docs / :SnipInfo <name>
+		interpreter_options = {
+			Python3_original = {
+				-- note not recognize `~` as /home/user,
+				interpreter = "/home/chris/mambaforge/envs/sdtools/bin/python",
+			},
+		}, -- " intepreter-specific options, consult docs / :SnipInfo <name>
 		-- " you can combo different display modes as desired
 		display = {
 			"TempFloatingWindowOk", -- display ok results in the floating window

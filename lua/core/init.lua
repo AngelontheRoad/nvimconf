@@ -62,6 +62,9 @@ local disable_distribution_plugins = function()
 	-- Disable sql omni completion.
 	vim.g.loaded_sql_completion = 1
 
+	-- Disable EditorConfig support
+	vim.g.editorconfig = 1
+
 	-- Disable remote plugins
 	-- NOTE: Disabling rplugin.vim will show error for `wilder.nvim` in :checkhealth,
 	-- NOTE:  but since it's config doesn't require python rtp, it's fine to ignore.
@@ -75,7 +78,7 @@ local leader_map = function()
 end
 
 local neovide_config = function()
-	vim.api.nvim_set_option_value("guifont", "SauceCodePro NF:h15", {})
+	vim.api.nvim_set_option_value("guifont", "SauceCodePro NF:h14", {})
 	vim.g.neovide_refresh_rate = 120
 	vim.g.neovide_cursor_vfx_mode = ""
 	vim.g.neovide_no_idle = true

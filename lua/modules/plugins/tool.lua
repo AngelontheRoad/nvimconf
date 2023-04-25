@@ -29,9 +29,9 @@ tool["ibhagwan/smartyank.nvim"] = {
 }
 tool["michaelb/sniprun"] = {
 	lazy = true,
-	-- You need to cd to `~/.local/share/nvim/site/lazy/sniprun/` and execute `bash ./install.sh`,
+	-- You need to cd to `~/.local/share/nvim/site/lazy/sniprun/` and execute `bash ./install.sh 1`,
 	-- if you encountered error about no executable sniprun found.
-	build = "bash ./install.sh",
+	build = "bash ./install.sh 1",
 	cmd = { "SnipRun" },
 	config = require("tool.sniprun"),
 }

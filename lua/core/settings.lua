@@ -30,12 +30,16 @@ settings["palette_overwrite"] = {}
 -- Set the colorscheme to use here.
 -- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `edge`, `everforest`, `nord`.
 ---@type string
-settings["colorscheme"] = "everforest"
+settings["colorscheme"] = "catppuccin"
 
 -- Useful if you would like to use a colorscheme that has a light and dark variant like `edge`, `everforest`.
 -- Valid values are: `dark`, `light`.
 ---@type "dark"|"light"
 settings["background"] = "dark"
+
+-- Use transparent background when it's ture
+---@type boolean
+settings["transparent_background"] = true
 
 -- Set the command for handling external URLs here. The executable must be available on your $PATH.
 -- This entry is IGNORED on Windows and macOS, which have their default handlers builtin.
@@ -80,7 +84,6 @@ settings["null_ls_deps"] = {
 	"black",
 	"clang_format",
 	"isort",
-	"editorconfig_checker",
 	"prettier",
 	"rustfmt",
 	"shfmt",
