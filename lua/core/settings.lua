@@ -39,7 +39,7 @@ settings["background"] = "dark"
 
 -- Use transparent background when it's ture
 ---@type boolean
-settings["transparent_background"] = true
+settings["transparent_background"] = false
 
 -- Set the command for handling external URLs here. The executable must be available on your $PATH.
 -- This entry is IGNORED on Windows and macOS, which have their default handlers builtin.
