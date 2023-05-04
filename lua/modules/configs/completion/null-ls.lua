@@ -7,7 +7,7 @@ return function()
 	-- Don't specify any config here if you are using the default one.
 	local sources = {
 		btns.formatting.black.with({
-			extra_args = { "--fast" },
+			extra_args = require("completion.formatters.black_format"),
 		}),
 		btns.diagnostics.flake8.with({
 			extra_args = require("completion.formatters.flake8_diagnostic"),
