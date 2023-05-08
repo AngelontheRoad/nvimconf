@@ -86,6 +86,10 @@ editor["pixelneo/vim-python-docstring"] = {
 	event = "BufEnter *.py",
 	init = require("editor.vim-python-docstring"),
 }
+editor["folke/todo-comments.nvim"] = {
+	lazy = true,
+	event = "VeryLazy",
+}
 
 ----------------------------------------------------------------------
 --                  :treesitter related plugins                    --
@@ -101,6 +105,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 	config = require("editor.treesitter"),
 	dependencies = {
 		{ "nvim-treesitter/nvim-treesitter-textobjects" },
+		{ "nvim-treesitter/nvim-treesitter-context" },
 		{ "mrjones2014/nvim-ts-rainbow" },
 		{ "JoosepAlviste/nvim-ts-context-commentstring" },
 		{ "mfussenegger/nvim-treehopper" },

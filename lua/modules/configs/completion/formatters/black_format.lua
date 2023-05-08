@@ -1,1 +1,1 @@
-return { "-l", "160", "--fast" }
+return { "-l", "120", "--fast" }
