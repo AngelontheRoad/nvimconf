@@ -64,12 +64,10 @@ editor["lambdalisue/suda.vim"] = {
 }
 
 -------------  user defined ----------------------
--- replace by register
 editor["vim-scripts/ReplaceWithRegister"] = {
 	lazy = true,
 	event = "BufReadPost",
 }
--- for surround
 editor["kylechui/nvim-surround"] = {
 	version = "*", -- Use for stability; omit to use `main` branch for the latest features
 	lazy = true,
@@ -89,6 +87,7 @@ editor["pixelneo/vim-python-docstring"] = {
 editor["folke/todo-comments.nvim"] = {
 	lazy = true,
 	event = "VeryLazy",
+	config = require("editor.todo-comments"),
 }
 
 ----------------------------------------------------------------------
