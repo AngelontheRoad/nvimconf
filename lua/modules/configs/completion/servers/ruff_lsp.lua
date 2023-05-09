@@ -1,4 +1,5 @@
 local on_attach = function(client, bufnr)
+	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	-- Disable hover in favor of Pyright
 	client.server_capabilities.hoverProvider = false
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")

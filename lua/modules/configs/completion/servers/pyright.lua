@@ -9,13 +9,18 @@ return function(options)
 			return capabilities
 		end)(),
 		settings = {
+			pyright = {
+				autoImportCompletion = true,
+			},
 			python = {
 				analysis = {
+					autoSearchPaths = true,
+					typeCheckingMode = "off",
 					useLibraryCodeForTypes = true,
+					diagnosticMode = "openFilesOnly",
 					diagnosticSeverityOverrides = {
 						reportUnusedVariable = "warning", -- or anything
 					},
-					typeCheckingMode = "basic",
 				},
 			},
 		},

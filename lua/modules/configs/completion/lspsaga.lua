@@ -119,7 +119,7 @@ return function()
 			frequency = 12,
 		},
 		ui = {
-			title = false,
+			title = true,
 			border = "single", -- Can be single, double, rounded, solid, shadow.
 			winblend = 0,
 			actionfix = icons.ui.Spell,
