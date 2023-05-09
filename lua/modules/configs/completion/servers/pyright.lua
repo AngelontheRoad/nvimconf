@@ -17,7 +17,6 @@ return function(options)
 					},
 					typeCheckingMode = "basic",
 				},
-				linting = { pylintEnabled = false },
 			},
 		},
 	})

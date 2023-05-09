@@ -12,6 +12,7 @@ return function()
 		btns.diagnostics.ruff.with({
 			extra_args = require("completion.formatters.ruff_diagnostic"),
 		}),
+		-- btns.diagnostics.ruff,
 		btns.formatting.ruff,
 		btns.formatting.black.with({
 			extra_args = require("completion.formatters.black_format"),
