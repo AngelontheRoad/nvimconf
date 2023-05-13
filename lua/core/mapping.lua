@@ -6,6 +6,7 @@ local map_cmd = bind.map_cmd
 -- default map
 local core_map = {
 	-- Suckless
+	["n|<leader>bo"] = map_cmd("<Cmd>%bd|e#<CR>"):with_desc("window: Close all buffers but the current one"),
 	["n|<S-Tab>"] = map_cr("normal za"):with_noremap():with_silent():with_desc("edit: Toggle code fold"),
 	["n|<C-s>"] = map_cu("write"):with_noremap():with_silent():with_desc("edit: Save file"),
 	["n|Y"] = map_cmd("y$"):with_desc("edit: Yank text to EOL"),
