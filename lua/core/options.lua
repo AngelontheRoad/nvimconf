@@ -40,7 +40,7 @@ local function load_options()
 		-- viewdir = global.cache_dir .. "view/",
 		-- spellfile = global.cache_dir .. "spell/en.uft-8.add",
 		history = 2000,
-		shada = "!,'300,<50,@100,s10,h",
+		shada = "!,'500,<50,@100,s10,h",
 		backupskip = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim",
 		-- tab settings
 		smarttab = true,
