@@ -78,7 +78,7 @@ local leader_map = function()
 end
 
 local neovide_config = function()
-	vim.api.nvim_set_option_value("guifont", "JetBrainsMono Nerd Font Mono:h12", {})
+	vim.api.nvim_set_option_value("guifont", "VictorMono Nerd Font Mono:h12", {})
 	vim.g.neovide_refresh_rate = 120
 	vim.g.neovide_cursor_vfx_mode = ""
 	vim.g.neovide_no_idle = true
@@ -151,7 +151,7 @@ local load_core = function()
 	neovide_config()
 	clipboard_config()
 	shell_config()
-	
+
 	require("core.options")
 	require("core.mapping")
 	require("keymap")

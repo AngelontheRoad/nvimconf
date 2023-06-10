@@ -37,10 +37,16 @@ return {
 				rope = { enabled = true },
 
 				-- Formatting
-				black = { enabled = true },
+				black = {
+					enabled = true,
+					line_length = 120,
+				},
 				pyls_isort = { enabled = false },
 				autopep8 = { enabled = false },
 				yapf = { enabled = false },
+
+				-- autocompletion
+				jedi = {},
 			},
 		},
 	},
