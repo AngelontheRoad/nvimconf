@@ -102,7 +102,7 @@ local function load_options()
 		shortmess = "aoOTIcF",
 		-- highlight cursor position
 		cursorline = true,
-		cursorcolumn = false,
+		cursorcolumn = true,
 		showtabline = 2,
 		-- page settings
 		winwidth = 30,
