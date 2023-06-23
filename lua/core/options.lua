@@ -32,7 +32,7 @@ local function load_options()
 		wildignorecase = true,
 		wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.tif,*.tiff,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**",
 		-- backup settings
-		sessionoptions = "buffers,curdir,help,tabpages,winsize",
+		sessionoptions = "buffers,curdir,folds,globals,help,tabpages,winpos,winsize",
 		viewoptions = "folds,cursor,curdir,slash,unix",
 		undodir = global.cache_dir .. "undo/",
 		-- directory = global.cache_dir .. "swap/",

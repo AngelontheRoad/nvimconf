@@ -46,7 +46,20 @@ return {
 				yapf = { enabled = false },
 
 				-- autocompletion
-				jedi = {},
+				-- jedi = {
+				-- 	extra_paths = {
+				-- 		"/home/chris/mambaforge/envs/sdtools/lib/python3.10/site-packages",
+				-- 	},
+				-- },
+				-- jedi_completion = {
+				-- 	cache_for = {
+				-- 		"numpy",
+				-- 		"pandas",
+				-- 		"scipy",
+				-- 		"matplotlib",
+				-- 		"tensorflow",
+				-- 	},
+				-- },
 			},
 		},
 	},
