@@ -113,7 +113,7 @@ local function load_options()
 		previewheight = 12,
 		-- cmd settings
 		showcmd = false,
-		cmdheight = 2, -- 0, 1, 2
+		cmdheight = 1, -- 0, 1, 2
 		cmdwinheight = 5,
 		display = "lastline",
 		-- list settings: show tab and space etc.
