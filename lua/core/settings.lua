@@ -99,7 +99,6 @@ settings["null_ls_deps"] = {
 	-- formatting
 	"clang_format",
 	"prettier",
-	"rustfmt",
 	"shfmt",
 	"stylua",
 	"vint",
