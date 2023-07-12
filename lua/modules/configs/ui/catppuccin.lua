@@ -112,7 +112,7 @@ return function()
 
 					-- For mason.nvim
 					MasonNormal = { link = "NormalFloat" },
-					
+
 					-- For indent-blankline
 					IndentBlanklineChar = { fg = cp.surface0 },
 					IndentBlanklineContextChar = { fg = cp.surface2, style = { "bold" } },
@@ -127,13 +127,6 @@ return function()
 					CmpDocBorder = {
 						fg = transparent_background and cp.surface1 or cp.mantle,
 						bg = transparent_background and cp.none or cp.mantle,
-					},
-
-					-- For lspsaga.nvim
-					OutlineNormal = { bg = transparent_background and cp.none or cp.mantle },
-					OutlineWinSeparator = {
-						bg = transparent_background and cp.none or cp.base,
-						fg = transparent_background and cp.surface1 or cp.base,
 					},
 
 					-- For fidget
