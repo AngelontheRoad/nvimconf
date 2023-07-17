@@ -27,7 +27,7 @@ local function load_options()
 		-- encoding setting
 		encoding = "utf-8",
 		-- clipboard setting
-		-- clipboard = 'unnamedplus',
+		clipboard = "unnamedplus",
 		-- wildchar settings
 		wildignorecase = true,
 		wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.tif,*.tiff,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**",
