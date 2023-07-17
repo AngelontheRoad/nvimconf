@@ -32,7 +32,7 @@ tool["michaelb/sniprun"] = {
 	-- You need to cd to `~/.local/share/nvim/site/lazy/sniprun/` and execute `bash ./install.sh 1`,
 	-- if you encountered error about no executable sniprun found.
 	build = "bash ./install.sh 1",
-	cmd = { "SnipRun" },
+	cmd = "SnipRun",
 	config = require("tool.sniprun"),
 }
 tool["akinsho/toggleterm.nvim"] = {
@@ -78,7 +78,7 @@ tool["nvim-telescope/telescope.nvim"] = {
 		{ "debugloop/telescope-undo.nvim" },
 		{
 			"ahmedkhalf/project.nvim",
-			event = "BufReadPost",
+			event = { "CursorHold", "CursorHoldI" },
 			config = require("tool.project"),
 		},
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },

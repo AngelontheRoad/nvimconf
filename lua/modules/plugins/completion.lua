@@ -2,7 +2,7 @@ local completion = {}
 
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
-	event = { "BufReadPost", "BufAdd", "BufNewFile" },
+	event = { "CursorHold", "CursorHoldI" },
 	config = require("completion.lsp"),
 	dependencies = {
 		{ "williamboman/mason.nvim" },
@@ -61,15 +61,15 @@ completion["hrsh7th/nvim-cmp"] = {
 }
 completion["zbirenbaum/copilot.lua"] = {
 	lazy = true,
- 	cmd = "Copilot",
- 	event = "InsertEnter",
- 	config = require("completion.copilot"),
- 	dependencies = {
- 		{
- 			"zbirenbaum/copilot-cmp",
- 			config = require("completion.copilot-cmp"),
- 		},
- 	},
+	cmd = "Copilot",
+	event = "InsertEnter",
+	config = require("completion.copilot"),
+	dependencies = {
+		{
+			"zbirenbaum/copilot-cmp",
+			config = require("completion.copilot-cmp"),
+		},
+	},
 }
 
 return completion

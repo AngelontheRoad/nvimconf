@@ -120,8 +120,8 @@ local function load_options()
 		list = true,
 		listchars = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←",
 		-- pseudo-transparency settings
-		-- pumblend = 10,
-		-- winblend = 10,
+		pumblend = 0,
+		winblend = 0,
 
 		-- see https://neovim.io/doc/user/change.html#fo-table
 		formatoptions = "1jcroql",
