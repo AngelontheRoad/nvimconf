@@ -185,7 +185,7 @@ function M.gen_lspkind_hl()
 		Package = colors.blue,
 		Property = colors.teal,
 		Struct = colors.yellow,
-		TypeParameter = colors.maroon,
+		TypeParameter = colors.blue,
 		Variable = colors.peach,
 		Array = colors.peach,
 		Boolean = colors.peach,
@@ -220,9 +220,9 @@ end
 -- Generate blend_color for neodim.
 function M.gen_neodim_blend_attr()
 	local trans_bg = require("core.settings").transparent_background
-	local appearance  = require("core.settings").background
+	local appearance = require("core.settings").background
 
-	if trans_bg and appearance  == "dark" then
+	if trans_bg and appearance == "dark" then
 		return "#000000"
 	elseif trans_bg and appearance == "light" then
 		return "#FFFFFF"
