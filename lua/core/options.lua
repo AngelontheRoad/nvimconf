@@ -151,8 +151,8 @@ local function load_options()
 		vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, conda_prefix .. "/bin/python")
 		vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, conda_prefix .. "/bin/python")
 	else
-		vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, "python")
-		vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "python3")
+		vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, "/opt/mambaforge/bin/python")
+		vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "/opt/mambaforge/bin/python")
 	end
 
 	for name, value in pairs(global_local) do
