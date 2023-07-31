@@ -3,7 +3,6 @@ local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 
--- default map
 local core_map = {
 	-- Suckless
 	["n|<leader>bo"] = map_cmd("<Cmd>%bd|e#<CR>"):with_desc("window: Close all buffers but the current one"),
@@ -58,10 +57,3 @@ local core_map = {
 }
 
 bind.nvim_load_mapping(core_map)
-
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader><leader>s",
-	":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
-	{ noremap = true, silent = true, nowait = true, desc = "edit: Start replacment mode of current word" }
-)

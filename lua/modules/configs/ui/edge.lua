@@ -5,5 +5,4 @@ return function()
 	vim.g.edge_show_eob = 1
 	vim.g.edge_better_performance = 1
 	vim.g.edge_transparent_background = require("core.settings").transparent_background and 2 or 0
-	vim.g.edge_dim_inactive_window = 1
 end

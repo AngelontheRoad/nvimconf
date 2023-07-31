@@ -4,23 +4,23 @@ return function()
 	local dap = require("dap")
 	local utils = require("modules.utils.dap")
 
-	-- if not require("mason-registry").is_installed("go-debug-adapter") then
-	-- 	vim.notify(
-	-- 		"Automatically installing `go-debug-adapter` for go debugging",
-	-- 		vim.log.levels.INFO,
-	-- 		{ title = "nvim-dap" }
-	-- 	)
+	if not require("mason-registry").is_installed("go-debug-adapter") then
+		vim.notify(
+			"Automatically installing `go-debug-adapter` for go debugging",
+			vim.log.levels.INFO,
+			{ title = "nvim-dap" }
+		)
 
-	-- 	local go_dbg = require("mason-registry").get_package("go-debug-adapter")
-	-- 	go_dbg:install():once(
-	-- 		"closed",
-	-- 		vim.schedule_wrap(function()
-	-- 			if go_dbg:is_installed() then
-	-- 				vim.notify("Successfully installed `go-debug-adapter`", vim.log.levels.INFO, { title = "nvim-dap" })
-	-- 			end
-	-- 		end)
-	-- 	)
-	-- end
+		local go_dbg = require("mason-registry").get_package("go-debug-adapter")
+		go_dbg:install():once(
+			"closed",
+			vim.schedule_wrap(function()
+				if go_dbg:is_installed() then
+					vim.notify("Successfully installed `go-debug-adapter`", vim.log.levels.INFO, { title = "nvim-dap" })
+				end
+			end)
+		)
+	end
 
 	dap.adapters.go = {
 		type = "executable",

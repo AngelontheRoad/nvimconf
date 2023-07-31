@@ -40,7 +40,7 @@ settings["load_big_files_faster"] = true
 -- Settings will complete their replacement at initialization.
 -- Parameters will be automatically completed as you type.
 -- Example: { sky = "#04A5E5" }
----@type palette
+---@type palette[]
 settings["palette_overwrite"] = {}
 
 -- Set the colorscheme to use here.
@@ -48,14 +48,15 @@ settings["palette_overwrite"] = {}
 ---@type string
 settings["colorscheme"] = "catppuccin"
 
--- Useful if you would like to use a colorscheme that has a light and dark variant like `edge`, `everforest`.
+-- Set it to true if your terminal has transparent background.
+---@type boolean
+settings["transparent_background"] = false
+
+-- Set background color to use here.
+-- Useful if you would like to use a colorscheme that has a light and dark variant like `edge`.
 -- Valid values are: `dark`, `light`.
 ---@type "dark"|"light"
 settings["background"] = "dark"
-
--- Use transparent background when it's ture
----@type boolean
-settings["transparent_background"] = false
 
 -- Set the command for handling external URLs here. The executable must be available on your $PATH.
 -- This entry is IGNORED on Windows and macOS, which have their default handlers builtin.
@@ -83,20 +84,19 @@ settings["server_formatting_block_list"] = {
 settings["lsp_deps"] = {
 	"bashls",
 	"clangd",
-	-- "gopls",
 	"html",
 	"jsonls",
 	"lua_ls",
 	-- "pylsp",
+	-- "gopls",
 }
 
 -- Set the general-purpose servers that will be installed during bootstrap here.
--- check the below link for all supported sources.
+-- Check the below link for all supported sources.
 -- in `code_actions`, `completion`, `diagnostics`, `formatting`, `hover` folders:
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins
 ---@type string[]
 settings["null_ls_deps"] = {
-	-- formatting
 	"clang_format",
 	"prettier",
 	"shfmt",

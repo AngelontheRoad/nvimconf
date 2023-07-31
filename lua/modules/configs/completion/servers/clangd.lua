@@ -74,7 +74,6 @@ return function(options)
 				end,
 				description = "Open source/header in a new split",
 			},
-
 		},
 	})
 end

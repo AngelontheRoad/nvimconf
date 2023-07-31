@@ -2,140 +2,106 @@ local global = require("core.global")
 
 local function load_options()
 	local global_local = {
-		termguicolors = true,
-		hidden = true,
+		-- backupdir = global.cache_dir .. "backup/",
+		-- directory = global.cache_dir .. "swap/",
+		-- spellfile = global.cache_dir .. "spell/en.uft-8.add",
+		-- viewdir = global.cache_dir .. "view/",
+		autoindent = true,
 		autoread = true,
 		autowrite = true,
-		-- back, swap file settings
-		undofile = true,
-		backup = false,
-		writebackup = false,
-		swapfile = false,
-		-- use relative line number
-		number = true,
-		relativenumber = true,
-		signcolumn = "yes",
-		-- bell settings
-		errorbells = true,
-		visualbell = true,
-		-- CRLF
-		fileformats = "unix,mac,dos",
-		-- use magic
-		magic = true,
-		-- virtual cursor in visual block mode
-		virtualedit = "block",
-		-- encoding setting
-		encoding = "utf-8",
-		-- clipboard setting
-		clipboard = "unnamedplus",
-		-- wildchar settings
-		wildignorecase = true,
-		wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.tif,*.tiff,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**",
-		-- backup settings
-		sessionoptions = "buffers,curdir,folds,help,tabpages,winpos,winsize",
-		viewoptions = "folds,cursor,curdir,slash,unix",
-		undodir = global.cache_dir .. "undo/",
-		-- directory = global.cache_dir .. "swap/",
-		-- backupdir = global.cache_dir .. "backup/",
-		-- viewdir = global.cache_dir .. "view/",
-		-- spellfile = global.cache_dir .. "spell/en.uft-8.add",
-		history = 2000,
-		shada = "!,'500,<50,@100,s10,h",
-		backupskip = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim",
-		-- tab settings
-		smarttab = true,
-		shiftround = true,
-		expandtab = true,
-		autoindent = true,
-		tabstop = 4,
-		shiftwidth = 4,
-		softtabstop = 4,
-		-- time settings
-		timeout = true,
-		ttimeout = true,
-		timeoutlen = 300,
-		ttimeoutlen = 0,
-		updatetime = 200,
-		redrawtime = 1500,
-		-- case settings
-		ignorecase = true,
-		smartcase = true,
-		infercase = true,
-		-- search settings
-		incsearch = true,
-		wrapscan = true,
-		-- complete settings
-		complete = ".,w,b,k",
-		completeopt = "menuone,noselect",
-		-- show the effects of :substitute etc.
-		inccommand = "nosplit",
-		-- grep settings
-		grepformat = "%f:%l:%c:%m",
-		grepprg = "rg --hidden --vimgrep --smart-case --",
-		breakat = [[\ \	;:,!?]],
-		-- move the curosr to the first non-blank of the line while page-moving
-		startofline = false,
-		-- split settings
-		splitbelow = true,
-		splitright = true,
-		splitkeep = "screen",
-		equalalways = false,
-		switchbuf = "usetab,uselast",
-		-- backspace settings
 		backspace = "indent,eol,start",
-		-- diff settings
-		diffopt = "filler,iwhite,internal,linematch:60,algorithm:patience",
-		-- jump settings
-		jumpoptions = "stack",
-		-- scrolloff settings
-		scrolloff = 2,
-		sidescrolloff = 5,
-		mousescroll = "ver:3,hor:6",
-		-- fold settings
-		foldenable = true,
-		-- 99 no fold closed, 0 to all closed, 1 to some
-		foldlevelstart = 99,
-		-- statusline settings
-		showmode = false,
-		ruler = true,
-		laststatus = 2,
-		shortmess = "aoOTIcF",
-		-- highlight cursor position
-		cursorline = true,
-		cursorcolumn = true,
-		showtabline = 2,
-		-- page settings
-		winwidth = 30,
-		winminwidth = 10,
-		-- height settings
-		pumheight = 15,
-		helpheight = 12,
-		previewheight = 12,
-		-- cmd settings
-		showcmd = false,
+		backup = false,
+		backupskip = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim",
+		breakat = [[\ \	;:,!?]],
+		breakindentopt = "shift:2,min:20",
+		clipboard = "unnamedplus",
 		cmdheight = 1, -- 0, 1, 2
 		cmdwinheight = 5,
+		complete = ".,w,b,k",
+		completeopt = "menuone,noselect",
+		concealcursor = "niv",
+		conceallevel = 0,
+		cursorcolumn = true,
+		cursorline = true,
+		diffopt = "filler,iwhite,internal,linematch:60,algorithm:patience",
 		display = "lastline",
-		-- list settings: show tab and space etc.
+		encoding = "utf-8",
+		equalalways = false,
+		errorbells = true,
+		expandtab = true,
+		fileformats = "unix,mac,dos",
+		foldenable = true,
+		foldlevelstart = 99,
+		formatoptions = "1jcroql",
+		grepformat = "%f:%l:%c:%m",
+		grepprg = "rg --hidden --vimgrep --smart-case --",
+		helpheight = 12,
+		hidden = true,
+		history = 2000,
+		ignorecase = true,
+		inccommand = "nosplit",
+		incsearch = true,
+		infercase = true,
+		jumpoptions = "stack",
+		laststatus = 2,
+		linebreak = true,
 		list = true,
 		listchars = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←",
-		-- pseudo-transparency settings
+		magic = true,
+		mousescroll = "ver:3,hor:6",
+		number = true,
+		previewheight = 12,
+		-- Do NOT adjust the following option (pumblend) if you're using transparent background
 		pumblend = 0,
-		winblend = 0,
-
-		-- see https://neovim.io/doc/user/change.html#fo-table
-		formatoptions = "1jcroql",
-
-		-- wrap settings
-		breakindentopt = "shift:2,min:20",
-		wrap = false,
-		whichwrap = "h,l,<,>,[,],~",
-		linebreak = true,
+		pumheight = 15,
+		redrawtime = 1500,
+		relativenumber = true,
+		ruler = true,
+		scrolloff = 2,
+		sessionoptions = "buffers,curdir,folds,help,tabpages,winpos,winsize",
+		shada = "!,'500,<50,@100,s10,h",
+		shiftround = true,
+		shiftwidth = 4,
+		shortmess = "aoOTIcF",
 		showbreak = "↳  ",
+		showcmd = false,
+		showmode = false,
+		showtabline = 2,
+		sidescrolloff = 5,
+		signcolumn = "yes",
+		smartcase = true,
+		smarttab = true,
+		softtabstop = 4,
+		splitbelow = true,
+		splitkeep = "screen",
+		splitright = true,
+		startofline = false,
+		swapfile = false,
+		switchbuf = "usetab,uselast",
 		synmaxcol = 2500,
-		-- conceal settings
-		conceallevel = 0,
-		concealcursor = "niv",
+		tabstop = 4,
+		termguicolors = true,
+		timeout = true,
+		timeoutlen = 300,
+		ttimeout = true,
+		ttimeoutlen = 0,
+		undodir = global.cache_dir .. "undo/",
+		undofile = true,
+		-- Please do NOT set `updatetime` to above 500, otherwise most plugins may not function correctly
+		updatetime = 200,
+		viewoptions = "folds,cursor,curdir,slash,unix",
+		virtualedit = "block",
+		visualbell = true,
+		whichwrap = "h,l,<,>,[,],~",
+		wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**",
+		wildignorecase = true,
+		-- Do NOT adjust the following option (winblend) if you're using transparent background
+		winblend = 0,
+		winminwidth = 10,
+		winwidth = 30,
+		wrap = false,
+		wrapscan = true,
+		writebackup = false,
 	}
 
 	local function isempty(s)

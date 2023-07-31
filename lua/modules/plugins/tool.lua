@@ -29,9 +29,9 @@ tool["ibhagwan/smartyank.nvim"] = {
 }
 tool["michaelb/sniprun"] = {
 	lazy = true,
-	-- You need to cd to `~/.local/share/nvim/site/lazy/sniprun/` and execute `bash ./install.sh 1`,
+	-- You need to cd to `~/.local/share/nvim/site/lazy/sniprun/` and execute `bash ./install.sh`,
 	-- if you encountered error about no executable sniprun found.
-	build = "bash ./install.sh 1",
+	build = "bash ./install.sh",
 	cmd = "SnipRun",
 	config = require("tool.sniprun"),
 }
@@ -52,10 +52,9 @@ tool["folke/trouble.nvim"] = {
 	cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
 	config = require("tool.trouble"),
 }
--- Please don't remove which-key.nvim otherwise you need to set timeoutlen=300 at `lua/core/options.lua`
 tool["folke/which-key.nvim"] = {
 	lazy = true,
-	event = "VeryLazy",
+	event = { "CursorHold", "CursorHoldI" },
 	config = require("tool.which-key"),
 }
 tool["gelguy/wilder.nvim"] = {

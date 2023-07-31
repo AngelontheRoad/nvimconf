@@ -30,8 +30,5 @@ return function()
 			padding = { 1, 1, 1, 1 },
 			winblend = 0,
 		},
-		triggers_blacklist = {
-			n = { "<C-c>" },
-		},
 	})
 end

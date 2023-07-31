@@ -31,7 +31,6 @@ return function()
 			border = "PmenuBorder", -- highlight to use for the border
 			accent = wilder.make_hl("WilderAccent", "CmpItemAbbr", "CmpItemAbbrMatch"),
 		},
-		max_height = "25%",
 		empty_message = wilder.popupmenu_empty_message_with_spinner(),
 		highlighter = wilder.lua_fzy_highlighter(),
 		left = {

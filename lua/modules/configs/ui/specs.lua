@@ -8,8 +8,8 @@ return function()
 			blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
 			width = 10,
 			winhl = "PmenuSbar",
-			fader = require("specs").sinus_fader,
-			resizer = require("specs").slide_resizer,
+			fader = require("specs").pulse_fader,
+			resizer = require("specs").shrink_resizer,
 		},
 		ignore_filetypes = {},
 		ignore_buftypes = { nofile = true },

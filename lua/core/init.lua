@@ -78,9 +78,9 @@ local leader_map = function()
 end
 
 local neovide_config = function()
-	vim.api.nvim_set_option_value("guifont", "VictorMono Nerd Font Mono:h12", {})
+	vim.api.nvim_set_option_value("guifont", "JetBrainsMono Nerd Font:h15", {})
 	vim.g.neovide_refresh_rate = 120
-	vim.g.neovide_cursor_vfx_mode = ""
+	vim.g.neovide_cursor_vfx_mode = "railgun"
 	vim.g.neovide_no_idle = true
 	vim.g.neovide_cursor_animation_length = 0.03
 	vim.g.neovide_cursor_trail_length = 0.05
@@ -101,14 +101,14 @@ local clipboard_config = function()
 		}
 	elseif global.is_wsl then
 		vim.g.clipboard = {
-			name = "psyank-wsl",
+			name = "win32yank-wsl",
 			copy = {
-				["+"] = "clip.exe",
-				["*"] = "clip.exe",
+				["+"] = "win32yank.exe -i --crlf",
+				["*"] = "win32yank.exe -i --crlf",
 			},
 			paste = {
-				["+"] = [[pwsh.exe -NoProfile -NoLogo -NonInteractive -Command [console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))]],
-				["*"] = [[pwsh.exe -NoProfile -NoLogo -NonInteractive -Command [console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))]],
+				["+"] = "win32yank.exe -o --lf",
+				["*"] = "win32yank.exe -o --lf",
 			},
 			cache_enabled = 0,
 		}
