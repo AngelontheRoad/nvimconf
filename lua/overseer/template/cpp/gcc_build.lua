@@ -13,4 +13,8 @@ return {
 	condition = {
 		filetype = { "cpp" },
 	},
+	callback = function(search)
+		print(vim.inspect(search))
+		return true
+	end,
 }

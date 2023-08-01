@@ -85,7 +85,17 @@ editor["kylechui/nvim-surround"] = {
 }
 editor["stevearc/overseer.nvim"] = {
 	lazy = true,
-	event = "VeryLazy",
+	cmd = {
+		"OverseerRun",
+		"OverseerRunCmd",
+		"OverseerToggle",
+		"OverseerBuild",
+		"OverseerInfo",
+		"OverseerClose",
+		"OverseerOpen",
+		"OverseerTaskAction",
+	},
+	opt = {},
 	config = require("editor.overseer"),
 }
 editor["pixelneo/vim-python-docstring"] = {

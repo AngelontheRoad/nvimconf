@@ -125,7 +125,6 @@ local function load_options()
 		vim.o[name] = value
 	end
 
-	vim.opt.mousemodel = "" -- disable right mouse
 	if global.is_windows then
 		vim.o.shell = "pwsh"
 		vim.o.shellcmdflag =
