@@ -166,4 +166,5 @@ end
 
 load_core()
 
-vim.api.nvim_command([[set rtp-=/usr/local/lib/nvim]])
+-- vim.api.nvim_command([[set rtp-=/usr/local/lib/nvim]])
+-- vim.api.nvim_command([[set rtp-=/usr/share/nvim]])
