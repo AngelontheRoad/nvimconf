@@ -21,7 +21,7 @@ ui["sainnhe/edge"] = {
 	config = require("ui.edge"),
 }
 ui["sainnhe/everforest"] = {
-	lazy = true,
+	lazy = false,
 	config = require("ui.everforest"),
 }
 ui["j-hui/fidget.nvim"] = {

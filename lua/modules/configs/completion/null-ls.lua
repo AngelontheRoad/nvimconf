@@ -9,14 +9,12 @@ return function()
 		-- btns.diagnostics.flake8.with({
 		-- 	extra_args = require("completion.formatters.flake8_diagnostic"),
 		-- }),
-		-- btns.diagnostics.ruff.with({
-		-- 	extra_args = require("completion.formatters.ruff_diagnostic"),
-		-- }),
-		-- btns.diagnostics.ruff,
-		-- btns.formatting.ruff,
-		-- btns.formatting.black.with({
-		-- 	extra_args = require("completion.formatters.black_format"),
-		-- }),
+		btns.diagnostics.ruff.with({
+			extra_args = require("completion.formatters.ruff_diagnostic"),
+		}),
+		btns.formatting.black.with({
+			extra_args = require("completion.formatters.black_format"),
+		}),
 		btns.formatting.clang_format.with({
 			filetypes = { "c", "cpp" },
 			extra_args = require("completion.formatters.clang_format"),
