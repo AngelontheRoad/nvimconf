@@ -95,7 +95,6 @@ editor["stevearc/overseer.nvim"] = {
 		"OverseerOpen",
 		"OverseerTaskAction",
 	},
-	opt = {},
 	config = require("editor.overseer"),
 }
 editor["pixelneo/vim-python-docstring"] = {
