@@ -100,30 +100,30 @@ local clipboard_config = function()
 			cache_enabled = 0,
 		}
 	elseif global.is_wsl then
-		vim.g.clipboard = {
-			name = "psyank-wsl",
-			copy = {
-				["+"] = "clip.exe",
-				["*"] = "clip.exe",
-			},
-			paste = {
-				["+"] = [[powershell.exe -NoProfile -NoLogo -NonInteractive -MTA -Command [console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))]],
-				["*"] = [[powershell.exe -NoProfile -NoLogo -NonInteractive -MTA -Command [console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))]],
-			},
-			cache_enabled = 0,
-		}
 		-- vim.g.clipboard = {
-		-- 	name = "win32yank-wsl",
+		-- 	name = "psyank-wsl",
 		-- 	copy = {
-		-- 		["+"] = "win32yank.exe -i --crlf",
-		-- 		["*"] = "win32yank.exe -i --crlf",
+		-- 		["+"] = "clip.exe",
+		-- 		["*"] = "clip.exe",
 		-- 	},
 		-- 	paste = {
-		-- 		["+"] = "win32yank.exe -o --lf",
-		-- 		["*"] = "win32yank.exe -o --lf",
+		-- 		["+"] = [[powershell.exe -NoProfile -NoLogo -NonInteractive -MTA -Command [console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))]],
+		-- 		["*"] = [[powershell.exe -NoProfile -NoLogo -NonInteractive -MTA -Command [console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))]],
 		-- 	},
 		-- 	cache_enabled = 0,
 		-- }
+		vim.g.clipboard = {
+			name = "win32yank-wsl",
+			copy = {
+				["+"] = "win32yank.exe -i --crlf",
+				["*"] = "win32yank.exe -i --crlf",
+			},
+			paste = {
+				["+"] = "win32yank.exe -o --lf",
+				["*"] = "win32yank.exe -o --lf",
+			},
+			cache_enabled = 0,
+		}
 	end
 end
 
