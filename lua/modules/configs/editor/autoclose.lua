@@ -13,7 +13,7 @@ return function()
 			['"'] = { escape = true, close = true, pair = '""' },
 			["`"] = { escape = true, close = true, pair = "``" },
 			["'"] = { escape = true, close = true, pair = "''", disabled_filetypes = { "rust" } },
-			["<"] = { escape = true, close = true, pair = "<>", disabled_filetypes = { "cpp", "python" } },
+			-- ["<"] = { escape = true, close = true, pair = "<>", disabled_filetypes = { "cpp", "python" } },
 		},
 		options = {
 			disabled_filetypes = { "big_file_disabled_ft" },
