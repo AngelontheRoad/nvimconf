@@ -31,6 +31,7 @@ local function load_options()
 		expandtab = true,
 		fileformats = "unix,mac,dos",
 		foldenable = true,
+		fileencodings = "utf8,ucs-bom,gbk,cp936,gb2312,gb18030",
 		foldlevelstart = 99,
 		formatoptions = "1jcroql",
 		grepformat = "%f:%l:%c:%m",
@@ -125,7 +126,11 @@ local function load_options()
 		vim.o[name] = value
 	end
 
-	if global.is_windows then
+	local sqlite_clib_path = os.getenv("SQLITE_CLIB_PATH")
+	-- Try environment variable first
+	if not isempty(sqlite_clib_path) then
+		vim.g.sqlite_clib_path = sqlite_clib_path
+	elseif global.is_windows then
 		vim.o.shell = "pwsh"
 		vim.o.shellcmdflag =
 			"-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
