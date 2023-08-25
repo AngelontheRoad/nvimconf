@@ -8,4 +8,6 @@ return function()
 	vim.g.clever_f_mark_direct_color = "CleverChar"
 	vim.g.clever_f_smart_case = 1
 	vim.g.clever_f_mark_direct = true
+
+	require("modules.utils").load_plugin("cleverf", nil, true)
 end

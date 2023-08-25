@@ -1,6 +1,5 @@
 return function()
 	local null_ls = require("null-ls")
-	local mason_null_ls = require("mason-null-ls")
 	local btns = null_ls.builtins
 
 	-- Please set additional flags for the supported servers here
@@ -36,7 +35,7 @@ return function()
 		}),
 		btns.formatting.rustfmt,
 	}
-	null_ls.setup({
+	require("modules.utils").load_plugin("null-ls", {
 		border = "rounded",
 		debug = false,
 		log_level = "warn",
@@ -44,12 +43,7 @@ return function()
 		sources = sources,
 	})
 
-	mason_null_ls.setup({
-		ensure_installed = require("core.settings").null_ls_deps,
-		automatic_installation = false,
-		automatic_setup = true,
-		handlers = {},
-	})
+	require("completion.mason-null-ls").setup()
 
 	-- Setup usercmd to register/deregister available source(s)
 	local function _gen_completion()
