@@ -16,14 +16,6 @@ ui["Jint-lzxy/nvim"] = {
 	name = "catppuccin",
 	config = require("ui.catppuccin"),
 }
-ui["sainnhe/edge"] = {
-	lazy = true,
-	config = require("ui.edge"),
-}
-ui["sainnhe/everforest"] = {
-	lazy = false,
-	config = require("ui.everforest"),
-}
 ui["j-hui/fidget.nvim"] = {
 	lazy = true,
 	branch = "legacy",
@@ -54,10 +46,6 @@ ui["karb94/neoscroll.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("ui.neoscroll"),
-}
-ui["shaunsingh/nord.nvim"] = {
-	lazy = true,
-	config = require("ui.nord"),
 }
 ui["rcarriga/nvim-notify"] = {
 	lazy = true,
