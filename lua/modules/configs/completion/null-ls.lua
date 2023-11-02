@@ -2,6 +2,17 @@ return function()
 	local null_ls = require("null-ls")
 	local btns = null_ls.builtins
 
+	---Return formatter args required by `extra_args`
+	---@param formatter_name string
+	---@return table|nil
+	local function formatter_args(formatter_name)
+		local ok, args = pcall(require, "user.configs.formatters." .. formatter_name)
+		if not ok then
+			args = require("completion.formatters." .. formatter_name)
+		end
+		return args
+	end
+
 	-- Please set additional flags for the supported servers here
 	-- Don't specify any config here if you are using the default one.
 	local sources = {
@@ -9,7 +20,7 @@ return function()
 		-- 	extra_args = require("completion.formatters.flake8_diagnostic"),
 		-- }),
 		btns.diagnostics.ruff.with({
-			extra_args = require("completion.formatters.ruff_diagnostic"),
+			extra_args = formatter_args("clang_format"),
 		}),
 		btns.formatting.black.with({
 			extra_args = require("completion.formatters.black_format"),
