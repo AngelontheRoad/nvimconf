@@ -17,15 +17,25 @@ return function()
 
 	require("modules.utils").load_plugin("bigfile", {
 		filesize = 1, -- size of the file in MiB
-		pattern = { "*" }, -- autocmd pattern
+		-- pattern = { "*" }, -- autocmd pattern
+		pattern = function(bufnr, filesize_mib)
+			-- you can't use `nvim_buf_line_count` because this runs on BufReadPre
+			-- local filetype = vim.filetype.match({ buf = bufnr })
+			local file_contents = vim.fn.readfile(vim.api.nvim_buf_get_name(bufnr))
+			local file_length = #file_contents
+			local first_line_length = #file_contents[1]
+			if file_length > 10000 or first_line_length > 1000 then
+				return true
+			end
+		end, -- autocmd pattern
 		features = { -- features to disable
-			"lsp",
-			"illuminate",
+			-- "lsp",
+			-- "illuminate",
 			"treesitter",
-			"syntax",
-			"vimopts",
-			ftdetect,
-			cmp,
+			-- "syntax",
+			-- "vimopts",
+			-- ftdetect,
+			-- cmp,
 		},
 	})
 end
