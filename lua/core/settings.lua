@@ -112,7 +112,7 @@ settings["lsp_deps"] = {
 -- Set the general-purpose servers that will be installed during bootstrap here.
 -- Check the below link for all supported sources.
 -- in `code_actions`, `completion`, `diagnostics`, `formatting`, `hover` folders:
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins
+-- https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins
 ---@type string[]
 settings["null_ls_deps"] = {
 	"clang_format",
@@ -166,7 +166,7 @@ settings["treesitter_deps"] = {
 ---@type { font_name: string, font_size: number }
 settings["gui_config"] = {
 	font_name = "JetBrainsMono Nerd Font",
-	font_size = 14,
+	font_size = 11,
 }
 
 -- Set the options specific to `neovide` here.
