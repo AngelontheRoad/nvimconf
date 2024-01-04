@@ -41,10 +41,14 @@ local core_map = {
 	["n|to"] = map_cr("tabonly"):with_noremap():with_silent():with_desc("tab: Only keep current tab"),
 	-- Insert mode
 	["i|<C-u>"] = map_cmd("<C-G>u<C-U>"):with_noremap():with_desc("edit: Delete previous block"),
-	["i|<C-b>"] = map_cmd("<Left>"):with_noremap():with_desc("edit: Move cursor to left"),
 	["i|<C-a>"] = map_cmd("<ESC>^i"):with_noremap():with_desc("edit: Move cursor to line start"),
+	["i|<C-e>"] = map_cmd("<ESC>$i"):with_noremap():with_desc("edit: Move cursor to line end"),
 	["i|<C-s>"] = map_cmd("<Esc>:w<CR>"):with_desc("edit: Save file"),
 	["i|<C-q>"] = map_cmd("<Esc>:wq<CR>"):with_desc("edit: Save file and quit"),
+	["i|<C-h>"] = map_cmd("<Left>"):with_noremap():with_desc("edit: Move cursor to left"),
+	["i|<C-l>"] = map_cmd("<Right>"):with_noremap():with_desc("edit: Move cursor to right"),
+	["i|<C-j>"] = map_cmd("<Down>"):with_noremap():with_desc("edit: Move cursor to down"),
+	["i|<C-k>"] = map_cmd("<Up>"):with_noremap():with_desc("edit: Move cursor to up"),
 	-- Command mode
 	["c|<C-b>"] = map_cmd("<Left>"):with_noremap():with_desc("edit: Left"),
 	["c|<C-f>"] = map_cmd("<Right>"):with_noremap():with_desc("edit: Right"),

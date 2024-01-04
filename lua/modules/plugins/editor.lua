@@ -150,6 +150,10 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
 			config = require("editor.ts-context-commentstring"),
 		},
+		{
+			"Wansmer/treesj",
+			config = require("editor.treesj"),
+		},
 	},
 }
 

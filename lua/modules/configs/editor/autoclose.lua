@@ -21,4 +21,6 @@ return function()
 			disable_when_touch = false,
 		},
 	})
+	-- override <C-H> inoremap at this plugin
+	vim.api.nvim_set_keymap("i", "<C-h>", "<Left>", { noremap = true, desc = "edit: Move cursor to left" })
 end
