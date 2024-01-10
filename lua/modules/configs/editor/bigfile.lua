@@ -20,14 +20,16 @@ return function()
 		-- pattern = { "*" }, -- autocmd pattern
 		pattern = function(bufnr, filesize_mib)
 			-- you can't use `nvim_buf_line_count` because this runs on BufReadPre
-			-- local filetype = vim.filetype.match({ buf = bufnr })
-			local file_contents = vim.fn.readfile(vim.api.nvim_buf_get_name(bufnr))
-			local file_length = #file_contents
-			-- avoid error on empty file
-			if file_length > 0 then
-				local first_line_length = #file_contents[1]
-				if file_length > 10000 or first_line_length > 1000 then
-					return true
+			local filetype = vim.filetype.match({ buf = bufnr })
+			if filetype == "javascript" then
+				local file_contents = vim.fn.readfile(vim.api.nvim_buf_get_name(bufnr))
+				local file_length = #file_contents
+				-- avoid error on empty file
+				if file_length > 0 then
+					local first_line_length = #file_contents[1]
+					if file_length > 10000 or first_line_length > 1000 then
+						return true
+					end
 				end
 			end
 		end, -- autocmd pattern
