@@ -1,12 +1,10 @@
 return function()
 	vim.g.rustaceanvim = {
-		-- DAP configuration
+		-- Disable automatic DAP configuration to avoid conflicts with previous user configs
 		dap = {
-			adapter = {
-				type = "executable",
-				command = "lldb-vscode",
-				name = "rt_lldb",
-			},
-		},
+			adapter = false,
+			configuration = false,
+			autoload_configurations = false,
+		}, -- DAP configuration
 	}
 end
