@@ -165,8 +165,8 @@ settings["treesitter_deps"] = {
 -- NOTE: Currently, only the following options related to the GUI are supported. Other entries will be IGNORED.
 ---@type { font_name: string, font_size: number }
 settings["gui_config"] = {
-	font_name = "JetBrainsMono Nerd Font",
-	font_size = 11,
+	font_name = "JetBrainsMono Nerd Font Mono",
+	font_size = 10,
 }
 
 -- Set the options specific to `neovide` here.
