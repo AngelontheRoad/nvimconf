@@ -3,7 +3,14 @@ return function()
 		selected_interpreters = {}, -- " use those instead of the default for the current filetype
 		repl_enable = {}, -- " enable REPL-like behavior for the given interpreters
 		repl_disable = {}, -- " disable REPL-like behavior for the given interpreters
-		interpreter_options = {}, -- " intepreter-specific options, consult docs / :SnipInfo <name>
+		interpreter_options = {
+			Python3_fifo = {
+				venv = { "/home/chris/.conda/envs/openai", "/home/chris/.conda/envs/ocr" },
+			},
+			Python3_original = {
+				venv = { "/home/chris/.conda/envs/openai", "/home/chris/.conda/envs/ocr" },
+			},
+		}, -- " intepreter-specific options, consult docs / :SnipInfo <name>
 		-- " you can combo different display modes as desired
 		display = {
 			"TempFloatingWindowOk", -- display ok results in the floating window
