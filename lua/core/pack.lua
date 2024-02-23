@@ -26,10 +26,12 @@ function Lazy:load_plugins()
 	local append_nativertp = function()
 		package.path = package.path
 			.. string.format(
-				";%s;%s;%s",
+				";%s;%s;%s;%s;%s",
 				modules_dir .. "/configs/?.lua",
 				modules_dir .. "/configs/?/init.lua",
-				user_config_dir .. "/?.lua"
+				user_config_dir .. "/?.lua",
+                fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua",
+                fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua"
 			)
 	end
 

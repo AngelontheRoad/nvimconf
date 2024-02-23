@@ -4,11 +4,9 @@ return function()
 		repl_enable = {}, -- " enable REPL-like behavior for the given interpreters
 		repl_disable = {}, -- " disable REPL-like behavior for the given interpreters
 		interpreter_options = {
-			Python3_fifo = {
-				venv = { "/home/chris/.conda/envs/openai", "/home/chris/.conda/envs/ocr" },
-			},
 			Python3_original = {
-				venv = { "/home/chris/.conda/envs/openai", "/home/chris/.conda/envs/ocr" },
+				interpreter = "/home/chris/.conda/envs/openai/bin/python3.12",
+				-- "/home/chris/.conda/envs/ocr/bin/python3.11",
 			},
 		}, -- " intepreter-specific options, consult docs / :SnipInfo <name>
 		-- " you can combo different display modes as desired
@@ -19,7 +17,7 @@ return function()
 			-- "VirtualText", -- display results in virtual text"
 			-- "LongTempFloatingWindow", -- display results in the long floating window
 			-- "Terminal" -- display results in a vertical split
-			-- "TerminalWithCode" -- display results and code history in a vertical split
+			-- "TerminalWithCode", -- display results and code history in a vertical split
 		},
 		display_options = {
 			terminal_width = 45,
