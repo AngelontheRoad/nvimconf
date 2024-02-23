@@ -74,10 +74,10 @@ local plug_map = {
 	["o|m"] = map_cu("lua require('tsht').nodes()"):with_silent():with_desc("jump: Operate across syntax tree"),
 
 	-- Plugin: treesj
-	["n|<leader>m"] = map_cu("lua require('treesj').toggle()")
+	["n|<leader>tm"] = map_cu("lua require('treesj').toggle()")
 		:with_noremap()
 		:with_desc("edit: Toggle node under cursor"),
-	["n|<leader>M"] = map_cu("lua require('treesj').toggle({ split = { recursive = true } })")
+	["n|<leader>tM"] = map_cu("lua require('treesj').toggle({ split = { recursive = true } })")
 		:with_noremap()
 		:with_desc("edit: Toggle node recursively under cursor"),
 

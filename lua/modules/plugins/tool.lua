@@ -119,7 +119,8 @@ tool["mfussenegger/nvim-dap"] = {
 tool["benlubas/molten-nvim"] = {
 	lazy = true,
 	version = "^1.0.0",
-	cmd = { "MoltenInfo", "MoltenInit" },
+	ft = { "python", "markdown" },
+	-- cmd = { "MoltenInfo", "MoltenInit" },
 	build = ":UpdateRemotePlugins",
 	dependencies = { { "3rd/image.nvim", config = require("tool.image") } },
 	init = require("tool.molten"),

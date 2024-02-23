@@ -225,6 +225,29 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Center scopes"),
+	-- Plugin: Molten, for jupyter
+	["n|<leader>mi"] = map_cr("MoltenInit"):with_noremap():with_silent():with_desc("jupyter: Initialize the plugin"),
+	["n|<leader>me"] = map_cr("MoltenEvaluateOperator")
+		:with_noremap()
+		:with_silent()
+		:with_desc("jupyter: Run operator selection"),
+	["n|<leader>ml"] = map_cr("MoltenEvaluateLine"):with_noremap():with_silent():with_desc("jupyter: Evaluate line"),
+	["n|<leader>mr"] = map_cr("MoltenReevaluateCell")
+		:with_noremap()
+		:with_silent()
+		:with_desc("jupyter: Re-evaluate cell"),
+	["n|<leader>md"] = map_cr("MoltenDelete"):with_noremap():with_silent():with_desc("jupyter: Delete cell"),
+	["n|<leader>mo"] = map_cr("noautocmd MoltenEnterOutput")
+		:with_noremap()
+		:with_silent()
+		:with_desc("jupyter: Show/enter output"),
+	["n|<leader>mh"] = map_cr("MoltenHideOutput"):with_noremap():with_silent():with_desc("jupyter: Hide output"),
+	["n|<leader>mj"] = map_cr("MoltenPrev"):with_noremap():with_silent():with_desc("jupyter: Go to the previous cell"),
+	["n|<leader>mk"] = map_cr("MoltenNext"):with_noremap():with_silent():with_desc("jupyter: Go to the next cell"),
+	["v|<leader>me"] = map_cmd(":<C-u>MoltenEvaluateVisual<CR>gv")
+		:with_noremap()
+		:with_silent()
+		:with_desc("jupyter: Evaluate visual selection"),
 }
 
 bind.nvim_load_mapping(plug_map)
