@@ -4,10 +4,10 @@ return function()
 		repl_enable = {}, -- " enable REPL-like behavior for the given interpreters
 		repl_disable = {}, -- " disable REPL-like behavior for the given interpreters
 		interpreter_options = {
-			Python3_original = {
-				interpreter = "/home/chris/.conda/envs/openai/bin/python3.12",
-				-- "/home/chris/.conda/envs/ocr/bin/python3.11",
-			},
+			-- Python3_original = {
+			-- interpreter = "/home/chris/.conda/envs/openai/bin/python3.12",
+			-- "/home/chris/.conda/envs/ocr/bin/python3.11",
+			-- },
 		}, -- " intepreter-specific options, consult docs / :SnipInfo <name>
 		-- " you can combo different display modes as desired
 		display = {
