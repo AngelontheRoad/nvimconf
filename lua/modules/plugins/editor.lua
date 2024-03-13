@@ -81,10 +81,6 @@ editor["lambdalisue/suda.vim"] = {
 }
 
 -------------  user defined ----------------------
-editor["vim-scripts/ReplaceWithRegister"] = {
-	lazy = true,
-	event = "BufReadPost",
-}
 editor["kylechui/nvim-surround"] = {
 	version = "*", -- Use for stability; omit to use `main` branch for the latest features
 	lazy = true,
