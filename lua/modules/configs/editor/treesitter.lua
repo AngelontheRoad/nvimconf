@@ -6,6 +6,15 @@ return vim.schedule_wrap(function()
 
 	require("modules.utils").load_plugin("nvim-treesitter", {
 		ensure_installed = require("core.settings").treesitter_deps,
+		incremental_selection = {
+			enable = true,
+			keymaps = {
+				init_selection = "<CR>",
+				-- scope_incremental = "<CR>",
+				node_incremental = "<CR>",
+				node_decremental = "<S-CR>",
+			},
+		},
 		highlight = {
 			enable = true,
 			disable = function(ft, bufnr)
