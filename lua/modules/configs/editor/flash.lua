@@ -25,7 +25,7 @@ return function()
 				-- hide after jump when not using jump labels
 				autohide = false,
 				-- show jump labels
-				jump_labels = false,
+				jump_labels = true,
 				-- set to `false` to use the current line only
 				multi_line = true,
 				-- When using jump labels, don't use these keys
