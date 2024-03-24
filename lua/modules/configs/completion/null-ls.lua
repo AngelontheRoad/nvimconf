@@ -19,9 +19,9 @@ return function()
 		-- btns.diagnostics.flake8.with({
 		-- 	extra_args = require("completion.formatters.flake8_diagnostic"),
 		-- }),
-		btns.diagnostics.ruff.with({
-			extra_args = formatter_args("clang_format"),
-		}),
+		-- btns.diagnostics.ruff.with({
+		-- 	extra_args = formatter_args("clang_format"),
+		-- }),
 		btns.formatting.black.with({
 			extra_args = require("completion.formatters.black_format"),
 		}),

@@ -44,7 +44,7 @@ return function()
 			highlight_git = true,
 			full_name = false,
 			highlight_opened_files = "none",
-			special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md", "CMakeLists.txt" },
+			special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md", "CMakeLists.txt", "pyproject.toml" },
 			symlink_destination = true,
 			indent_markers = {
 				enable = true,
@@ -68,17 +68,17 @@ return function()
 				padding = " ",
 				symlink_arrow = " 󰁔 ",
 				glyphs = {
-					default = icons.documents.Default, --
+					default = icons.documents.Default, --
 					symlink = icons.documents.Symlink, --
-					bookmark = icons.ui.Bookmark,
+					bookmark = icons.ui.Bookmark, --󰃃
 					git = {
-						unstaged = icons.git.Mod_alt,
-						staged = icons.git.Add, --󰄬
-						unmerged = icons.git.Unmerged,
-						renamed = icons.git.Rename, --󰁔
-						untracked = icons.git.Untracked, -- "󰞋"
+						unstaged = icons.git.Mod_alt, --
+						staged = icons.git.Add, --
+						unmerged = icons.git.Unmerged, --󰘬
+						renamed = icons.git.Rename, --
+						untracked = icons.git.Untracked, --󰞋
 						deleted = icons.git.Remove, --
-						ignored = icons.git.Ignore, --◌
+						ignored = icons.git.Ignore, --
 					},
 					folder = {
 						arrow_open = icons.ui.ArrowOpen,
