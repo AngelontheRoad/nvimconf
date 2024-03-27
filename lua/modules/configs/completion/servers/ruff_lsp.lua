@@ -10,7 +10,7 @@ return function(options)
 		on_attach = on_attach,
 		init_options = {
 			settings = {
-				path = ruff,
+				-- path = ruff,
 				-- Any extra CLI arguments for `ruff` go here.
 				args = { "--ignore", "E501,F403,F405" },
 			},

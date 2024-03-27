@@ -22,9 +22,9 @@ return function()
 		-- btns.diagnostics.ruff.with({
 		-- 	extra_args = formatter_args("clang_format"),
 		-- }),
-		btns.formatting.black.with({
-			extra_args = require("completion.formatters.black_format"),
-		}),
+		-- btns.formatting.black.with({
+		-- 	extra_args = require("completion.formatters.black_format"),
+		-- }),
 		btns.formatting.clang_format.with({
 			filetypes = { "c", "cpp" },
 			extra_args = require("completion.formatters.clang_format"),
