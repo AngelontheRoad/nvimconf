@@ -31,6 +31,7 @@ return function()
 				-- When using jump labels, don't use these keys
 				-- This allows using those keys directly after the motion
 				label = { exclude = "hjkliardc" },
+				keys = { "f", "F", ";", "," },
 			},
 		},
 	})
