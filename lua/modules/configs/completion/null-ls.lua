@@ -16,9 +16,6 @@ return function()
 	-- Please set additional flags for the supported servers here
 	-- Don't specify any config here if you are using the default one.
 	local sources = {
-		-- btns.diagnostics.flake8.with({
-		-- 	extra_args = require("completion.formatters.flake8_diagnostic"),
-		-- }),
 		-- btns.diagnostics.ruff.with({
 		-- 	extra_args = formatter_args("clang_format"),
 		-- }),
@@ -26,8 +23,8 @@ return function()
 		-- 	extra_args = require("completion.formatters.black_format"),
 		-- }),
 		btns.formatting.clang_format.with({
-			filetypes = { "c", "cpp" },
-			extra_args = require("completion.formatters.clang_format"),
+			filetypes = { "c", "cpp", "objc", "objcpp", "cs", "java", "cuda", "proto" },
+			extra_args = formatter_args("clang_format"),
 		}),
 		btns.formatting.prettier.with({
 			filetypes = {
@@ -51,6 +48,7 @@ return function()
 		log_level = "warn",
 		update_in_insert = false,
 		sources = sources,
+		default_timeout = require("core.settings").format_timeout,
 	})
 
 	require("completion.mason-null-ls").setup()
@@ -58,7 +56,7 @@ return function()
 	-- Setup usercmd to register/deregister available source(s)
 	local function _gen_completion()
 		local sources_cont = null_ls.get_source({
-			filetype = vim.api.nvim_get_option_value("filetype", { scope = "local" }),
+			filetype = vim.bo.filetype,
 		})
 		local completion_items = {}
 		for _, server in pairs(sources_cont) do
