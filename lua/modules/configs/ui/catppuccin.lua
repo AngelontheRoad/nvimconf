@@ -83,6 +83,7 @@ return function()
 			overseer = true,
 			pounce = false,
 			rainbow_delimiters = true,
+			render_markdown = true,
 			sandwich = false,
 			semantic_tokens = true,
 			symbols_outline = false,

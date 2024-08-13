@@ -22,17 +22,20 @@ lang["mrcjkb/rustaceanvim"] = {
 	init = require("lang.rust"),
 	dependencies = { "nvim-lua/plenary.nvim" },
 }
+lang["MeanderingProgrammer/render-markdown.nvim"] = {
+	lazy = true,
+	ft = "markdown",
+	config = require("lang.render-markdown"),
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+		"nvim-treesitter/nvim-treesitter",
+	},
+}
 lang["Saecki/crates.nvim"] = {
 	lazy = true,
 	event = "BufReadPost Cargo.toml",
 	config = require("lang.crates"),
 	dependencies = { "nvim-lua/plenary.nvim" },
-}
-lang["iamcco/markdown-preview.nvim"] = {
-	lazy = true,
-	ft = "markdown",
-	build = ":call mkdp#util#install()",
-	config = require("lang.markdown-preview"),
 }
 lang["chrisbra/csv.vim"] = {
 	lazy = true,

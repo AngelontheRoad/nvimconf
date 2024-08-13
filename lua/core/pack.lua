@@ -30,8 +30,8 @@ function Lazy:load_plugins()
 				modules_dir .. "/configs/?.lua",
 				modules_dir .. "/configs/?/init.lua",
 				user_config_dir .. "/?.lua",
-                fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua",
-                fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua"
+				fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua",
+				fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua"
 			)
 	end
 
@@ -126,6 +126,28 @@ function Lazy:load_lazy()
 				reset = true, -- reset the runtime path to $VIMRUNTIME and the config directory
 				---@type string[]
 				paths = {}, -- add any custom paths here that you want to include in the rtp
+				disabled_plugins = {
+					-- Do not use builtin matchit.vim and matchparen.vim because we're using vim-matchup
+					"matchit",
+					"matchparen",
+					-- Do not load builtin netrw
+					"netrwPlugin",
+					-- Do not load tohtml.vim
+					"tohtml",
+					-- Do not load zipPlugin.vim, gzip.vim and tarPlugin.vim (all of these plugins are
+					-- related to reading files inside compressed containers)
+					"gzip",
+					"tarPlugin",
+					"tutor",
+					"zipPlugin",
+					-- Disable remote plugins
+					-- NOTE:
+					--  > Disabling rplugin.vim will make `wilder.nvim` complain about missing rplugins during :checkhealth,
+					--  > but since it's config doesn't require python rtp (strictly), it's fine to ignore that for now.
+					"rplugin",
+					-- Do not load spell files
+					"spellfile",
+				},
 			},
 		},
 	}

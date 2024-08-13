@@ -5,8 +5,11 @@ local map_cr = bind.map_cr
 -- local map_callback = bind.map_callback
 
 local plug_map = {
-	-- Plugin MarkdownPreview
-	["n|<F12>"] = map_cr("MarkdownPreviewToggle"):with_noremap():with_silent():with_desc("tool: Preview markdown"),
+	-- Plugin render-markdown.nvim
+	["n|<F12>"] = map_cr("RenderMarkdown toggle")
+		:with_noremap()
+		:with_silent()
+		:with_desc("tool: toggle markdown preview within nvim"),
 }
 
 bind.nvim_load_mapping(plug_map)
