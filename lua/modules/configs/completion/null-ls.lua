@@ -23,7 +23,7 @@ return function()
 		-- 	extra_args = require("completion.formatters.black_format"),
 		-- }),
 		btns.formatting.clang_format.with({
-			filetypes = { "c", "cpp", "objc", "objcpp", "cs", "java", "cuda", "proto" },
+			filetypes = { "c", "cpp", "objc", "objcpp", "cs", "cuda", "proto" },
 			extra_args = formatter_args("clang_format"),
 		}),
 		btns.formatting.prettier.with({
