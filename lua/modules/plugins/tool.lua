@@ -37,6 +37,7 @@ tool["ibhagwan/smartyank.nvim"] = {
 }
 tool["michaelb/sniprun"] = {
 	lazy = true,
+	cond = not vim.uv.os_uname().sysname == "Windows_NT",
 	-- You need to cd to `~/.local/share/nvim/site/lazy/sniprun/` and execute `bash ./install.sh`,
 	-- if you encountered error about no executable sniprun found.
 	build = "bash ./install.sh",
@@ -136,6 +137,7 @@ tool["mfussenegger/nvim-dap"] = {
 ----------------------------------------------------------------------
 tool["benlubas/molten-nvim"] = {
 	lazy = true,
+	cond = not vim.fn.has("wsl"),
 	version = "^1.0.0",
 	ft = { "python", "markdown" },
 	-- cmd = { "MoltenInfo", "MoltenInit" },
