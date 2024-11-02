@@ -137,7 +137,7 @@ tool["mfussenegger/nvim-dap"] = {
 ----------------------------------------------------------------------
 tool["benlubas/molten-nvim"] = {
 	lazy = true,
-	cond = not (vim.fn.has("wsl")),
+	cond = (vim.fn.has("wsl") ~= "0"),
 	version = "^1.0.0",
 	ft = { "python", "markdown" },
 	-- cmd = { "MoltenInfo", "MoltenInit" },
