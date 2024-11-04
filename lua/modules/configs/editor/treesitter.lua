@@ -8,6 +8,7 @@ return vim.schedule_wrap(function()
 		ensure_installed = require("core.settings").treesitter_deps,
 		incremental_selection = {
 			enable = true,
+			disable = { "vim" },
 			keymaps = {
 				init_selection = "<CR>",
 				-- scope_incremental = "<CR>",
