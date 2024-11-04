@@ -65,3 +65,26 @@ _G._toggle_lazygit = function()
 		vim.notify("Command [lazygit] not found!", vim.log.levels.ERROR, { title = "toggleterm.nvim" })
 	end
 end
+
+_G._toggle_inlayhint = function()
+	if vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }) then
+		vim.lsp.inlay_hint.enable(false, { bufnr = 0 })
+		vim.notify("Disable inlay hint successfully!", vim.log.levels.INFO, { title = "Inlay hint" })
+	else
+		vim.lsp.inlay_hint.enable(true, { bufnr = 0 })
+		vim.notify("Enable inlay hint successfully!", vim.log.levels.INFO, { title = "Inlay hint" })
+	end
+end
+
+local _diagnostic = 1
+_G._toggle_diagnostic = function()
+	if vim.diagnostic.is_enabled({ bufnr = 0 }) then
+		if _diagnostic == 1 then
+			_diagnostic = 0
+			vim.diagnostic.hide(nil, 0)
+		else
+			_diagnostic = 1
+			vim.diagnostic.show(nil, 0)
+		end
+	end
+end

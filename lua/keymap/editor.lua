@@ -27,6 +27,8 @@ local builtin_map = {
 	-- Builtin: Command mode
 	["c|<C-b>"] = map_cmd("<Left>"):with_noremap():with_desc("edit: Left"),
 	["c|<C-f>"] = map_cmd("<Right>"):with_noremap():with_desc("edit: Right"),
+	["c|<A-b>"] = map_cmd("<C-Left>"):with_noremap():with_desc("edit: Left"),
+	["c|<A-f>"] = map_cmd("<C-Right>"):with_noremap():with_desc("edit: Right"),
 	["c|<C-a>"] = map_cmd("<Home>"):with_noremap():with_desc("edit: Home"),
 	["c|<C-e>"] = map_cmd("<End>"):with_noremap():with_desc("edit: End"),
 	["c|<C-d>"] = map_cmd("<Del>"):with_noremap():with_desc("edit: Delete"),
@@ -139,6 +141,18 @@ local plug_map = {
 	["n|<leader>tM"] = map_cu("lua require('treesj').toggle({ split = { recursive = true } })")
 		:with_noremap()
 		:with_desc("edit: Toggle node recursively under cursor"),
+	["n|<leader>th"] = map_callback(function()
+			_toggle_inlayhint()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("edit: Toggle inlay hint"),
+	["n|<leader>td"] = map_callback(function()
+			_toggle_diagnostic()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("edit: Toggle diagnostic info"),
 
 	-- Plugin: nvim-treehopper
 	["o|m"] = map_cu("lua require('tsht').nodes()"):with_silent():with_desc("jump: Operate across syntax tree"),
