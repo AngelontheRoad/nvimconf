@@ -141,18 +141,18 @@ local plug_map = {
 	["n|<leader>tM"] = map_cu("lua require('treesj').toggle({ split = { recursive = true } })")
 		:with_noremap()
 		:with_desc("edit: Toggle node recursively under cursor"),
-	["n|<leader>th"] = map_callback(function()
-			_toggle_inlayhint()
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("edit: Toggle inlay hint"),
 	["n|<leader>td"] = map_callback(function()
 			_toggle_diagnostic()
 		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("edit: Toggle diagnostic info"),
+		:with_desc("edit: Toggle virtual text display"),
+	["n|<leader>th"] = map_callback(function()
+			_toggle_inlayhint()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("edit: Toggle inlay hints dispaly"),
 
 	-- Plugin: nvim-treehopper
 	["o|m"] = map_cu("lua require('tsht').nodes()"):with_silent():with_desc("jump: Operate across syntax tree"),

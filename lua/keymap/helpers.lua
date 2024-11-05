@@ -69,10 +69,10 @@ end
 _G._toggle_inlayhint = function()
 	if vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }) then
 		vim.lsp.inlay_hint.enable(false, { bufnr = 0 })
-		vim.notify("Disable inlay hint successfully!", vim.log.levels.INFO, { title = "Inlay hint" })
+		vim.notify("Disable inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
 	else
 		vim.lsp.inlay_hint.enable(true, { bufnr = 0 })
-		vim.notify("Enable inlay hint successfully!", vim.log.levels.INFO, { title = "Inlay hint" })
+		vim.notify("Enable inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
 	end
 end
 
@@ -82,9 +82,11 @@ _G._toggle_diagnostic = function()
 		if _diagnostic == 1 then
 			_diagnostic = 0
 			vim.diagnostic.hide(nil, 0)
+			vim.notify("Hide virtual text successfully!", vim.log.levels.INFO, { title = "LSP Diagnostic" })
 		else
 			_diagnostic = 1
 			vim.diagnostic.show(nil, 0)
+			vim.notify("Show virtual text successfully!", vim.log.levels.INFO, { title = "LSP Diagnostic" })
 		end
 	end
 end
