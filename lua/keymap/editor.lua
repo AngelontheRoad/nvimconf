@@ -142,17 +142,29 @@ local plug_map = {
 		:with_noremap()
 		:with_desc("edit: Toggle node recursively under cursor"),
 	["n|<leader>td"] = map_callback(function()
+			_toggle_diagnostic(0)
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("edit: Toggle virtual text display of current buffer"),
+	["n|<leader>th"] = map_callback(function()
+			_toggle_inlayhint(0)
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("edit: Toggle inlay hints dispaly of current buffer"),
+	["n|<leader>tD"] = map_callback(function()
 			_toggle_diagnostic()
 		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("edit: Toggle virtual text display"),
-	["n|<leader>th"] = map_callback(function()
+		:with_desc("edit: Toggle virtual text display of all buffers"),
+	["n|<leader>tH"] = map_callback(function()
 			_toggle_inlayhint()
 		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("edit: Toggle inlay hints dispaly"),
+		:with_desc("edit: Toggle inlay hints dispaly of all buffers"),
 
 	-- Plugin: nvim-treehopper
 	["o|m"] = map_cu("lua require('tsht').nodes()"):with_silent():with_desc("jump: Operate across syntax tree"),

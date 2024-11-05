@@ -66,27 +66,44 @@ _G._toggle_lazygit = function()
 	end
 end
 
-_G._toggle_inlayhint = function()
-	if vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }) then
-		vim.lsp.inlay_hint.enable(false, { bufnr = 0 })
+_G._toggle_inlayhint = function(filter)
+	if vim.lsp.inlay_hint.is_enabled(filter) then
+		vim.lsp.inlay_hint.enable(false, filter)
 		vim.notify("Disable inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
 	else
-		vim.lsp.inlay_hint.enable(true, { bufnr = 0 })
+		vim.lsp.inlay_hint.enable(true, filter)
 		vim.notify("Enable inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
 	end
 end
 
 local _diagnostic = 1
-_G._toggle_diagnostic = function()
-	if vim.diagnostic.is_enabled({ bufnr = 0 }) then
-		if _diagnostic == 1 then
-			_diagnostic = 0
-			vim.diagnostic.hide(nil, 0)
-			vim.notify("Hide virtual text successfully!", vim.log.levels.INFO, { title = "LSP Diagnostic" })
+local _diagnostic_g = 1
+_G._toggle_diagnostic = function(bufnr)
+	if vim.diagnostic.is_enabled({ bufnr = bufnr }) then
+		-- specific buffer number
+		if bufnr then
+			if _diagnostic == 1 then
+				_diagnostic = 0
+				vim.diagnostic.hide(nil, bufnr)
+				vim.notify("Hide virtual text successfully!", vim.log.levels.INFO, { title = "LSP Diagnostic" })
+			else
+				_diagnostic = 1
+				vim.diagnostic.show(nil, bufnr)
+				vim.notify("Show virtual text successfully!", vim.log.levels.INFO, { title = "LSP Diagnostic" })
+			end
+		-- globally
 		else
-			_diagnostic = 1
-			vim.diagnostic.show(nil, 0)
-			vim.notify("Show virtual text successfully!", vim.log.levels.INFO, { title = "LSP Diagnostic" })
+			if _diagnostic_g == 1 then
+				_diagnostic_g = 0
+				_diagnostic = 0
+				vim.diagnostic.hide(nil)
+				vim.notify("Hide virtual text successfully!", vim.log.levels.INFO, { title = "LSP Diagnostic" })
+			else
+				_diagnostic_g = 1
+				_diagnostic = 1
+				vim.diagnostic.show(nil)
+				vim.notify("Show virtual text successfully!", vim.log.levels.INFO, { title = "LSP Diagnostic" })
+			end
 		end
 	end
 end
