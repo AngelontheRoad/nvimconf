@@ -67,6 +67,7 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("lsp: Show document diagnostics"),
+
 	-- Plugin: telescope
 	["n|<C-p>"] = map_callback(function()
 			_command_panel()

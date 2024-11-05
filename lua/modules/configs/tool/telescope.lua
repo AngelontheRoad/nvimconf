@@ -62,6 +62,9 @@ return function()
 				show_scores = true,
 				show_unindexed = true,
 				ignore_patterns = { "*.git/*", "*/tmp/*" },
+				workspaces = {
+					["conf"] = "/home/chris/.config/nvim",
+				},
 			},
 			live_grep_args = {
 				auto_quoting = true, -- enable/disable auto-quoting

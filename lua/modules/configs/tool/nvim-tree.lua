@@ -139,6 +139,7 @@ return function()
 							"fugitive",
 							"fugitiveblame",
 							"git",
+							"Glance",
 							"notify",
 							"NvimTree",
 							"Outline",
