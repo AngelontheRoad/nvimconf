@@ -119,7 +119,7 @@ local plug_map = {
 	-- Plugin: dap
 	-- use C-w_q to close float window
 	["n|<F6>"] = map_callback(function()
-			require("dap").continue()
+			_async_compile_and_debug()
 		end)
 		:with_noremap()
 		:with_silent()
