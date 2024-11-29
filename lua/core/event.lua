@@ -146,7 +146,7 @@ function autocmd.load_autocmds()
 		},
 	}
 
-	autocmd.nvim_create_augroups(require("modules.utils").extend_config(definitions, "user.event"))
+	autocmd.nvim_create_augroups(definitions)
 end
 
 autocmd.load_autocmds()

@@ -88,8 +88,6 @@ editor["nvim-pack/nvim-spectre"] = {
 	lazy = true,
 	cmd = "Spectre",
 }
-
--------------  user defined ----------------------
 editor["kylechui/nvim-surround"] = {
 	version = "*", -- Use for stability; omit to use `main` branch for the latest features
 	lazy = true,

@@ -121,7 +121,7 @@ local function load_options()
 		vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "/opt/mambaforge/bin/python")
 	end
 
-	for name, value in pairs(require("modules.utils").extend_config(global_local, "user.options")) do
+	for name, value in pairs(global_local) do
 		vim.api.nvim_set_option_value(name, value, {})
 	end
 end

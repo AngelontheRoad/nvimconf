@@ -88,11 +88,6 @@ function mapping.lsp(buf)
 			:with_desc("edit: Toggle inlay hints dispaly of all buffers"),
 	}
 	bind.nvim_load_mapping(map)
-
-	local ok, user_mappings = pcall(require, "user.keymap.completion")
-	if ok and type(user_mappings.lsp) == "function" then
-		require("modules.utils.keymap").replace(user_mappings.lsp(buf))
-	end
 end
 
 return mapping

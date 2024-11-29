@@ -6,10 +6,7 @@ return function()
 	---@param formatter_name string
 	---@return table|nil
 	local function formatter_args(formatter_name)
-		local ok, args = pcall(require, "user.configs.formatters." .. formatter_name)
-		if not ok then
-			args = require("completion.formatters." .. formatter_name)
-		end
+		local args = require("completion.formatters." .. formatter_name)
 		return args
 	end
 

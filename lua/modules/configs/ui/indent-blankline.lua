@@ -2,7 +2,6 @@ return function()
 	-- This list delineates the per-language nodes used for guiding |ibl| in highlighting the current scope
 	-- It is extracted from each language's `indents.scm` file
 	-- NOTE: Only a subset of the supported programming languages is included
-	--       If your preferred language isn't listed, you can add it to the user config
 	local nodes = {
 		bibtex = {
 			"entry",

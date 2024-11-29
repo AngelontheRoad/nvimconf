@@ -5,7 +5,6 @@ local vim_path = global.vim_path
 local data_dir = global.data_dir
 local lazy_path = data_dir .. "lazy/lazy.nvim"
 local modules_dir = vim_path .. "/lua/modules"
-local user_config_dir = vim_path .. "/lua/user"
 
 local settings = require("core.settings")
 local use_ssh = settings.use_ssh
@@ -26,10 +25,9 @@ function Lazy:load_plugins()
 	local append_nativertp = function()
 		package.path = package.path
 			.. string.format(
-				";%s;%s;%s;%s;%s",
+				";%s;%s;%s;%s",
 				modules_dir .. "/configs/?.lua",
 				modules_dir .. "/configs/?/init.lua",
-				user_config_dir .. "/?.lua",
 				fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua",
 				fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua"
 			)
@@ -38,12 +36,9 @@ function Lazy:load_plugins()
 	local get_plugins_list = function()
 		local list = {}
 		local plugins_list = vim.split(fn.glob(modules_dir .. "/plugins/*.lua"), "\n")
-		local user_plugins_list = vim.split(fn.glob(user_config_dir .. "/plugins/*.lua"), "\n", { trimempty = true })
-		vim.list_extend(plugins_list, user_plugins_list)
 		for _, f in ipairs(plugins_list) do
-			-- aggregate the plugins from `/plugins/*.lua` and `/user/plugins/*.lua` to a plugin list of a certain field for later `require` action.
 			-- current fields contains: completion, editor, lang, tool, ui
-			list[#list + 1] = f:find(modules_dir) and f:sub(#modules_dir - 6, -1) or f:sub(#user_config_dir - 3, -1)
+			list[#list + 1] = f:sub(#modules_dir - 6, -1)
 		end
 		return list
 	end
