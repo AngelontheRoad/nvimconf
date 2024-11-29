@@ -22,15 +22,6 @@ lang["mrcjkb/rustaceanvim"] = {
 	init = require("lang.rust"),
 	dependencies = { "nvim-lua/plenary.nvim" },
 }
-lang["MeanderingProgrammer/render-markdown.nvim"] = {
-	lazy = true,
-	ft = "markdown",
-	config = require("lang.render-markdown"),
-	dependencies = {
-		"nvim-tree/nvim-web-devicons",
-		"nvim-treesitter/nvim-treesitter",
-	},
-}
 lang["Saecki/crates.nvim"] = {
 	lazy = true,
 	event = "BufReadPost Cargo.toml",

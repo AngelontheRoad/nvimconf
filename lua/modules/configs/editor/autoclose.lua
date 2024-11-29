@@ -20,6 +20,7 @@ return function()
 			disable_when_touch = false,
 			disabled_filetypes = {
 				"alpha",
+				"AvanteInput",
 				"bigfile",
 				"checkhealth",
 				"dap-repl",
