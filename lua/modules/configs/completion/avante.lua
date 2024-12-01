@@ -2,7 +2,7 @@ return function()
 	require("modules.utils").load_plugin("avante", {
 		---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
 		provider = "openai",
-		debug = true,
+		debug = false,
 		auto_suggestions_provider = "copilot",
 		openai = {
 			endpoint = "https://oneai.evanora.top/v1",
