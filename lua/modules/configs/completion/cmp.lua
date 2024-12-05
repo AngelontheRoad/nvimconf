@@ -158,7 +158,7 @@ return function()
 			["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
 			["<C-d>"] = cmp.mapping.scroll_docs(-4),
 			["<C-f>"] = cmp.mapping.scroll_docs(4),
-			["<C-w>"] = cmp.mapping.abort(),
+			["<C-e>"] = cmp.mapping.abort(),
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
