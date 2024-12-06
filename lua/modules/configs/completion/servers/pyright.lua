@@ -5,7 +5,7 @@ return function(options)
 		end,
 		capabilities = (function()
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
+			capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 } -- 2 means deprecated, 1 means unnecessary
 			return capabilities
 		end)(),
 		settings = {

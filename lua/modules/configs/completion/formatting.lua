@@ -118,7 +118,7 @@ function M.format(opts)
 	end
 
 	local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
-	local clients = vim.lsp.get_clients({ buffer = bufnr })
+	local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
 	if opts.filter then
 		clients = opts.filter(clients)
@@ -176,6 +176,7 @@ function M.format(opts)
 		-- Fall back to format the whole buffer (even if partial formatting failed)
 		local params = vim.lsp.util.make_formatting_params(opts.formatting_options)
 		local result, err = client.request_sync("textDocument/formatting", params, timeout_ms, bufnr)
+		-- vim.notify(string.format("client: %s\nbufnr: %s", client.name, bufnr), vim.log.levels.INFO)
 		if result and result.result then
 			vim.lsp.util.apply_text_edits(result.result, bufnr, client.offset_encoding)
 			if format_notify then
