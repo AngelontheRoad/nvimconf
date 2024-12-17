@@ -3,7 +3,7 @@ return function()
 		require("modules.utils").load_plugin("copilot", {
 			cmp = {
 				enabled = true,
-				method = "getCompletionsCycling",
+				method = "getCompletions",
 			},
 			panel = {
 				-- if true, it can interfere with completions in copilot-cmp
@@ -14,6 +14,7 @@ return function()
 				enabled = false,
 			},
 			filetypes = {
+				["avante"] = false,
 				["bigfile"] = false,
 				["dap-repl"] = false,
 				["fugitive"] = false,
