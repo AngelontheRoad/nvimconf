@@ -8,7 +8,7 @@ return function(options)
 				-- Server settings should go here
 				lineLength = 120,
 				lint = {
-					ignore = { "E4", "E7", "E501", "F403", "F405" },
+					ignore = { "E4", "E501", "E741", "E742", "E743", "F403", "F405" },
 				},
 			},
 		},

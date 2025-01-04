@@ -32,4 +32,8 @@ lang["chrisbra/csv.vim"] = {
 	lazy = true,
 	ft = "csv",
 }
+lang["microsoft/python-type-stubs"] = {
+	lazy = true,
+	ft = "python",
+}
 return lang
