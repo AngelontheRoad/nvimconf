@@ -70,16 +70,16 @@ _G._toggle_inlayhint = function(filter)
 	if vim.lsp.inlay_hint.is_enabled(filter) then
 		vim.lsp.inlay_hint.enable(false, filter)
 		if filter then
-			vim.notify("Hide global inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
-		else
 			vim.notify("Hide buffer inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
+		else
+			vim.notify("Hide global inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
 		end
 	else
 		vim.lsp.inlay_hint.enable(true, filter)
 		if filter then
-			vim.notify("Show global inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
-		else
 			vim.notify("Show buffer inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
+		else
+			vim.notify("Show global inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
 		end
 	end
 end
