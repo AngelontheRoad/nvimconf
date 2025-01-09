@@ -1,3 +1,5 @@
+local inlayhints_enabled = require("core.settings").lsp_inlayhints
+
 _G._command_panel = function()
 	require("telescope.builtin").keymaps({
 		lhs_filter = function(lhs)
@@ -66,21 +68,15 @@ _G._toggle_lazygit = function()
 	end
 end
 
+local inlayhints_state_global = inlayhints_enabled
 _G._toggle_inlayhint = function(filter)
-	if vim.lsp.inlay_hint.is_enabled(filter) then
-		vim.lsp.inlay_hint.enable(false, filter)
-		if filter then
-			vim.notify("Hide buffer inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
-		else
-			vim.notify("Hide global inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
-		end
+	if filter then
+		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(filter), filter)
+		vim.notify("Toggle buffer inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
 	else
-		vim.lsp.inlay_hint.enable(true, filter)
-		if filter then
-			vim.notify("Show buffer inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
-		else
-			vim.notify("Show global inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
-		end
+		vim.lsp.inlay_hint.enable(not inlayhints_state_global)
+		inlayhints_state_global = not inlayhints_state_global
+		vim.notify("Toggle global inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
 	end
 end
 
