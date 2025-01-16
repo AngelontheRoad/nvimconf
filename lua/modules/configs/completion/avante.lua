@@ -3,7 +3,7 @@ return function()
 		---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
 		provider = "copilot",
 		debug = false,
-		auto_suggestions_provider = "copilot",
+		auto_suggestions_provider = "claude",
 		openai = {
 			endpoint = "https://oneai.evanora.top/v1",
 			model = "gpt-cl-3-5-sonnet-20241022",
