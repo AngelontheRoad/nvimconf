@@ -91,7 +91,7 @@ if use_copilot then
 		event = "VeryLazy",
 		lazy = true,
 		version = false,
-		build = "make",
+		build = "make BUILD_FROM_SOURCE=true",
 		config = require("completion.avante"),
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",

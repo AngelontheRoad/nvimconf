@@ -38,6 +38,7 @@ M.setup = function()
 		if not ok then
 			-- Default to use factory config for server(s) that doesn't include a spec
 			nvim_lsp[lsp_name].setup(opts)
+			return
 		elseif type(custom_handler) == "function" then
 			--- Case where language server requires its own setup
 			--- Make sure to call require("lspconfig")[lsp_name].setup() in the function
