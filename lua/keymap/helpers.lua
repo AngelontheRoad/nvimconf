@@ -1,4 +1,5 @@
-local inlayhints_enabled = require("core.settings").lsp_inlayhints
+local _inlay_enabled = require("core.settings").lsp_inlayhints
+local _global_vt_enabled = require("core.settings").diagnostics_virtual_text
 
 _G._command_panel = function()
 	require("telescope.builtin").keymaps({
@@ -68,52 +69,58 @@ _G._toggle_lazygit = function()
 	end
 end
 
-local inlayhints_state_global = inlayhints_enabled
+local _global_inlay_enabled = _inlay_enabled
 _G._toggle_inlayhint = function(filter)
 	if filter then
-		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(filter), filter)
-		vim.notify("Toggle buffer inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
+		local state = not vim.lsp.inlay_hint.is_enabled(filter)
+		vim.lsp.inlay_hint.enable(state, filter)
+		vim.notify(
+			state and "Show buffer inlay hint successfully!" or "Hide buffer inlay hint successfully!",
+			vim.log.levels.INFO,
+			{ title = "LSP Inlay Hint" }
+		)
 	else
-		vim.lsp.inlay_hint.enable(not inlayhints_state_global)
-		inlayhints_state_global = not inlayhints_state_global
-		vim.notify("Toggle global inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
+		_global_inlay_enabled = not _global_inlay_enabled
+		vim.lsp.inlay_hint.enable(_global_inlay_enabled)
+		vim.notify(
+			_global_inlay_enabled and "Show global inlay hint successfully!" or "Hide global inlay hint successfully!",
+			vim.log.levels.INFO,
+			{ title = "LSP Inlay Hint" }
+		)
 	end
 end
 
-local _global_virt_state = require("core.settings").diagnostics_virtual_text
-local _buf_virt_state = {}
+local _buf_vt_enabled = {}
 _G._toggle_diagnostic = function(bufnr)
-	if vim.diagnostic.is_enabled({ bufnr = bufnr }) then
-		-- specific buffer number
-		if bufnr then
-			local num = vim.fn.bufnr(bufnr)
-			if _buf_virt_state[num] then
-				_buf_virt_state[num] = false
-				vim.diagnostic.hide(nil, bufnr)
-				vim.notify("Hide buffer virtual text successfully!", vim.log.levels.INFO, { title = "LSP Diagnostic" })
-			else
-				_buf_virt_state[num] = true
-				vim.diagnostic.show(nil, bufnr)
-				vim.notify("Show buffer virtual text successfully!", vim.log.levels.INFO, { title = "LSP Diagnostic" })
-			end
-		-- globally
+	if bufnr then
+		local num = vim.fn.bufnr()
+		if _buf_vt_enabled[num] == nil then
+			_buf_vt_enabled[num] = not _global_vt_enabled
 		else
-			if _global_virt_state then
-				_global_virt_state = false
-				for i, _ in pairs(_buf_virt_state) do
-					_buf_virt_state[i] = false
-				end
-				vim.diagnostic.hide(nil)
-				vim.notify("Hide global virtual text successfully!", vim.log.levels.INFO, { title = "LSP Diagnostic" })
-			else
-				_global_virt_state = true
-				for i, _ in pairs(_buf_virt_state) do
-					_buf_virt_state[i] = true
-				end
-				vim.diagnostic.show(nil)
-				vim.notify("Show global virtual text successfully!", vim.log.levels.INFO, { title = "LSP Diagnostic" })
+			_buf_vt_enabled[num] = not _buf_vt_enabled[num]
+		end
+		local state = _buf_vt_enabled[num]
+		vim.diagnostic[state and "show" or "hide"](nil, bufnr)
+		vim.notify(
+			state and "Show buffer virtual text successfully!" or "Hide buffer virtual text successfully!",
+			vim.log.levels.INFO,
+			{ title = "LSP Diagnostic" }
+		)
+		-- globally
+	else
+		_global_vt_enabled = not _global_vt_enabled
+		local bufnrs = vim.api.nvim_list_bufs()
+		for _, num in pairs(bufnrs) do
+			if vim.api.nvim_buf_is_loaded(num) then
+				_buf_vt_enabled[num] = _global_vt_enabled
 			end
 		end
+		vim.diagnostic[_global_vt_enabled and "show" or "hide"]()
+		vim.notify(
+			_global_vt_enabled and "Show global virtual text successfully!" or "Hide global virtual text successfully!",
+			vim.log.levels.INFO,
+			{ title = "LSP Diagnostic" }
+		)
 	end
 end
 
