@@ -67,30 +67,6 @@ function M.lsp(buf)
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Show outgoing calls"),
-		["n|<leader>tD"] = map_callback(function()
-				_toggle_diagnostic(0)
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("edit: Toggle virtual text display of current buffer"),
-		["n|<leader>tH"] = map_callback(function()
-				_toggle_inlayhint({ bufnr = 0 })
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("edit: Toggle inlay hints dispaly of current buffer"),
-		["n|<leader>td"] = map_callback(function()
-				_toggle_diagnostic()
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("edit: Toggle virtual text display of all buffers"),
-		["n|<leader>th"] = map_callback(function()
-				_toggle_inlayhint()
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("edit: Toggle inlay hints dispaly of all buffers"),
 	}
 	bind.nvim_load_mapping(map)
 end

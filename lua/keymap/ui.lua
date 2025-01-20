@@ -2,6 +2,7 @@ local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
+local map_callback = bind.map_callback
 
 local mappings = {
 	builtins = {
@@ -77,6 +78,32 @@ local mappings = {
 			:with_silent()
 			:with_noremap()
 			:with_desc("window: Move window rightward"),
+
+		-- Plugin: lsp
+		["n|<leader>tD"] = map_callback(function()
+				_toggle_diagnostic(0)
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("edit: Toggle virtual text display of current buffer"),
+		["n|<leader>tH"] = map_callback(function()
+				_toggle_inlayhint({ bufnr = 0 })
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("edit: Toggle inlay hints dispaly of current buffer"),
+		["n|<leader>td"] = map_callback(function()
+				_toggle_diagnostic()
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("edit: Toggle virtual text display of all buffers"),
+		["n|<leader>th"] = map_callback(function()
+				_toggle_inlayhint()
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("edit: Toggle inlay hints dispaly of all buffers"),
 	},
 }
 
@@ -125,11 +152,6 @@ function M.gitsigns(buf)
 		end)
 			:with_buffer(buf)
 			:with_desc("git: Stage hunk"),
-		["n|<leader>gu"] = bind.map_callback(function()
-			actions.undo_stage_hunk()
-		end)
-			:with_buffer(buf)
-			:with_desc("git: Undo stage hunk"),
 		["n|<leader>gr"] = bind.map_callback(function()
 			actions.reset_hunk()
 		end)
@@ -145,6 +167,11 @@ function M.gitsigns(buf)
 		end)
 			:with_buffer(buf)
 			:with_desc("git: Reset buffer"),
+		["n|<leader>gi"] = bind.map_callback(function()
+			actions.preview_hunk_inline()
+		end)
+			:with_buffer(buf)
+			:with_desc("git: Preview hunk inline"),
 		["n|<leader>gp"] = bind.map_callback(function()
 			actions.preview_hunk()
 		end)
@@ -156,9 +183,7 @@ function M.gitsigns(buf)
 			:with_buffer(buf)
 			:with_desc("git: Blame line"),
 		-- Text objects
-		["ox|ih"] = bind.map_callback(function()
-			actions.select_hunk()
-		end):with_buffer(buf),
+		["ox|ih"] = bind.map_cu("Gitsigns select_hunk"):with_silent():with_buffer(buf),
 	}
 	bind.nvim_load_mapping(map)
 end
