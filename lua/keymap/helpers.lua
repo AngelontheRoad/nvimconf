@@ -75,7 +75,7 @@ _G._toggle_inlayhint = function(filter)
 		local state = not vim.lsp.inlay_hint.is_enabled(filter)
 		vim.lsp.inlay_hint.enable(state, filter)
 		vim.notify(
-			state and "Show buffer inlay hint successfully!" or "Hide buffer inlay hint successfully!",
+			state and "Inlay hint enabled in current buffer" or "Inlay hint disabled in current buffer",
 			vim.log.levels.INFO,
 			{ title = "LSP Inlay Hint" }
 		)
@@ -83,7 +83,7 @@ _G._toggle_inlayhint = function(filter)
 		_global_inlay_enabled = not _global_inlay_enabled
 		vim.lsp.inlay_hint.enable(_global_inlay_enabled)
 		vim.notify(
-			_global_inlay_enabled and "Show global inlay hint successfully!" or "Hide global inlay hint successfully!",
+			_global_inlay_enabled and "Inlay hint enabled globally" or "Inlay hint disabled globally",
 			vim.log.levels.INFO,
 			{ title = "LSP Inlay Hint" }
 		)
@@ -102,7 +102,8 @@ _G._toggle_diagnostic = function(bufnr)
 		local state = _buf_vt_enabled[num]
 		vim.diagnostic[state and "show" or "hide"](nil, bufnr)
 		vim.notify(
-			state and "Show buffer virtual text successfully!" or "Hide buffer virtual text successfully!",
+			state and "Virtual text is now displayed in current buffer"
+				or "Virtual text is now hidden in current buffer",
 			vim.log.levels.INFO,
 			{ title = "LSP Diagnostic" }
 		)
@@ -117,7 +118,7 @@ _G._toggle_diagnostic = function(bufnr)
 		end
 		vim.diagnostic[_global_vt_enabled and "show" or "hide"]()
 		vim.notify(
-			_global_vt_enabled and "Show global virtual text successfully!" or "Hide global virtual text successfully!",
+			_global_vt_enabled and "Virtual text is now displayed globally" or "Virtual text is now hidden globally",
 			vim.log.levels.INFO,
 			{ title = "LSP Diagnostic" }
 		)
