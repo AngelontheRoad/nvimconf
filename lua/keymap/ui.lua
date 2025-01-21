@@ -2,7 +2,6 @@ local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
-local map_callback = bind.map_callback
 
 local mappings = {
 	builtins = {
@@ -78,32 +77,6 @@ local mappings = {
 			:with_silent()
 			:with_noremap()
 			:with_desc("window: Move window rightward"),
-
-		-- Plugin: lsp
-		["n|<leader>tD"] = map_callback(function()
-				_toggle_diagnostic(0)
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("edit: Toggle virtual text display of current buffer"),
-		["n|<leader>tH"] = map_callback(function()
-				_toggle_inlayhint({ bufnr = 0 })
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("edit: Toggle inlay hints dispaly of current buffer"),
-		["n|<leader>td"] = map_callback(function()
-				_toggle_diagnostic()
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("edit: Toggle virtual text display of all buffers"),
-		["n|<leader>th"] = map_callback(function()
-				_toggle_inlayhint()
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("edit: Toggle inlay hints dispaly of all buffers"),
 	},
 }
 

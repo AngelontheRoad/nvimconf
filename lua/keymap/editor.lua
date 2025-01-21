@@ -58,6 +58,32 @@ local mappings = {
 			:with_silent()
 			:with_desc("edit: Clear search highlight"),
 		["n|<leader><leader>o"] = map_cr("setlocal spell! spelllang=en_us"):with_desc("edit: Toggle spell check"),
+
+		-- Builtin: Lsp
+		["n|<leader>tD"] = map_callback(function()
+				_toggle_diagnostic(0)
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("edit: Toggle display of virtual text in current buffer"),
+		["n|<leader>tH"] = map_callback(function()
+				_toggle_inlayhint({ bufnr = 0 })
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("edit: Toggle display of inlay hints in current buffer"),
+		["n|<leader>td"] = map_callback(function()
+				_toggle_diagnostic()
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("edit: Toggle global display of virtual text"),
+		["n|<leader>th"] = map_callback(function()
+				_toggle_inlayhint()
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("edit: Toggle global display of inlay hints"),
 	},
 
 	plug_map = {
