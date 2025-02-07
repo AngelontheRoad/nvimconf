@@ -60,25 +60,25 @@ local mappings = {
 		["n|<leader><leader>o"] = map_cr("setlocal spell! spelllang=en_us"):with_desc("edit: Toggle spell check"),
 
 		-- Builtin: Lsp
-		["n|<leader>tD"] = map_callback(function()
+		["n|<leader>lV"] = map_callback(function()
 				_toggle_diagnostic(0)
 			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("edit: Toggle display of virtual text in current buffer"),
-		["n|<leader>tH"] = map_callback(function()
+		["n|<leader>lH"] = map_callback(function()
 				_toggle_inlayhint({ bufnr = 0 })
 			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("edit: Toggle display of inlay hints in current buffer"),
-		["n|<leader>td"] = map_callback(function()
+		["n|<leader>lv"] = map_callback(function()
 				_toggle_diagnostic()
 			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("edit: Toggle global display of virtual text"),
-		["n|<leader>th"] = map_callback(function()
+		["n|<leader>lh"] = map_callback(function()
 				_toggle_inlayhint()
 			end)
 			:with_noremap()
@@ -137,27 +137,27 @@ local mappings = {
 		["nv|<leader>c"] = map_cmd("<Cmd>HopChar1MW<CR>"):with_noremap():with_desc("jump: Goto one char"),
 		-- ["nv|<leader>c"] = map_cmd("<Cmd>HopChar2MW<CR>"):with_noremap():with_desc("jump: Goto two chars"),
 
-		-- Plugin: nvim-spectre
+		-- Plugin: grug-far
 		["n|<leader>Ss"] = map_callback(function()
-				require("spectre").toggle()
+				require("grug-far").open()
 			end)
 			:with_silent()
 			:with_noremap()
 			:with_desc("editn: Toggle search & replace panel"),
 		["n|<leader>Sp"] = map_callback(function()
-				require("spectre").open_visual({ select_word = true })
+				require("grug-far").open({ prefills = { search = vim.fn.expand("<cword>") } })
 			end)
 			:with_silent()
 			:with_noremap()
 			:with_desc("editn: search & replace current word (project)"),
 		["v|<leader>Sp"] = map_callback(function()
-				require("spectre").open_visual()
+				require("grug-far").with_visual_selection()
 			end)
 			:with_silent()
 			:with_noremap()
 			:with_desc("edit: search & replace current word (project)"),
 		["n|<leader>Sf"] = map_callback(function()
-				require("spectre").open_file_search({ select_word = true })
+				require("grug-far").open({ prefills = { paths = vim.fn.expand("%") } })
 			end)
 			:with_silent()
 			:with_noremap()
