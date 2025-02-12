@@ -10,6 +10,7 @@ return function()
 	end
 
 	require("modules.utils").load_plugin("edgy", {
+		animate = { enabled = false },
 		close_when_all_hidden = true,
 		exit_when_last = true,
 		wo = { winbar = false },
@@ -59,7 +60,7 @@ return function()
 			{
 				ft = "trouble",
 				pinned = true,
-				size = { height = 0.6, width = 0.3 },
+				size = { height = 0.6, width = 0.2 },
 				open = "Trouble symbols toggle win.position=right",
 				filter = trouble_filter("right"),
 			},
@@ -67,7 +68,7 @@ return function()
 				ft = "trouble",
 				pinned = true,
 				collapsed = true,
-				size = { height = 0.4, width = 0.3 },
+				size = { height = 0.4, width = 0.2 },
 				open = "Trouble lsp toggle win.position=right",
 				filter = trouble_filter("right"),
 			},
