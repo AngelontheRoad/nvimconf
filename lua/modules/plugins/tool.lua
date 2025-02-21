@@ -142,8 +142,8 @@ tool["benlubas/molten-nvim"] = {
 	ft = { "python", "markdown" },
 	-- cmd = { "MoltenInfo", "MoltenInit" },
 	build = ":UpdateRemotePlugins",
-	dependencies = { { "3rd/image.nvim", config = require("tool.image") } },
 	init = require("tool.molten"),
+	dependencies = { { "3rd/image.nvim", config = require("tool.image") } },
 }
 
 return tool

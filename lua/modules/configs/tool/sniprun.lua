@@ -3,13 +3,9 @@ return function()
 		selected_interpreters = {}, -- " use those instead of the default for the current filetype
 		repl_enable = {}, -- " enable REPL-like behavior for the given interpreters
 		repl_disable = {}, -- " disable REPL-like behavior for the given interpreters
-		interpreter_options = {
-			-- Python3_original = {
-			-- interpreter = "/home/chris/.conda/envs/openai/bin/python3.12",
-			-- "/home/chris/.conda/envs/ocr/bin/python3.11",
-			-- },
-		}, -- " intepreter-specific options, consult docs / :SnipInfo <name>
+		interpreter_options = {}, -- " intepreter-specific options, consult docs / :SnipInfo <name>
 		-- " you can combo different display modes as desired
+		-- It's better to specify the python path by using environment variable
 		display = {
 			"TempFloatingWindowOk", -- display ok results in the floating window
 			"NvimNotifyErr", -- display err results with the nvim-notify plugin

@@ -45,8 +45,8 @@ return function()
 			},
 			suggestion = {
 				accept = "<M-i>",
-				next = "<M-]>",
-				prev = "<M-[>",
+				next = "<M-,>",
+				prev = "<M-.>",
 				dismiss = "<C-]>",
 			},
 			jump = {
@@ -92,6 +92,7 @@ return function()
 			},
 		},
 		highlights = {
+			--- @type AvanteConflictHighlights
 			diff = {
 				current = "DiffText",
 				incoming = "DiffAdd",
@@ -106,6 +107,10 @@ return function()
 			--- Helps to avoid entering operator-pending mode with diff mappings starting with `c`.
 			--- Disable by setting to -1.
 			override_timeoutlen = 500,
+		},
+		suggestion = {
+			debounce = 600,
+			throttle = 600,
 		},
 	})
 end

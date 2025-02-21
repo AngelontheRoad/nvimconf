@@ -111,7 +111,8 @@ editor["stevearc/overseer.nvim"] = {
 }
 editor["pixelneo/vim-python-docstring"] = {
 	lazy = true,
-	event = "BufEnter *.py",
+	ft = { "python" },
+	-- event = "BufEnter *.py",
 	init = require("editor.vim-python-docstring"),
 }
 
