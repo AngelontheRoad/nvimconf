@@ -251,6 +251,7 @@ local mappings = {
 			:with_noremap()
 			:with_silent()
 			:with_desc("jupyter: Re-evaluate cell"),
+		["n|<leader>ms"] = map_cr("MoltenInterrupt"):with_noremap():with_silent():with_desc("jupyter: Interrupt"),
 		["n|<leader>md"] = map_cr("MoltenDelete"):with_noremap():with_silent():with_desc("jupyter: Delete cell"),
 		["n|<leader>mo"] = map_cr("noautocmd MoltenEnterOutput")
 			:with_noremap()
