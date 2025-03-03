@@ -30,8 +30,6 @@ return function()
 			properties = {},
 		},
 		integrations = {
-			aerial = false,
-			alpha = false,
 			cmp = true,
 			dap = true,
 			dap_ui = true,
@@ -43,7 +41,6 @@ return function()
 			gitsigns = true,
 			grug_far = true,
 			hop = true,
-			illuminate = false,
 			indent_blankline = { enabled = true, colored_indent_levels = false },
 			lsp_saga = true,
 			lsp_trouble = true,

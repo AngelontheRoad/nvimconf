@@ -6,12 +6,18 @@ _G._command_panel = function()
 		lhs_filter = function(lhs)
 			return not string.find(lhs, "Þ")
 		end,
-		layout_config = {
-			width = 0.6,
-			height = 0.6,
-			prompt_position = "top",
-		},
 	})
+end
+
+_G._flash_esc_or_noh = function()
+	local flash_active, state = pcall(function()
+		return require("flash.plugins.char").state
+	end)
+	if flash_active and state then
+		state:hide()
+	else
+		pcall(vim.cmd.noh)
+	end
 end
 
 _G._telescope_collections = function(picker_type)
@@ -39,17 +45,6 @@ _G._telescope_collections = function(picker_type)
 			end,
 		})
 		:find()
-end
-
-_G._flash_esc_or_noh = function()
-	local flash_active, state = pcall(function()
-		return require("flash.plugins.char").state
-	end)
-	if flash_active and state then
-		state:hide()
-	else
-		pcall(vim.cmd.noh)
-	end
 end
 
 local _lazygit = nil
@@ -91,7 +86,7 @@ _G._toggle_inlayhint = function(filter)
 end
 
 local _buf_vt_enabled = {}
-_G._toggle_diagnostic = function(bufnr)
+_G._toggle_virtualtext = function(bufnr)
 	if bufnr then
 		local num = vim.fn.bufnr()
 		if _buf_vt_enabled[num] == nil then

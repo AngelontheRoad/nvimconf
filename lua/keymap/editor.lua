@@ -61,7 +61,7 @@ local mappings = {
 
 		-- Builtin: Lsp
 		["n|<leader>lV"] = map_callback(function()
-				_toggle_diagnostic(0)
+				_toggle_virtualtext(0)
 			end)
 			:with_noremap()
 			:with_silent()
@@ -73,7 +73,7 @@ local mappings = {
 			:with_silent()
 			:with_desc("edit: Toggle display of inlay hints in current buffer"),
 		["n|<leader>lv"] = map_callback(function()
-				_toggle_diagnostic()
+				_toggle_virtualtext()
 			end)
 			:with_noremap()
 			:with_silent()

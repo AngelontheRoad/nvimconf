@@ -3,16 +3,13 @@ local map_cr = bind.map_cr
 
 local mappings = {
 	plugins = {
-		-- Plugins: render-markdown.nvim
+		-- Plugin: render-markdown.nvim
 		["n|<F1>"] = map_cr("RenderMarkdown toggle")
 			:with_noremap()
 			:with_silent()
-			:with_desc("tool: toggle markdown preview within nvim"),
-		-- Plugin render-markdown.nvim
-		["n|<F12>"] = map_cr("RenderMarkdown toggle")
-			:with_noremap()
-			:with_silent()
-			:with_desc("tooe: toggle markdown preview within nvim"),
+			:with_desc("tool: Toggle markdown preview within nvim"),
+		-- Plugin: render-markdown.nvim
+		["n|<F12>"] = map_cr("MarkdownPreviewToggle"):with_noremap():with_silent():with_desc("tool: Preview markdown"),
 	},
 }
 

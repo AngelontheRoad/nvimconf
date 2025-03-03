@@ -15,6 +15,11 @@ lang["ray-x/go.nvim"] = {
 	config = require("lang.go"),
 	dependencies = { "ray-x/guihua.lua" },
 }
+lang["iamcco/markdown-preview.nvim"] = {
+	lazy = true,
+	ft = "markdown",
+	build = ":call mkdp#util#install()",
+}
 lang["mrcjkb/rustaceanvim"] = {
 	lazy = true,
 	ft = "rust",
