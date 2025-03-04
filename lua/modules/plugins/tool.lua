@@ -146,4 +146,19 @@ tool["benlubas/molten-nvim"] = {
 	dependencies = { { "3rd/image.nvim", config = require("tool.image") } },
 }
 
+tool["stevearc/overseer.nvim"] = {
+	lazy = true,
+	cmd = {
+		"OverseerRun",
+		"OverseerRunCmd",
+		"OverseerToggle",
+		"OverseerBuild",
+		"OverseerInfo",
+		"OverseerClose",
+		"OverseerOpen",
+		"OverseerTaskAction",
+	},
+	config = require("tool.overseer"),
+}
+
 return tool

@@ -29,7 +29,7 @@ return function()
 			on_create = nil,
 		},
 		-- Template modules to load
-		templates = { "builtin", "c", "cpp" },
+		templates = { "builtin", "c", "cpp", "python" },
 		-- When true, tries to detect a green color from your colorscheme to use for success highlight
 		auto_detect_success_color = true,
 		-- Patch nvim-dap to support preLaunchTask and postDebugTask
@@ -52,7 +52,7 @@ return function()
 			-- String that separates tasks
 			separator = "────────────────────────────────────────",
 			-- Default direction. Can be "left", "right", or "bottom"
-			direction = "left",
+			direction = "bottom",
 			-- Set keymap to false to remove default behavior
 			-- You can add custom keymaps here as well (anything vim.keymap.set accepts)
 			bindings = {
@@ -66,16 +66,17 @@ return function()
 				["<C-f>"] = "OpenFloat",
 				["<C-q>"] = "OpenQuickFix",
 				["p"] = "TogglePreview",
-				["<C-l>"] = "IncreaseDetail",
-				["<C-h>"] = "DecreaseDetail",
+				["<C-,>"] = "IncreaseDetail",
+				["<C-.>"] = "DecreaseDetail",
 				["L"] = "IncreaseAllDetail",
 				["H"] = "DecreaseAllDetail",
 				["["] = "DecreaseWidth",
 				["]"] = "IncreaseWidth",
 				["{"] = "PrevTask",
 				["}"] = "NextTask",
-				["<C-k>"] = "ScrollOutputUp",
-				["<C-j>"] = "ScrollOutputDown",
+				-- ["<C-k>"] = "ScrollOutputUp",
+				-- ["<C-j>"] = "ScrollOutputDown",
+				["q"] = "Close",
 			},
 		},
 		-- See :help overseer-actions
@@ -95,7 +96,7 @@ return function()
 			height = nil,
 			-- Set any window options here (e.g. winhighlight)
 			win_opts = {
-				winblend = 10,
+				winblend = 0,
 			},
 		},
 		task_launcher = {
@@ -149,7 +150,7 @@ return function()
 			height = nil,
 			-- Set any window options here (e.g. winhighlight)
 			win_opts = {
-				winblend = 10,
+				winblend = 0,
 			},
 		},
 		-- Configuration for task floating windows
@@ -159,8 +160,13 @@ return function()
 			border = "rounded",
 			-- Set any window options here (e.g. winhighlight)
 			win_opts = {
-				winblend = 10,
+				winblend = 0,
 			},
+		},
+		-- Configuration for mapping help floating windows
+		help_win = {
+			border = "rounded",
+			win_opts = {},
 		},
 		-- Aliases for bundles of components. Redefine the builtins, or create your own.
 		component_aliases = {
@@ -170,13 +176,12 @@ return function()
 				"on_output_summarize",
 				"on_exit_set_status",
 				"on_complete_notify",
-				"on_complete_dispose",
+				{ "on_complete_dispose", require_view = { "SUCCESS", "FAILURE" } },
 			},
 			-- Tasks from tasks.json use these components
 			default_vscode = {
 				"default",
 				"on_result_diagnostics",
-				"on_result_diagnostics_quickfix",
 			},
 		},
 		bundles = {
@@ -185,6 +190,8 @@ return function()
 			save_task_opts = {
 				bundleable = true,
 			},
+			-- Autostart tasks when they are loaded from a bundle
+			autostart_on_load = true,
 		},
 		-- A list of components to preload on setup.
 		-- Only matters if you want them to show up in the task editor.

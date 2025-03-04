@@ -87,6 +87,14 @@ local mappings = {
 			:with_noremap()
 			:with_silent()
 			:with_desc("lsp: Show document diagnostics"),
+		["n|<leader>lk"] = map_cr("Trouble lsp toggle win.position=right")
+			:with_noremap()
+			:with_silent()
+			:with_desc("lsp: Show document under cursor"),
+		["n|<leader>ls"] = map_cr("Trouble symbols toggle win.position=right")
+			:with_noremap()
+			:with_silent()
+			:with_desc("lsp: Show symbols hierarchy"),
 
 		-- Plugin: telescope
 		["n|<C-p>"] = map_callback(function()
@@ -267,6 +275,17 @@ local mappings = {
 			:with_noremap()
 			:with_silent()
 			:with_desc("jupyter: Evaluate visual selection"),
+
+		-- Plugin: overseer
+		["n|<leader>ot"] = map_cr("OverseerToggle right")
+			:with_noremap()
+			:with_silent()
+			:with_desc("overseer: Toggle the overseer window"),
+		["n|<leader>oi"] = map_cr("OverseerInfo")
+			:with_noremap()
+			:with_silent()
+			:with_desc("overseer: Show overseer info"),
+		["n|<leader>or"] = map_cr("OverseerRun"):with_noremap():with_silent():with_desc("overseer: Run command"),
 	},
 }
 
