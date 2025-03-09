@@ -8,6 +8,7 @@ return {
 		end
 		return {
 			cmd = cmd,
+			name = "run script",
 			components = {
 				{ "on_output_quickfix", set_diagnostics = true },
 				"on_result_diagnostics",
@@ -16,6 +17,6 @@ return {
 		}
 	end,
 	condition = {
-		filetype = { "python", "markdown" },
+		filetype = { "c", "python" },
 	},
 }
