@@ -1,5 +1,6 @@
 local _inlay_enabled = require("core.settings").lsp_inlayhints
 local _global_vt_enabled = require("core.settings").diagnostics_virtual_text
+local _global_vl_enabled = require("core.settings").diagnostics_virtual_lines
 
 _G._command_panel = function()
 	require("telescope.builtin").keymaps({
@@ -85,37 +86,19 @@ _G._toggle_inlayhint = function(filter)
 	end
 end
 
-local _buf_vt_enabled = {}
-_G._toggle_virtualtext = function(bufnr)
-	if bufnr then
-		local num = vim.fn.bufnr()
-		if _buf_vt_enabled[num] == nil then
-			_buf_vt_enabled[num] = not _global_vt_enabled
-		else
-			_buf_vt_enabled[num] = not _buf_vt_enabled[num]
-		end
-		local state = _buf_vt_enabled[num]
-		vim.diagnostic[state and "show" or "hide"](nil, bufnr)
-		vim.notify(
-			state and "Virtual text is now displayed in current buffer"
-				or "Virtual text is now hidden in current buffer",
-			vim.log.levels.INFO,
-			{ title = "LSP Diagnostic" }
-		)
-		-- globally
-	else
-		_global_vt_enabled = not _global_vt_enabled
-		local bufnrs = vim.api.nvim_list_bufs()
-		for _, num in pairs(bufnrs) do
-			if vim.api.nvim_buf_is_loaded(num) then
-				_buf_vt_enabled[num] = _global_vt_enabled
-			end
-		end
-		vim.diagnostic[_global_vt_enabled and "show" or "hide"]()
-		vim.notify(
-			_global_vt_enabled and "Virtual text is now displayed globally" or "Virtual text is now hidden globally",
-			vim.log.levels.INFO,
-			{ title = "LSP Diagnostic" }
-		)
-	end
+_G._toggle_virtualtextandlines = function()
+	_global_vt_enabled = not _global_vt_enabled
+	_global_vl_enabled = not _global_vl_enabled
+	vim.diagnostic.config({ virtual_text = _global_vt_enabled, virtual_lines = _global_vl_enabled })
+	-- vim.diagnostic[_global_vt_enabled and "show" or "hide"](nil, bufnr)
+	vim.notify(
+		_global_vt_enabled and "Virtual text is now displayed globally" or "Virtual text is now hidden globally",
+		vim.log.levels.INFO,
+		{ title = "LSP Diagnostic" }
+	)
+	vim.notify(
+		_global_vl_enabled and "Virtual lines are now dareplayed globally" or "Virtual lines are now hidden globally",
+		vim.log.levels.INFO,
+		{ title = "LSP Diagnostic" }
+	)
 end

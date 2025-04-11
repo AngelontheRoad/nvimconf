@@ -61,11 +61,12 @@ local mappings = {
 
 		-- Builtin: Lsp
 		["n|<leader>lV"] = map_callback(function()
-				_toggle_virtualtext(0)
+				vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+				vim.notify("Diagnostic toggled", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("edit: Toggle display of virtual text in current buffer"),
+			:with_desc("edit: Toggle on/off of diagnostic"),
 		["n|<leader>lH"] = map_callback(function()
 				_toggle_inlayhint({ bufnr = 0 })
 			end)
@@ -73,7 +74,7 @@ local mappings = {
 			:with_silent()
 			:with_desc("edit: Toggle display of inlay hints in current buffer"),
 		["n|<leader>lv"] = map_callback(function()
-				_toggle_virtualtext()
+				_toggle_virtualtextandlines()
 			end)
 			:with_noremap()
 			:with_silent()
