@@ -3,6 +3,7 @@ local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
+local vim_path = require("core.global").vim_path
 require("keymap.helpers")
 
 local mappings = {
@@ -98,7 +99,15 @@ local mappings = {
 
 		-- Plugin: telescope
 		["n|<C-p>"] = map_callback(function()
-				_command_panel()
+				local search_backend = require("core.settings").search_backend
+				if search_backend == "fzf" then
+					local prompt_position = require("telescope.config").values.layout_config.horizontal.prompt_position
+					require("fzf-lua").keymaps({
+						fzf_opts = { ["--layout"] = prompt_position == "top" and "reverse" or "default" },
+					})
+				else
+					_command_panel()
+				end
 			end)
 			:with_noremap()
 			:with_silent()
@@ -122,8 +131,21 @@ local mappings = {
 			:with_silent()
 			:with_desc("tool: Find patterns"),
 		["v|<leader>fs"] = map_callback(function()
-				local opts = {}
-				require("telescope-live-grep-args.shortcuts").grep_visual_selection(opts)
+				local search_backend = require("core.settings").search_backend
+				if search_backend == "fzf" then
+					local default_opts = "--column --line-number --no-heading --color=always --smart-case"
+					local opts = vim.fn.getcwd() == vim_path
+							and default_opts .. " --no-ignore --hidden --glob '!.git/*'"
+						or ""
+					local text = require("fzf-lua.utils").get_visual_selection()
+					require("fzf-lua").grep_project({
+						search = text,
+						rg_opts = opts,
+					})
+				else
+					local opts = vim.fn.getcwd() == vim_path and { additional_args = { "--no-ignore" } } or {}
+					require("telescope-live-grep-args.shortcuts").grep_visual_selection(opts)
+				end
 			end)
 			:with_noremap()
 			:with_silent()
@@ -149,7 +171,16 @@ local mappings = {
 		["n|<leader>fr"] = map_cr("Telescope resume")
 			:with_noremap()
 			:with_silent()
-			:with_desc("tool: Resume last search"),
+			:with_desc("tool: Resume last telescope search"),
+		["n|<leader>fR"] = map_callback(function()
+				local search_backend = require("core.settings").search_backend
+				if search_backend == "fzf" then
+					require("fzf-lua").resume()
+				end
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("tool: Resume last fzf search"),
 
 		-- Plugin: dap
 		-- use C-w_q to close float window

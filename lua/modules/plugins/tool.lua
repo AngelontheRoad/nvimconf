@@ -66,6 +66,11 @@ tool["folke/which-key.nvim"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("tool.which-key"),
 }
+tool["ibhagwan/fzf-lua"] = {
+	lazy = true,
+	event = "VeryLazy",
+	config = require("tool.fzf-lua"),
+}
 
 ----------------------------------------------------------------------
 --                        Telescope Plugins                         --
@@ -83,7 +88,7 @@ tool["nvim-telescope/telescope.nvim"] = {
 		{ "nvim-telescope/telescope-live-grep-args.nvim" },
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		{
-			"FabianWirth/search.nvim",
+			"ayamir/search.nvim",
 			config = require("tool.search"),
 		},
 		{
