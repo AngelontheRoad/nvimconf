@@ -1,12 +1,18 @@
 return function()
 	require("modules.utils").load_plugin("avante", {
 		---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
-		provider = "copilot",
+		provider = "claude",
 		debug = false,
 		auto_suggestions_provider = "claude",
-		openai = {
-			endpoint = "https://oneai.evanora.top/v1",
-			model = "gpt-cl-3-5-sonnet-20241022",
+		providers = {
+			openai = {
+				endpoint = "https://oneai.evanora.top/v1",
+				model = "gpt-4.1-2025-04-14",
+			},
+			claude = {
+				endpoint = "https://oneai.evanora.top",
+				model = "claude-3-7-sonnet-20250219",
+			},
 		},
 		---Specify the special dual_boost mode
 		---1. enabled: Whether to enable dual_boost mode. Default to false.
@@ -31,6 +37,9 @@ return function()
 			auto_apply_diff_after_generation = false,
 			support_paste_from_clipboard = false,
 			minimize_diff = true, -- Whether to remove unchanged lines when applying a code block
+			enable_token_counting = true, -- 是否启用令牌计数。默认为 true。
+			enable_cursor_planning_mode = false, -- 是否启用 Cursor 规划模式。默认为 false。
+			enable_claude_text_editor_tool_mode = false, -- 是否启用 Claude 文本编辑器工具模式。
 		},
 		mappings = {
 			--- @class AvanteConflictMappings
@@ -57,11 +66,21 @@ return function()
 				normal = "<M-CR>",
 				insert = "<C-s>",
 			},
+			cancel = {
+				normal = { "<C-c>", "<Esc>", "q" },
+				insert = { "<C-c>" },
+			},
 			sidebar = {
 				apply_all = "A",
 				apply_cursor = "a",
+				retry_user_request = "r",
+				edit_user_request = "e",
 				switch_windows = "<Tab>",
 				reverse_switch_windows = "<S-Tab>",
+				remove_file = "d",
+				add_file = "@",
+				close = { "<Esc>", "q" },
+				close_from_input = nil, -- 例如，{ normal = "<Esc>", insert = "<C-d>" }
 			},
 		},
 		hints = { enabled = true },

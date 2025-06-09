@@ -65,39 +65,33 @@ _G._toggle_lazygit = function()
 	end
 end
 
-local _global_inlay_enabled = _inlay_enabled
-_G._toggle_inlayhint = function(filter)
-	if filter then
-		local state = not vim.lsp.inlay_hint.is_enabled(filter)
-		vim.lsp.inlay_hint.enable(state, filter)
-		vim.notify(
-			state and "Inlay hint enabled in current buffer" or "Inlay hint disabled in current buffer",
-			vim.log.levels.INFO,
-			{ title = "LSP Inlay Hint" }
-		)
-	else
-		_global_inlay_enabled = not _global_inlay_enabled
-		vim.lsp.inlay_hint.enable(_global_inlay_enabled)
-		vim.notify(
-			_global_inlay_enabled and "Inlay hint enabled globally" or "Inlay hint disabled globally",
-			vim.log.levels.INFO,
-			{ title = "LSP Inlay Hint" }
-		)
-	end
+_G._toggle_inlayhint = function()
+	_inlay_enabled = not _inlay_enabled
+	vim.lsp.inlay_hint.enable(_inlay_enabled)
+	vim.notify(
+		_inlay_enabled and "Inlay hint enabled " or "Inlay hint disabled",
+		vim.log.levels.INFO,
+		{ title = "LSP Inlay Hint" }
+	)
 end
 
-_G._toggle_virtualtextandlines = function()
+_G._togglevirt_text_or_line = function()
 	_global_vt_enabled = not _global_vt_enabled
 	_global_vl_enabled = not _global_vl_enabled
 	vim.diagnostic.config({ virtual_text = _global_vt_enabled, virtual_lines = _global_vl_enabled })
-	-- vim.diagnostic[_global_vt_enabled and "show" or "hide"](nil, bufnr)
 	vim.notify(
-		_global_vt_enabled and "Virtual text is now displayed globally" or "Virtual text is now hidden globally",
+		_global_vt_enabled and "Virtual text is now displayed" or "Virtual line is now displayed",
 		vim.log.levels.INFO,
 		{ title = "LSP Diagnostic" }
 	)
+end
+
+local _virtual_enabled = _global_vt_enabled or _global_vl_enabled
+_G._togglevirt_show = function()
+	_virtual_enabled = not _virtual_enabled
+	vim.diagnostic[_virtual_enabled and "show" or "hide"]()
 	vim.notify(
-		_global_vl_enabled and "Virtual lines are now dareplayed globally" or "Virtual lines are now hidden globally",
+		_virtual_enabled and "Diagnostics show now" or "Diagnostics hide now",
 		vim.log.levels.INFO,
 		{ title = "LSP Diagnostic" }
 	)

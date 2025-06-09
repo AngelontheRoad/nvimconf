@@ -10,6 +10,7 @@ return function()
 	end
 
 	require("modules.utils").load_plugin("edgy", {
+		animate = { enabled = false },
 		close_when_all_hidden = true,
 		exit_when_last = true,
 		wo = { winbar = false },
@@ -43,7 +44,11 @@ return function()
 				pinned = true,
 				collapsed = false,
 				size = { height = 0.4, width = 40 },
-				open = "Trouble symbols toggle win.position=right",
+				open = function()
+					if vim.b.buftype == "" then
+						return "Trouble symbols toggle win.position=right"
+					end
+				end,
 				filter = trouble_filter("right"),
 			},
 		},
