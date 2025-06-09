@@ -14,6 +14,4 @@ return function()
 		local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
 		nvim_lsp.dartls.setup(final_opts)
 	end
-
-	pcall(vim.cmd.LspStart) -- Start LSPs
 end
