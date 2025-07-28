@@ -30,6 +30,13 @@ tool["nvim-tree/nvim-tree.lua"] = {
 	},
 	config = require("tool.nvim-tree"),
 }
+tool["mikavilpas/yazi.nvim"] = {
+	lazy = true,
+	event = "VeryLazy",
+	dependencies = {
+		{ "nvim-lua/plenary.nvim", lazy = true },
+	},
+}
 tool["ibhagwan/smartyank.nvim"] = {
 	lazy = true,
 	event = "BufReadPost",
