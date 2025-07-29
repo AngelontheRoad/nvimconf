@@ -15,7 +15,6 @@ return function()
 			},
 			filetypes = {
 				["avante"] = false,
-				["bigfile"] = false,
 				["dap-repl"] = false,
 				["fugitive"] = false,
 				["fugitiveblame"] = false,

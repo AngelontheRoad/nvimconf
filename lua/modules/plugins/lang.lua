@@ -13,7 +13,7 @@ lang["ray-x/go.nvim"] = {
 	ft = { "go", "gomod", "gosum" },
 	build = ":GoInstallBinaries",
 	config = require("lang.go"),
-	dependencies = { "ray-x/guihua.lua" },
+	dependencies = "ray-x/guihua.lua",
 }
 lang["iamcco/markdown-preview.nvim"] = {
 	lazy = true,
@@ -25,13 +25,13 @@ lang["mrcjkb/rustaceanvim"] = {
 	ft = "rust",
 	version = "*",
 	init = require("lang.rust"),
-	dependencies = { "nvim-lua/plenary.nvim" },
+	dependencies = "nvim-lua/plenary.nvim",
 }
 lang["Saecki/crates.nvim"] = {
 	lazy = true,
 	event = "BufReadPost Cargo.toml",
 	config = require("lang.crates"),
-	dependencies = { "nvim-lua/plenary.nvim" },
+	dependencies = "nvim-lua/plenary.nvim",
 }
 lang["chrisbra/csv.vim"] = {
 	lazy = true,

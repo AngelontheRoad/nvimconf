@@ -46,7 +46,7 @@ function Lazy:load_plugins()
 	append_nativertp()
 
 	for _, m in ipairs(get_plugins_list()) do
-		-- require modules returned from `get_plugins_list()` function.
+		-- require modules returned from the `get_plugins_list()` function.
 		local modules = require(m:sub(0, #m - 4))
 		if type(modules) == "table" then
 			for name, conf in pairs(modules) do
@@ -141,7 +141,7 @@ function Lazy:load_lazy()
 					-- Disable remote plugins
 					-- NOTE:
 					--  > Disabling rplugin.vim will make `wilder.nvim` complain about missing rplugins during :checkhealth,
-					--  > but since it's config doesn't require python rtp (strictly), it's fine to ignore that for now.
+					--  > but since its config doesn't require python rtp (strictly), it's fine to ignore that for now.
 					-- "rplugin",
 				},
 			},

@@ -21,7 +21,6 @@ return function()
 			disabled_filetypes = {
 				"alpha",
 				"AvanteInput",
-				"bigfile",
 				"checkhealth",
 				"dap-repl",
 				"diff",
