@@ -43,6 +43,15 @@ settings["server_formatting_block_list"] = {
 	tsserver = true,
 }
 
+-- Directories where formatting on save is disabled.
+-- NOTE: Strings may contain regular expressions (vim regex). |regexp|
+-- NOTE: Directories are automatically normalized using |vim.fs.normalize()|.
+---@type string[]
+settings["format_disabled_dirs"] = {
+	-- Example
+	"~/format_disabled_dir",
+}
+
 -- Set the minimum severity level of diagnostics to display.
 -- Priority: `Error` > `Warning` > `Information` > `Hint`.
 -- For example, if set to `Warning`, only warnings and errors will be shown.

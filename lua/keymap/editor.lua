@@ -158,15 +158,15 @@ local mappings = {
 			:with_desc("editn: search & replace current word (file)"),
 
 		-- Plugin: treesj
-		["n|<leader>tm"] = map_cu("lua require('treesj').toggle()")
+		["n|<C-e>"] = map_cu("lua require('treesj').toggle()")
 			:with_noremap()
 			:with_desc("edit: Toggle node under cursor"),
-		["n|<leader>tM"] = map_cu("lua require('treesj').toggle({ split = { recursive = true } })")
+		["n|<C-S-e>"] = map_cu("lua require('treesj').toggle({ split = { recursive = true } })")
 			:with_noremap()
 			:with_desc("edit: Toggle node recursively under cursor"),
 
 		-- Plugin: nvim-treehopper
-		["o|m"] = map_cu("lua require('tsht').nodes()"):with_silent():with_desc("jump: Operate across syntax tree"),
+		["ox|m"] = map_cu("lua require('tsht').nodes()"):with_silent():with_desc("jump: Operate across syntax tree"),
 
 		-- Plugin suda.vim
 		["n|<C-S-s>"] = map_cu("SudaWrite"):with_silent():with_noremap():with_desc("edit: Save file using sudo"),
