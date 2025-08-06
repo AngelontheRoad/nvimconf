@@ -1,5 +1,4 @@
 local completion = {}
-local use_copilot = require("core.settings").use_copilot
 
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
@@ -25,6 +24,10 @@ completion["DNLHC/glance.nvim"] = {
 	lazy = true,
 	event = "LspAttach",
 	config = require("completion.glance"),
+}
+completion["rachartier/tiny-inline-diagnostic.nvim"] = {
+	lazy = false,
+	config = require("completion.tiny-inline-diagnostic"),
 }
 completion["joechrisellis/lsp-format-modifications.nvim"] = {
 	lazy = true,
@@ -62,59 +65,59 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "kdheepak/cmp-latex-symbols" },
 	},
 }
-if use_copilot then
-	completion["zbirenbaum/copilot.lua"] = {
-		lazy = false,
-		cmd = "Copilot",
-		event = "InsertEnter",
-		config = require("completion.copilot"),
-		dependencies = {
-			{
-				"zbirenbaum/copilot-cmp",
-				config = require("completion.copilot-cmp"),
-			},
+completion["zbirenbaum/copilot.lua"] = {
+	lazy = true,
+	cond = require("core.settings").use_copilot,
+	cmd = "Copilot",
+	event = "InsertEnter",
+	config = require("completion.copilot"),
+	dependencies = {
+		{
+			"zbirenbaum/copilot-cmp",
+			config = require("completion.copilot-cmp"),
 		},
-	}
+	},
+}
 
-	completion["yetone/avante.nvim"] = {
-		event = "VeryLazy",
-		lazy = true,
-		version = false,
-		build = "make",
-		config = require("completion.avante"),
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"stevearc/dressing.nvim",
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-			{
-				-- support for image pasting
-				"HakonHarnes/img-clip.nvim",
-				event = "VeryLazy",
-				opts = {
-					-- recommended settings
-					default = {
-						embed_image_as_base64 = false,
-						prompt_for_file_name = false,
-						drag_and_drop = {
-							insert_mode = true,
-						},
-						-- required for Windows users
-						use_absolute_path = true,
+completion["yetone/avante.nvim"] = {
+	event = "VeryLazy",
+	lazy = true,
+	version = false,
+	build = vim.fn.has("win32") ~= 0 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+		or "make",
+	config = require("completion.avante"),
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter",
+		"folke/snacks.nvim",
+		"nvim-lua/plenary.nvim",
+		"MunifTanjim/nui.nvim",
+		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+		{
+			-- support for image pasting
+			"HakonHarnes/img-clip.nvim",
+			event = "VeryLazy",
+			opts = {
+				-- recommended settings
+				default = {
+					embed_image_as_base64 = false,
+					prompt_for_file_name = false,
+					drag_and_drop = {
+						insert_mode = true,
 					},
+					-- required for Windows users
+					use_absolute_path = true,
 				},
-			},
-			{
-				"MeanderingProgrammer/render-markdown.nvim",
-				ft = { "markdown", "Avante" },
-				opts = {
-					file_types = { "markdown", "Avante" },
-				},
-				config = require("lang.render-markdown"),
 			},
 		},
-	}
-end
+		{
+			"MeanderingProgrammer/render-markdown.nvim",
+			ft = { "markdown", "Avante" },
+			opts = {
+				file_types = { "markdown", "Avante" },
+			},
+			config = require("lang.render-markdown"),
+		},
+	},
+}
 
 return completion

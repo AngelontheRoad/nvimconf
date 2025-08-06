@@ -55,7 +55,7 @@ settings["format_disabled_dirs"] = {
 -- Set the minimum severity level of diagnostics to display.
 -- Priority: `Error` > `Warning` > `Information` > `Hint`.
 -- For example, if set to `Warning`, only warnings and errors will be shown.
--- NOTE: This only works when `diagnostics_virtual_text` is true.
+-- NOTE: This only works when `diagnostics_virtual_lines` or is true.
 ---@type "ERROR"|"WARN"|"INFO"|"HINT"
 settings["diagnostics_level"] = "HINT"
 
@@ -104,15 +104,10 @@ settings["search_backend"] = "telescope"
 ---@type boolean
 settings["lsp_inlayhints"] = false
 
--- Set to false if diagnostics virtual text is annoying.
--- If disabled, lsp diagnostics display in trouble.nvim (press `gt` to toggle it).
+-- Set to false to disable virtual text for diagnostics
+-- You can still view diagnostics using trouble.nvim (`<leader>ld`).
 ---@type boolean
-settings["diagnostics_virtual_text"] = true
-
--- Set to false if diagnostics virtual lines is annoying.
--- NOTE: This entry is an alternative form to `diagnostics_virtual_text`.
----@type boolean
-settings["diagnostics_virtual_lines"] = false
+settings["diagnostics_virtual_lines"] = true
 
 -- LSPs to install during bootstrap.
 -- Full list: https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/configs

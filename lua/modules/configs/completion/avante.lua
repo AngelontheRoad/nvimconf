@@ -3,15 +3,26 @@ return function()
 		---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
 		provider = "claude",
 		debug = false,
+		mode = "agentic", -- The default mode for interaction. "agentic" uses tools to automatically generate code, "legacy" uses the old planning method to generate code.
 		auto_suggestions_provider = "claude",
 		providers = {
 			openai = {
 				endpoint = "https://oneai.evanora.top/v1",
 				model = "gpt-4.1-2025-04-14",
+				timeout = 30000,
+				extra_request_body = {
+					temperature = 0.75,
+					max_tokens = 20480,
+				},
 			},
 			claude = {
 				endpoint = "https://oneai.evanora.top",
-				model = "claude-3-7-sonnet-20250219",
+				model = "claude-4-sonnet-20250514",
+				timeout = 30000,
+				extra_request_body = {
+					temperature = 0.75,
+					max_tokens = 20480,
+				},
 			},
 		},
 		---Specify the special dual_boost mode

@@ -1,6 +1,4 @@
 local _inlay_enabled = require("core.settings").lsp_inlayhints
-local _global_vt_enabled = require("core.settings").diagnostics_virtual_text
-local _global_vl_enabled = require("core.settings").diagnostics_virtual_lines
 
 _G._command_panel = function()
 	require("telescope.builtin").keymaps({
@@ -76,23 +74,11 @@ _G._toggle_inlayhint = function()
 	)
 end
 
-_G._togglevirt_text_or_line = function()
-	_global_vt_enabled = not _global_vt_enabled
-	_global_vl_enabled = not _global_vl_enabled
-	vim.diagnostic.config({ virtual_text = _global_vt_enabled, virtual_lines = _global_vl_enabled })
+_G._toggle_virtuallines = function()
+	require("tiny-inline-diagnostic").toggle()
 	vim.notify(
-		_global_vt_enabled and "Virtual text is now displayed" or "Virtual line is now displayed",
-		vim.log.levels.INFO,
-		{ title = "LSP Diagnostic" }
-	)
-end
-
-local _virtual_enabled = _global_vt_enabled or _global_vl_enabled
-_G._togglevirt_show = function()
-	_virtual_enabled = not _virtual_enabled
-	vim.diagnostic[_virtual_enabled and "show" or "hide"]()
-	vim.notify(
-		_virtual_enabled and "Diagnostics show now" or "Diagnostics hide now",
+		"Virtual lines are now "
+			.. (require("tiny-inline-diagnostic.diagnostic").user_toggle_state and "displayed" or "hidden"),
 		vim.log.levels.INFO,
 		{ title = "LSP Diagnostic" }
 	)

@@ -8,7 +8,10 @@ local mappings = {
 	builtins = {
 		-- Builtin: Buffer
 		["n|<leader>bn"] = map_cu("enew"):with_noremap():with_silent():with_desc("buffer: New"),
-		["n|<leader>bo"] = map_cmd("<Cmd>%bd|e#|bd#<CR>"):with_desc("window: Close all buffers but the current one"),
+		["n|<leader>bo"] = map_cmd("<Cmd>%bd|e#|bd#<CR>")
+			:with_noremap()
+			:with_silent()
+			:with_desc("window: Close all buffers but the current one"),
 
 		-- Builtin: Terminal
 		["t|<C-w>h"] = map_cmd("<Cmd>wincmd h<CR>"):with_silent():with_noremap():with_desc("window: Focus left"),
@@ -17,10 +20,10 @@ local mappings = {
 		["t|<C-w>k"] = map_cmd("<Cmd>wincmd k<CR>"):with_silent():with_noremap():with_desc("window: Focus up"),
 
 		-- Builtin: Tabpage
-		["n|tc"] = map_cr("tabnew %"):with_noremap():with_silent():with_desc("tab: Create a new tab"),
-		["n|tn"] = map_cr("tabnext"):with_noremap():with_silent():with_desc("tab: Move to next tab"),
-		["n|tp"] = map_cr("tabprevious"):with_noremap():with_silent():with_desc("tab: Move to previous tab"),
-		["n|to"] = map_cr("tabonly"):with_noremap():with_silent():with_desc("tab: Only keep current tab"),
+		["n|tc"] = map_cmd("<Cmd>tabnew %<CR>"):with_noremap():with_silent():with_desc("tab: Create a new tab"),
+		["n|tn"] = map_cmd("<Cmd>tabnext<CR>"):with_noremap():with_silent():with_desc("tab: Move to next tab"),
+		["n|tp"] = map_cmd("<Cmd>tabprevious<CR>"):with_noremap():with_silent():with_desc("tab: Move to previous tab"),
+		["n|to"] = map_cmd("<Cmd>tabonly<CR>"):with_noremap():with_silent():with_desc("tab: Only keep current tab"),
 	},
 
 	plug_map = {

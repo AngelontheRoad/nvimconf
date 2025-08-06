@@ -60,18 +60,12 @@ local mappings = {
 		["n|<leader><leader>o"] = map_cr("setlocal spell! spelllang=en_us"):with_desc("edit: Toggle spell check"),
 
 		-- Builtin: Lsp
-		["n|<leader>lV"] = map_callback(function()
-				_togglevirt_text_or_line()
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("edit: Swtich show of diagnostics between virtual text or line"),
 		["n|<leader>lv"] = map_callback(function()
-				_togglevirt_show()
+				_toggle_virtuallines()
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("edit: Toggle display of diagnostics"),
+			:with_desc("edit: Toggle virtual lines"),
 		["n|<leader>lh"] = map_callback(function()
 				_toggle_inlayhint()
 			end)

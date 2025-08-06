@@ -1,27 +1,41 @@
 local lsp_state = { progress = "" }
-local spinners = { "", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥", "" }
+local spinners = { "", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥", "", "" }
 
 vim.api.nvim_create_autocmd("LspProgress", {
 	group = vim.api.nvim_create_augroup("LualineLspProgress", { clear = true }),
 	pattern = { "begin", "report", "end" },
 	callback = function(args)
-		-- Ensure params exists before accessing its fields
-		if not args.data or not args.data.params then
+		-- Get the payload
+		local data = args.data and args.data.params and args.data.params.value
+		if not data then
 			return
 		end
 
-		local data = args.data.params.value
-		local progress = ""
+		-- If it's the end event, clear; else build "<spinner> XX% <title> <loaded>"
+		if data.kind == "end" then
+			lsp_state.progress = ""
+		else
+			local pct = data.percentage or 0
+			local idx = 1 + ((pct - pct % 10) / 10)
+			local spinner = spinners[idx]
 
-		if data.percentage then
-			local idx = math.max(1, math.floor(data.percentage / 10))
-			local icon = spinners[idx]
-			progress = icon .. " " .. data.percentage .. "%% "
+			local progress = ""
+			if data.message then
+				local start, stop = data.message:find("^%d+/%d+")
+				if start then
+					progress = data.message:sub(start, stop)
+				end
+			end
+
+			lsp_state.progress = spinner
+				.. " "
+				.. tostring(pct)
+				.. "%% "
+				.. (data.title or "")
+				.. (progress ~= "" and " " .. progress or "")
 		end
 
-		local loaded_count = data.message and string.match(data.message, "^(%d+/%d+)") or ""
-		local str = progress .. (data.title or "") .. " " .. (loaded_count or "")
-		lsp_state.progress = data.kind == "end" and "" or str
+		-- Redraw statusline
 		pcall(vim.cmd.redrawstatus)
 	end,
 })
@@ -121,7 +135,7 @@ return function()
 		---@param special_nobg boolean @Disable guibg for transparent backgrounds?
 		---@param bg string? @Background hl group
 		---@param gui string? @GUI highlight arguments
-		---@return fun():lualine_hlgrp|nil
+		---@return nil|fun():lualine_hlgrp
 		gen_hl = function(fg, gen_bg, special_nobg, bg, gui)
 			if has_catppuccin then
 				return function()
@@ -139,10 +153,6 @@ return function()
 			end
 		end,
 	}
-
-	local function lsp_progress()
-		return conditionals.has_enough_room() and lsp_state.progress or ""
-	end
 
 	local function diff_source()
 		local gitsigns = vim.b.gitsigns_status_dict
@@ -217,7 +227,7 @@ return function()
 						"%s[%s] %s",
 						icons.misc.LspAvailable,
 						table.concat(available_servers, ", "),
-						lsp_progress()
+						lsp_state.progress()
 					)
 			end,
 			color = utils.gen_hl("blue", true, true, nil, "bold"),
