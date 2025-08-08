@@ -4,7 +4,7 @@ return function()
 	local use_fzf = search_backend == "fzf"
 	local fzf = use_fzf and require("fzf-lua")
 	local extensions = require("telescope").extensions
-	local builtin = require("telescope.builtin")
+	local builtins = require("telescope.builtin")
 	local prompt_pos = require("telescope.config").values.layout_config.horizontal.prompt_position
 
 	local base_opts = use_fzf and { fzf_opts = { ["--layout"] = (prompt_pos == "top" and "reverse" or "default") } }
