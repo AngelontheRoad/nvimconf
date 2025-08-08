@@ -73,6 +73,7 @@ local function init_palette()
 				sky = "#04A5E5",
 				teal = "#B5E8E0",
 				lavender = "#7287FD",
+
 				text = "#F2F2BF",
 				subtext1 = "#BAC2DE",
 				subtext0 = "#A6ADC8",
@@ -82,10 +83,12 @@ local function init_palette()
 				surface2 = "#6E6C7E",
 				surface1 = "#575268",
 				surface0 = "#302D41",
+
 				base = "#1D1536",
 				mantle = "#1C1C19",
 				crust = "#161320",
 			}
+
 		palette = vim.tbl_extend("force", { none = "NONE" }, palette, require("core.settings").palette_overwrite)
 	end
 
@@ -190,7 +193,7 @@ end
 ---@return palette
 function M.get_palette(overwrite)
 	if not overwrite then
-		return vim.deepcopy(init_palette())
+		return vim.deepcopy(init_palette(), true)
 	else
 		return vim.tbl_extend("force", init_palette(), overwrite)
 	end
@@ -258,6 +261,19 @@ function M.gen_cursorword_hl()
 	-- Do not highlight `MiniCursorwordCurrent`
 	set_global_hl("MiniCursorword", nil, M.darken(colors.surface1, 0.7, colors.base))
 	set_global_hl("MiniCursorwordCurrent", nil)
+end
+
+---Setup and enable a language server in one call.
+---@param server string @Name of the language server
+---@param config? vim.lsp.Config @Optional config to apply
+function M.register_server(server, config)
+	vim.validate("server", server, "string", false)
+	vim.validate("config", config, "table", true)
+
+	if config then
+		vim.lsp.config(server, config)
+	end
+	vim.lsp.enable(server)
 end
 
 ---Convert number (0/1) to boolean

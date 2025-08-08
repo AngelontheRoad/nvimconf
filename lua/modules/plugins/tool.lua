@@ -1,4 +1,5 @@
 local tool = {}
+local settings = require("core.settings")
 
 tool["tpope/vim-fugitive"] = {
 	lazy = true,
@@ -75,8 +76,10 @@ tool["folke/which-key.nvim"] = {
 }
 tool["ibhagwan/fzf-lua"] = {
 	lazy = true,
-	event = "VeryLazy",
+	cond = (settings.search_backend == "fzf"),
+	cmd = "FzfLua",
 	config = require("tool.fzf-lua"),
+	dependencies = { "nvim-tree/nvim-web-devicons" },
 }
 
 ----------------------------------------------------------------------
