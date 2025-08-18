@@ -19,9 +19,9 @@ local mappings = {
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("filetree: Toggle"),
+			:with_desc("filetree: Nvimtree Toggle"),
 
-		["n|<C-y>"] = map_cmd("<Cmd>Yazi toggle<CR>"):with_noremap():with_silent():with_desc("filetree: Toggle"),
+		["n|<C-y>"] = map_cr("Yazi toggle"):with_noremap():with_silent():with_desc("filetree: Yazi toggle"),
 
 		-- Plugin: sniprun
 		["v|<F5>"] = map_cr("SnipRun"):with_noremap():with_silent():with_desc("tool: Run code by range"),
