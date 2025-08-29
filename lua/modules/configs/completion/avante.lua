@@ -49,8 +49,20 @@ return function()
 			support_paste_from_clipboard = false,
 			minimize_diff = true, -- Whether to remove unchanged lines when applying a code block
 			enable_token_counting = true, -- 是否启用令牌计数。默认为 true。
-			enable_cursor_planning_mode = false, -- 是否启用 Cursor 规划模式。默认为 false。
-			enable_claude_text_editor_tool_mode = false, -- 是否启用 Claude 文本编辑器工具模式。
+			auto_approve_tool_permissions = false, -- Default: show permission prompts for all tools
+		},
+		prompt_logger = { -- logs prompts to disk (timestamped, for replay/debugging)
+			enabled = true, -- toggle logging entirely
+			log_dir = vim.fn.stdpath("cache") .. "/avante_prompts", -- directory where logs are saved
+			fortune_cookie_on_success = false, -- shows a random fortune after each logged prompt (requires `fortune` installed)
+			next_prompt = {
+				normal = "<C-n>", -- load the next (newer) prompt log in normal mode
+				insert = "<C-n>",
+			},
+			prev_prompt = {
+				normal = "<C-p>", -- load the previous (older) prompt log in normal mode
+				insert = "<C-p>",
+			},
 		},
 		mappings = {
 			--- @class AvanteConflictMappings
@@ -74,7 +86,7 @@ return function()
 				prev = "[[",
 			},
 			submit = {
-				normal = "<M-CR>",
+				normal = "<CR>",
 				insert = "<C-s>",
 			},
 			cancel = {
@@ -94,7 +106,10 @@ return function()
 				close_from_input = nil, -- 例如，{ normal = "<Esc>", insert = "<C-d>" }
 			},
 		},
-		hints = { enabled = true },
+		selection = {
+			enabled = true,
+			hint_display = "delayed",
+		},
 		windows = {
 			---@type "right" | "left" | "top" | "bottom"
 			position = "right", -- the position of the sidebar
@@ -104,6 +119,48 @@ return function()
 				enabled = true, -- true, false to enable/disable the header
 				align = "center", -- left, center, right for title
 				rounded = true,
+			},
+			spinner = {
+				editing = {
+					"⡀",
+					"⠄",
+					"⠂",
+					"⠁",
+					"⠈",
+					"⠐",
+					"⠠",
+					"⢀",
+					"⣀",
+					"⢄",
+					"⢂",
+					"⢁",
+					"⢈",
+					"⢐",
+					"⢠",
+					"⣠",
+					"⢤",
+					"⢢",
+					"⢡",
+					"⢨",
+					"⢰",
+					"⣰",
+					"⢴",
+					"⢲",
+					"⢱",
+					"⢸",
+					"⣸",
+					"⢼",
+					"⢺",
+					"⢹",
+					"⣹",
+					"⢽",
+					"⢻",
+					"⣻",
+					"⢿",
+					"⣿",
+				},
+				generating = { "·", "✢", "✳", "∗", "✻", "✽" }, -- Spinner characters for the 'generating' state
+				thinking = { "🤯", "🙄" }, -- Spinner characters for the 'thinking' state
 			},
 			input = {
 				prefix = "> ",
