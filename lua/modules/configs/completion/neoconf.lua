@@ -11,7 +11,7 @@ M.setup = function()
 		-- import existing settings from other plugins
 		import = {
 			vscode = true, -- local .vscode/settings.json
-			coc = true, -- global/local coc-settings.json
+			coc = false, -- global/local coc-settings.json
 			nlsp = true, -- global/local nlsp-settings.nvim json settings
 		},
 	})

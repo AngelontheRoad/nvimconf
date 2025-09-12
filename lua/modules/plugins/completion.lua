@@ -88,7 +88,30 @@ completion["yetone/avante.nvim"] = {
 	config = require("completion.avante"),
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
-		"folke/snacks.nvim",
+		{
+			"folke/snacks.nvim",
+			priority = 1000,
+			lazy = false,
+			---@type snacks.Config
+			opts = {
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+				bigfile = { enabled = false },
+				dashboard = { enabled = false },
+				explorer = { enabled = false },
+				image = { enabled = true },
+				indent = { enabled = false },
+				input = { enabled = true },
+				picker = { enabled = false },
+				notifier = { enabled = false },
+				quickfile = { enabled = false },
+				scope = { enabled = false },
+				scroll = { enabled = false },
+				statuscolumn = { enabled = false },
+				words = { enabled = false },
+			},
+		},
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
 		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons

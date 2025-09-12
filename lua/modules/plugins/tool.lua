@@ -156,7 +156,8 @@ tool["benlubas/molten-nvim"] = {
 	-- cmd = { "MoltenInfo", "MoltenInit" },
 	build = ":UpdateRemotePlugins",
 	init = require("tool.molten"),
-	dependencies = { { "3rd/image.nvim", config = require("tool.image") } },
+	-- use snacks instead
+	-- dependencies = { { "3rd/image.nvim", config = require("tool.image") } },
 }
 
 tool["stevearc/overseer.nvim"] = {

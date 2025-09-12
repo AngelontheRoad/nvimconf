@@ -6,8 +6,8 @@ return function()
 	}
 
 	require("modules.utils").load_plugin("notify", {
-		stages = "fade",
-		render = "default",
+		stages = "fade_in_slide_out",
+		render = "compact",
 		fps = 20,
 		timeout = 2000,
 		minimum_width = 50,

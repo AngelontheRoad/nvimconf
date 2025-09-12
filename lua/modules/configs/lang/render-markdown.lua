@@ -17,5 +17,8 @@ return function()
 		-- The level of logs to write to file: vim.fn.stdpath("state") .. "/render-markdown.log"
 		-- Only intended to be used for plugin development / debugging
 		log_level = "error",
+		latex = {
+			enabled = false,
+		},
 	})
 end
