@@ -1,4 +1,14 @@
 local completion = {}
+completion["Wansmer/symbol-usage.nvim"] = {
+	lazy = true,
+	event = "LspAttach",
+	config = function()
+		require("symbol-usage").setup({})
+		vim.api.nvim_create_user_command("E", function()
+			require("symbol-usage").refresh()
+		end, {})
+	end,
+}
 
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
@@ -19,11 +29,6 @@ completion["nvimdev/lspsaga.nvim"] = {
 	event = "LspAttach",
 	config = require("completion.lspsaga"),
 	dependencies = "nvim-tree/nvim-web-devicons",
-}
-completion["DNLHC/glance.nvim"] = {
-	lazy = true,
-	event = "LspAttach",
-	config = require("completion.glance"),
 }
 completion["rachartier/tiny-inline-diagnostic.nvim"] = {
 	lazy = false,

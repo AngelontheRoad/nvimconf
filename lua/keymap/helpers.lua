@@ -1,14 +1,7 @@
 local _inlay_enabled = require("core.settings").lsp_inlayhints
+local M = {}
 
-_G._command_panel = function()
-	require("telescope.builtin").keymaps({
-		lhs_filter = function(lhs)
-			return not string.find(lhs, "Þ")
-		end,
-	})
-end
-
-_G._flash_esc_or_noh = function()
+M.flash_esc_or_noh = function()
 	local flash_active, state = pcall(function()
 		return require("flash.plugins.char").state
 	end)
@@ -19,7 +12,7 @@ _G._flash_esc_or_noh = function()
 	end
 end
 
-_G._telescope_collections = function(opts)
+M.telescope_collections = function(opts)
 	local tabs = require("search.tabs")
 	local actions = require("telescope.actions")
 	local state = require("telescope.actions.state")
@@ -48,7 +41,7 @@ _G._telescope_collections = function(opts)
 end
 
 local _lazygit = nil
-_G._toggle_lazygit = function()
+M.toggle_lazygit = function()
 	if vim.fn.executable("lazygit") == 1 then
 		if not _lazygit then
 			_lazygit = require("toggleterm.terminal").Terminal:new({
@@ -64,7 +57,7 @@ _G._toggle_lazygit = function()
 	end
 end
 
-_G._toggle_inlayhint = function()
+M.toggle_inlayhint = function()
 	_inlay_enabled = not _inlay_enabled
 	vim.lsp.inlay_hint.enable(_inlay_enabled)
 	vim.notify(
@@ -74,7 +67,7 @@ _G._toggle_inlayhint = function()
 	)
 end
 
-_G._toggle_virtuallines = function()
+M.toggle_virtuallines = function()
 	require("tiny-inline-diagnostic").toggle()
 	vim.notify(
 		"Virtual lines are now "
@@ -83,3 +76,16 @@ _G._toggle_virtuallines = function()
 		{ title = "LSP Diagnostic" }
 	)
 end
+M.picker = function(method, tele_opts)
+	local prompt_position = require("telescope.config").values.layout_config.horizontal.prompt_position
+	local fzf_opts = { ["--layout"] = prompt_position == "top" and "reverse" or "default" }
+	if require("core.settings").search_backend == "fzf" then
+		require("fzf-lua")[method]({
+			fzf_opts = fzf_opts,
+		})
+	else
+		require("telescope.builtin")[method](tele_opts)
+	end
+end
+
+return M

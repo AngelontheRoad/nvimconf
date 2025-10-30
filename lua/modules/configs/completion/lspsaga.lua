@@ -28,11 +28,11 @@ return function()
 	require("modules.utils").load_plugin("lspsaga", {
 		-- Breadcrumbs: https://nvimdev.github.io/lspsaga/breadcrumbs/
 		symbol_in_winbar = {
-			enable = false,
+			enable = true,
 			separator = " " .. icons.ui.Separator,
 			hide_keyword = false,
-			show_file = false,
-			folder_level = 1,
+			show_file = true,
+			respect_root = true,
 			color_mode = true,
 			delay = 100,
 		},
@@ -53,6 +53,7 @@ return function()
 		-- Code Action: https://nvimdev.github.io/lspsaga/codeaction/
 		code_action = {
 			num_shortcut = true,
+			only_in_cursor = false,
 			show_server_name = true,
 			extend_gitsigns = false,
 			keys = {
@@ -129,7 +130,7 @@ return function()
 			collapse = icons.ui.ArrowOpen,
 			code_action = icons.ui.CodeAction,
 			actionfix = icons.ui.Spell,
-			lines = { "┗", "┣", "┃", "━", "┏" },
+			lines = { "┗", "┣", "┃", "━", "┏", },
 			imp_sign = icons.kind.Implementation,
 			kind = {
 				-- Kind
