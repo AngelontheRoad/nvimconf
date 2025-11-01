@@ -1,6 +1,7 @@
 return function()
 	local icons = { ui = require("modules.utils.icons").get("ui", true) }
 	local lga_actions = require("telescope-live-grep-args.actions")
+	local actions = require("telescope.actions")
 
 	require("modules.utils").load_plugin("telescope", {
 		defaults = {
@@ -39,6 +40,14 @@ return function()
 			file_sorter = require("telescope.sorters").get_fuzzy_file,
 			generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 			buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+			mappings = {
+				n = {
+					["<space>"] = actions.toggle_selection,
+					["<C-a>"] = actions.toggle_all,
+					["<S-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+					["qq"] = actions.send_to_qflist + actions.open_qflist,
+				},
+			},
 		},
 		extensions = {
 			fzf = {
@@ -61,6 +70,7 @@ return function()
 					i = {
 						["<C-k>"] = lga_actions.quote_prompt(),
 						["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+						["<C-space>"] = lga_actions.to_fuzzy_refine,
 					},
 				},
 			},
