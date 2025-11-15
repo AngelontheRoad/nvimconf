@@ -42,7 +42,7 @@ return function()
 			buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
 			mappings = {
 				n = {
-					["<space>"] = actions.toggle_selection,
+					["<Space>"] = actions.toggle_selection + actions.move_selection_worse,
 					["<C-a>"] = actions.toggle_all,
 					["<S-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 					["qq"] = actions.send_to_qflist + actions.open_qflist,
