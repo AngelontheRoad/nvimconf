@@ -1,3 +1,4 @@
+-- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/basedpyright.lua
 return function(options)
 	require("lspconfig").basedpyright.setup({
 		settings = {

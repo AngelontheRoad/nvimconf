@@ -121,6 +121,8 @@ settings["lsp_deps"] = {
 	"lua_ls",
 	-- "pylsp",
 	"gopls",
+	"ruff",
+	"zuban",
 }
 
 -- General-purpose sources for none-ls to install during bootstrap.
