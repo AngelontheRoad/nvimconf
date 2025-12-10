@@ -56,6 +56,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+-- Start treesitter for installed parsers
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = require("core.settings").treesitter_deps,
+	callback = function(args)
+		vim.treesitter.start(args.buf)
+	end,
+})
+
 -- Autojump to last edit
 vim.api.nvim_create_autocmd("BufReadPost", {
 	callback = function()
