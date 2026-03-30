@@ -1,10 +1,11 @@
-local helpers = require("keymap.helpers")
+---@diagnostic disable: undefined-global
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
 local et = bind.escape_termcode
+local helpers = require("keymap.helpers")
 
 local ts_to_select = require("nvim-treesitter-textobjects.select")
 local ts_to_swap = require("nvim-treesitter-textobjects.swap")

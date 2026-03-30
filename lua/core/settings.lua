@@ -40,6 +40,7 @@ settings["formatter_block_list"] = {
 settings["server_formatting_block_list"] = {
 	clangd = true,
 	lua_ls = true,
+	ruff = false,
 	tsserver = true,
 }
 
@@ -50,6 +51,7 @@ settings["server_formatting_block_list"] = {
 settings["format_disabled_dirs"] = {
 	-- Example
 	"~/format_disabled_dir",
+	"~/.local/share/fcitx5/rime",
 }
 
 -- Set the minimum severity level of diagnostics to display.
