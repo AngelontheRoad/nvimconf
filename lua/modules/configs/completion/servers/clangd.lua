@@ -1,40 +1,40 @@
-local util = require("lspconfig").util
+-- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/clangd.lua
 
-local function switch_source_header_splitcmd(bufnr, splitcmd)
-	bufnr = util.validate_bufnr(bufnr)
-	local clangd_client = util.get_active_client_by_name(bufnr, "clangd")
-	local params = { uri = vim.uri_from_bufnr(bufnr) }
-	if clangd_client then
-		clangd_client.request("textDocument/switchSourceHeader", params, function(err, result)
-			if err then
-				error(tostring(err))
-			end
-			if not result then
-				vim.notify("Corresponding file can’t be determined", vim.log.levels.ERROR, { title = "LSP Error!" })
-				return
-			end
-			vim.api.nvim_command(splitcmd .. " " .. vim.uri_to_fname(result))
-		end, bufnr)
-	else
-		vim.notify(
-			"Method textDocument/switchSourceHeader is not supported by any active server attached to buffer",
+local function switch_source_header_splitcmd(bufnr, splitcmd, client)
+	local method_name = "textDocument/switchSourceHeader"
+	---@diagnostic disable-next-line:param-type-mismatch
+	if not client or not client:supports_method(method_name) then
+		return vim.notify(
+			("Method %s is not supported by any active server attached to buffer"):format(method_name),
 			vim.log.levels.ERROR,
 			{ title = "LSP Error!" }
 		)
 	end
+	local params = vim.lsp.util.make_text_document_params(bufnr)
+	client:request(method_name, params, function(err, result)
+		if err then
+			error(tostring(err))
+		end
+		if not result then
+			vim.notify("corresponding file cannot be determined")
+			return
+		end
+		vim.cmd({ cmd = splitcmd, args = { vim.uri_to_fname(result) } })
+	end, bufnr)
 end
 
-local function symbol_info()
-	local bufnr = vim.api.nvim_get_current_buf()
-	local clangd_client = util.get_active_client_by_name(bufnr, "clangd")
-	if not clangd_client or not clangd_client.supports_method("textDocument/symbolInfo") then
+local function symbol_info(bufnr, client)
+	local method_name = "textDocument/symbolInfo"
+	---@diagnostic disable-next-line:param-type-mismatch
+	if not client or not client:supports_method(method_name) then
 		return vim.notify("Clangd client not found", vim.log.levels.ERROR)
 	end
 	local win = vim.api.nvim_get_current_win()
-	local params = vim.lsp.util.make_position_params(win, clangd_client.offset_encoding)
-	clangd_client.request("textDocument/symbolInfo", params, function(err, res)
+	local params = vim.lsp.util.make_position_params(win, client.offset_encoding)
+	---@diagnostic disable-next-line:param-type-mismatch
+	client:request(method_name, params, function(err, res)
 		if err or #res == 0 then
-			-- Clangd always returns an error, there is not reason to parse it
+			-- Clangd always returns an error, there is no reason to parse it
 			return
 		end
 		local container = string.format("container: %s", res[1].containerName) ---@type string
@@ -44,7 +44,6 @@ local function symbol_info()
 			width = math.max(string.len(name), string.len(container)),
 			focusable = false,
 			focus = false,
-			border = "single",
 			title = "Symbol Info",
 		})
 	end, bufnr)
@@ -61,12 +60,16 @@ local function get_binary_path_list(binaries)
 	return table.concat(path_list, ",")
 end
 
--- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/clangd.lua
+-- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/clangd.lua
 return function(defaults)
 	vim.lsp.config("clangd", {
-		on_attach = defaults.on_attach,
 		capabilities = vim.tbl_deep_extend("keep", { offsetEncoding = { "utf-16", "utf-8" } }, defaults.capabilities),
 		single_file_support = true,
+		on_init = function(client, _)
+			if client.server_capabilities then
+				client.server_capabilities.semanticTokensProvider = nil
+			end
+		end,
 		cmd = {
 			"clangd",
 			"-j=9",
@@ -85,31 +88,22 @@ return function(defaults)
 			"--limit-results=300",
 			"--pch-storage=memory",
 		},
-		commands = {
-			ClangdSwitchSourceHeader = {
-				function()
-					switch_source_header_splitcmd(0, "edit")
-				end,
-				description = "Open source/header in current buffer",
-			},
-			ClangdSwitchSourceHeaderVSplit = {
-				function()
-					switch_source_header_splitcmd(0, "vsplit")
-				end,
-				description = "Open source/header in a new vsplit",
-			},
-			ClangdSwitchSourceHeaderSplit = {
-				function()
-					switch_source_header_splitcmd(0, "split")
-				end,
-				description = "Open source/header in a new split",
-			},
-			ClangdShowSymbolInfo = {
-				function()
-					symbol_info()
-				end,
-				description = "Show symbol info",
-			},
-		},
+		on_attach = function(client, bufnr)
+			vim.api.nvim_buf_create_user_command(bufnr, "LspClangdSwitchSourceHeader", function()
+				switch_source_header_splitcmd(bufnr, "edit", client)
+			end, { desc = "Open source/header in a new vsplit" })
+
+			vim.api.nvim_buf_create_user_command(bufnr, "LspClangdSwitchSourceHeaderVsplit", function()
+				switch_source_header_splitcmd(bufnr, "vsplit", client)
+			end, { desc = "Open source/header in a new vsplit" })
+
+			vim.api.nvim_buf_create_user_command(bufnr, "LspClangdSwitchSourceHeaderSplit", function()
+				switch_source_header_splitcmd(bufnr, "split", client)
+			end, { desc = "Open source/header in a new split" })
+
+			vim.api.nvim_buf_create_user_command(bufnr, "LspClangdShowSymbolInfo", function()
+				symbol_info(bufnr, client)
+			end, { desc = "Show symbol info" })
+		end,
 	})
 end

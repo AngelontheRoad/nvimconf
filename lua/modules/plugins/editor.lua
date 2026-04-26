@@ -110,7 +110,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 	branch = "main",
 	build = function()
 		if #vim.api.nvim_list_uis() > 0 then
-			vim.api.nvim_command([[TSUpdate]])
+			vim.cmd.TSUpdate()
 		end
 	end,
 	config = require("editor.treesitter"),

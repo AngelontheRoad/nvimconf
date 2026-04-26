@@ -17,11 +17,7 @@ completion["neovim/nvim-lspconfig"] = {
 	dependencies = {
 		{ "mason-org/mason.nvim" },
 		{ "mason-org/mason-lspconfig.nvim" },
-		{ "folke/neoconf.nvim" },
-		{
-			"Jint-lzxy/lsp_signature.nvim",
-			config = require("completion.lsp-signature"),
-		},
+		{ "b0o/schemastore.nvim" },
 	},
 }
 completion["nvimdev/lspsaga.nvim"] = {
@@ -34,20 +30,32 @@ completion["rachartier/tiny-inline-diagnostic.nvim"] = {
 	lazy = false,
 	config = require("completion.tiny-inline-diagnostic"),
 }
-completion["joechrisellis/lsp-format-modifications.nvim"] = {
+completion["stevearc/conform.nvim"] = {
 	lazy = true,
-	event = "LspAttach",
+	event = "BufWritePre",
+	cmd = { "ConformInfo", "Format", "FormatToggle", "FormatterToggleFt" },
+	config = require("completion.conform"),
+}
+completion["mfussenegger/nvim-lint"] = {
+	lazy = true,
+	event = { "BufWritePost", "BufReadPost" },
+	config = require("completion.nvim-lint"),
 }
 
-completion["nvimtools/none-ls.nvim"] = {
-	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
-	config = require("completion.null-ls"),
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"jay-babu/mason-null-ls.nvim",
-	},
-}
+-- completion["joechrisellis/lsp-format-modifications.nvim"] = {
+-- 	lazy = true,
+-- 	event = "LspAttach",
+-- }
+
+-- completion["nvimtools/none-ls.nvim"] = {
+-- 	lazy = true,
+-- 	event = { "CursorHold", "CursorHoldI" },
+-- 	config = require("completion.null-ls"),
+-- 	dependencies = {
+-- 		"nvim-lua/plenary.nvim",
+-- 		"jay-babu/mason-null-ls.nvim",
+-- 	},
+-- }
 completion["hrsh7th/nvim-cmp"] = {
 	lazy = true,
 	event = { "InsertEnter", "CmdlineEnter" },
@@ -70,19 +78,6 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "kdheepak/cmp-latex-symbols" },
 	},
 }
-completion["zbirenbaum/copilot.lua"] = {
-	lazy = true,
-	cond = require("core.settings").use_copilot,
-	cmd = "Copilot",
-	event = "InsertEnter",
-	config = require("completion.copilot"),
-	dependencies = {
-		{
-			"zbirenbaum/copilot-cmp",
-			config = require("completion.copilot-cmp"),
-		},
-	},
-}
 
 completion["yetone/avante.nvim"] = {
 	event = "VeryLazy",
@@ -92,7 +87,6 @@ completion["yetone/avante.nvim"] = {
 		or "make",
 	config = require("completion.avante"),
 	dependencies = {
-		"nvim-treesitter/nvim-treesitter",
 		{
 			"folke/snacks.nvim",
 			priority = 1000,

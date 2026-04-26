@@ -1,5 +1,14 @@
 return function()
 	require("overseer").setup({
+		-- Patch nvim-dap to support preLaunchTask and postDebugTask
+		dap = true,
+		-- Configure the task output buffer and window
+		output = {
+			-- Use a terminal buffer to display output. If false, a normal buffer is used
+			use_terminal = true,
+			-- If true, don't clear the buffer when a task restarts
+			preserve_output = false,
+		},
 		-- Default task strategy
 		strategy = {
 			"toggleterm",
@@ -32,15 +41,6 @@ return function()
 		templates = { "builtin", "c", "cpp", "python" },
 		-- When true, tries to detect a green color from your colorscheme to use for success highlight
 		auto_detect_success_color = true,
-		-- Patch nvim-dap to support preLaunchTask and postDebugTask
-		dap = true,
-		-- Configure the task output buffer and window
-		output = {
-			-- Use a terminal buffer to display output. If false, a normal buffer is used
-			use_terminal = true,
-			-- If true, don't clear the buffer when a task restarts
-			preserve_output = false,
-		},
 		-- Configure the task list
 		task_list = {
 			-- Default direction. Can be "left", "right", or "bottom"
@@ -79,7 +79,7 @@ return function()
 				["<C-s>"] = { "keymap.open", opts = { dir = "split" }, desc = "Open task output in split" },
 				["<C-t>"] = { "keymap.open", opts = { dir = "tab" }, desc = "Open task output in tab" },
 				["<C-f>"] = { "keymap.open", opts = { dir = "float" }, desc = "Open task output in float" },
-				["<C-q>"] = {
+				["<C-x>"] = {
 					"keymap.run_action",
 					opts = { action = "open output in quickfix" },
 					desc = "Open task output in the quickfix",
@@ -105,6 +105,7 @@ return function()
 			max_width = 0.9,
 			min_height = 10,
 			max_height = 0.9,
+			border = nil,
 			-- Set any window options here (e.g. winhighlight)
 			win_opts = {},
 		},
@@ -112,6 +113,7 @@ return function()
 		task_win = {
 			-- How much space to leave around the floating window
 			padding = 2,
+			border = nil,
 			-- Set any window options here (e.g. winhighlight)
 			win_opts = {},
 		},
@@ -138,7 +140,13 @@ return function()
 		-- List of other directories to search for task templates.
 		-- This will search under the runtimepath, so for example
 		-- "foo/bar" will search "<runtimepath>/lua/foo/bar/*"
-		template_dirs = { "overseer" },
+		template_dirs = {},
+		-- List of module names or lua patterns that match modules (must start with '^')
+		-- to disable. This can be used to disable built in task providers.
+		disable_template_modules = {
+			-- "overseer.template.make",
+			-- "^.*cargo",
+		},
 		-- For template providers, how long to wait before timing out.
 		-- Set to 0 to wait forever.
 		template_timeout_ms = 3000,

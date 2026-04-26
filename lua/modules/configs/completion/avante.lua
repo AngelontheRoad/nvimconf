@@ -16,8 +16,8 @@ return function()
 				},
 			},
 			claude = {
-				endpoint = "https://oneai.evanora.top",
-				model = "claude-4-sonnet-20250514",
+				endpoint = "https://oneai.evanora.top/v1",
+				model = "claude-opus-4-6-high",
 				timeout = 30000,
 				extra_request_body = {
 					temperature = 0.75,

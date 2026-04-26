@@ -191,7 +191,7 @@ return function()
 				},
 			},
 			{ name = "latex_symbols" },
-			{ name = "copilot" },
+			-- { name = "copilot" },
 		},
 		experimental = {
 			ghost_text = {

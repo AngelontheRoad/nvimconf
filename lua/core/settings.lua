@@ -6,7 +6,7 @@ settings["use_ssh"] = true
 
 -- Set to false if you don't use Copilot
 ---@type boolean
-settings["use_copilot"] = true
+settings["use_copilot"] = false
 
 -- Set to false if you don't want to format on save.
 ---@type boolean
@@ -112,33 +112,71 @@ settings["lsp_inlayhints"] = false
 ---@type boolean
 settings["diagnostics_virtual_lines"] = true
 
+-- Linters to install during bootstrap (Mason package names).
+-- These are managed by Mason and used by nvim-lint.
+---@type string[]
+settings["linter_deps"] = {
+	"actionlint",
+	"hadolint",
+	"markdownlint-cli2",
+	"oxlint",
+	-- "rumdl", -- markdownlint Rust rewrite; waiting for rule coverage to mature
+	"golangci-lint",
+	"selene",
+	"shellcheck",
+	"systemdlint",
+}
+
+-- Formatters to install during bootstrap (Mason package names).
+-- These are managed by Mason and used by conform.nvim.
+---@type string[]
+settings["formatter_deps"] = {
+	"beautysh",
+	"clang-format",
+	"cmakelang",
+	"fixjson",
+	"gofumpt",
+	"goimports",
+	"mdsf",
+	"prettier",
+	"superhtml",
+	"shellharden",
+	"stylua",
+}
+
 -- LSPs to install during bootstrap.
 -- Full list: https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/configs
 ---@type string[]
 settings["lsp_deps"] = {
 	"bashls",
 	"clangd",
-	"html",
+	"dockerls",
+	"gh_actions_ls",
+	"gopls",
 	"jsonls",
 	"lua_ls",
+	"marksman",
+	"neocmake",
 	-- "pylsp",
-	"gopls",
 	"ruff",
-	"zuban",
+	"superhtml",
+	"systemd_lsp",
+	"tombi",
+	"yamlls",
 }
 
 -- General-purpose sources for none-ls to install during bootstrap.
 -- Supported sources: https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins
 ---@type string[]
-settings["null_ls_deps"] = {
-	"clang_format",
-	"gofumpt",
-	"goimports",
-	"prettier",
-	"shfmt",
-	"stylua",
-	"vint",
-}
+-- settings["null_ls_deps"] = {
+-- 	"clang_format",
+-- 	-- "gofumpt",
+-- 	-- "goimports",
+-- 	"prettier",
+-- 	-- "shfmt",
+-- 	"stylua",
+-- 	"vint",
+-- }
 
 -- Debug Adapter Protocol (DAP) clients to install and configure during bootstrap.
 -- Supported DAPs: https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
@@ -163,7 +201,6 @@ settings["treesitter_deps"] = {
 	"html",
 	"javascript",
 	"json",
-	"jsonc",
 	"latex",
 	"lua",
 	"make",

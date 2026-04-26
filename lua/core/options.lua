@@ -54,7 +54,7 @@ local function load_options()
 		shiftround = true,
 		shortmess = "aoOTIcF",
 		showbreak = "↳  ",
-		showcmd = false,
+		showcmd = true,
 		showmode = false,
 		showtabline = 2,
 		sidescrolloff = 5,
@@ -122,8 +122,8 @@ local function load_options()
 		vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, conda_prefix .. "/bin/python")
 		vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, conda_prefix .. "/bin/python")
 	else
-		vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, "/opt/mambaforge/bin/python")
-		vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "/opt/mambaforge/bin/python")
+		vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, "/usr/bin/python")
+		vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "/usr/bin/python")
 	end
 
 	for name, value in pairs(options) do
