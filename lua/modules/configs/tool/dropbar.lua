@@ -17,6 +17,20 @@ return function()
 	}
 
 	require("modules.utils").load_plugin("dropbar", {
+		menu = {
+			preview = true,
+		},
+		fzf = {
+			keymaps = {
+				["<Up>"] = "api.fuzzy_find_prev",
+				["<Down>"] = "api.fuzzy_find_next",
+				["<CR>"] = "api.fuzzy_find_click",
+				["<Esc>"] = "api.fuzzy_find_close",
+			},
+			char_pattern = "[%w%p]",
+			retain_inner_spaces = true,
+			fuzzy_find_on_click = true,
+		},
 		bar = {
 			hover = false,
 			truncate = true,
@@ -45,14 +59,7 @@ return function()
 		sources = {
 			terminal = {
 				name = function(buf)
-					local name = vim.api.nvim_buf_get_name(buf)
-					local term = select(2, require("toggleterm.terminal").identify(name))
-					-- Trying to "snag" a display name from toggleterm
-					if term then
-						return term.display_name or term.name
-					else
-						return name
-					end
+					return vim.api.nvim_buf_get_name(buf)
 				end,
 			},
 		},

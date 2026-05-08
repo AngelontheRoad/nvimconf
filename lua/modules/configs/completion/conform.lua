@@ -93,7 +93,7 @@ return function()
 			jsonc = {}, -- fixjson/prettier strip comments; fallback to LSP (jsonls) for JSONC formatting
 			lua = { "stylua" },
 			markdown = { "mdsf" },
-			nix = { "nixfmt", "statix" },
+			-- nix = { "nixfmt", "statix" },
 			objc = { "clang-format" },
 			objcpp = { "clang-format" },
 			proto = { "clang-format" },
@@ -103,7 +103,7 @@ return function()
 			handlebars = { "prettier" },
 			less = { "prettier" },
 			scss = { "prettier" },
-			toml = { " taplo " },
+			toml = { "tombi" },
 			typescript = { "prettier" },
 			typescriptreact = { "prettier" },
 			vue = { "prettier" },
@@ -113,11 +113,6 @@ return function()
 		formatters = {
 			["clang-format"] = {
 				prepend_args = require("completion.formatters.clang_format"),
-			},
-			statix = {
-				command = "statix",
-				args = { "fix", "--stdin" },
-				stdin = true,
 			},
 			-- prettier: stdin mode does not work under bun's node shim,
 			-- so use --write (file-based) mode instead.
@@ -218,12 +213,12 @@ return function()
 	end, { nargs = 1, complete = "filetype" })
 
 	-- Auto stop bashls for .env files (migrated from null-ls config)
-	vim.api.nvim_create_autocmd("LspAttach", {
-		callback = function(event)
-			local bufname = vim.api.nvim_buf_get_name(event.buf)
-			if bufname:match("%.env$") or bufname:match("%.env%.") then
-				vim.cmd.LspStop("bashls")
-			end
-		end,
-	})
+	-- vim.api.nvim_create_autocmd("LspAttach", {
+	-- 	callback = function(event)
+	-- 		local bufname = vim.api.nvim_buf_get_name(event.buf)
+	-- 		if bufname:match("%.env$") or bufname:match("%.env%.") then
+	-- 			vim.cmd.LspStop("bashls")
+	-- 		end
+	-- 	end,
+	-- })
 end

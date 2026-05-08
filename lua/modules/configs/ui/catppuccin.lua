@@ -12,7 +12,6 @@ return function()
 			percentage = 0.15,
 		},
 		transparent_background = transparent_background,
-		show_end_of_buffer = false, -- show the '~' characters after the end of buffers
 		term_colors = true,
 		compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 		styles = {
@@ -30,18 +29,15 @@ return function()
 			properties = {},
 		},
 		integrations = {
-			cmp = true,
+			blink_cmp = { enabled = true, style = "bordered" },
 			dap = true,
 			dap_ui = true,
 			diffview = true,
 			dropbar = { enabled = true, color_mode = true },
 			fidget = true,
 			flash = true,
-			fzf = true,
 			gitsigns = true,
 			grug_far = true,
-			hop = true,
-			indent_blankline = { enabled = true, colored_indent_levels = false },
 			lsp_saga = true,
 			lsp_trouble = true,
 			markdown = true,
@@ -62,14 +58,12 @@ return function()
 					information = { "underline" },
 				},
 			},
-			navic = { enabled = false },
 			notify = true,
-			nvimtree = true,
 			overseer = true,
 			rainbow_delimiters = true,
 			render_markdown = true,
 			semantic_tokens = true,
-			telescope = { enabled = true, style = "nvchad" },
+			snacks = true,
 			treesitter = true,
 			treesitter_context = true,
 			which_key = true,
@@ -97,9 +91,9 @@ return function()
 					-- For mason.nvim
 					MasonNormal = { link = "NormalFloat" },
 
-					-- For indent-blankline
-					IblIndent = { fg = cp.surface0 },
-					IblScope = { fg = cp.surface2, style = { "bold" } },
+					-- For snacks.indent
+					SnacksIndent = { fg = cp.surface0 },
+					SnacksIndentScope = { fg = cp.surface2, style = { "bold" } },
 
 					-- For nvim-cmp and wilder.nvim
 					Pmenu = { fg = cp.overlay2, bg = transparent_background and cp.none or cp.base },
@@ -117,39 +111,9 @@ return function()
 					FidgetTask = { bg = cp.none, fg = cp.surface2 },
 					FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
-					-- For nvim-notify
-					NotifyBackground = { bg = cp.base },
-
-					-- For nvim-tree
-					NvimTreeRootFolder = { fg = cp.pink },
-					NvimTreeIndentMarker = { fg = cp.surface2 },
-
 					-- For trouble.nvim
 					TroubleNormal = { bg = transparent_background and cp.none or cp.base },
 					TroubleNormalNC = { bg = transparent_background and cp.none or cp.base },
-
-					-- For telescope.nvim
-					TelescopeMatching = { fg = cp.lavender },
-					TelescopeResultsDiffAdd = { fg = cp.green },
-					TelescopeResultsDiffChange = { fg = cp.yellow },
-					TelescopeResultsDiffDelete = { fg = cp.red },
-
-					-- For glance.nvim
-					GlanceWinBarFilename = { fg = cp.subtext1, style = { "bold" } },
-					GlanceWinBarFilepath = { fg = cp.subtext0, style = { "italic" } },
-					GlanceWinBarTitle = { fg = cp.teal, style = { "bold" } },
-					GlanceListCount = { fg = cp.lavender },
-					GlanceListFilepath = { link = "Comment" },
-					GlanceListFilename = { fg = cp.blue },
-					GlanceListMatch = { fg = cp.lavender, style = { "bold" } },
-					GlanceFoldIcon = { fg = cp.green },
-
-					-- For nvim-treehopper
-					TSNodeKey = {
-						fg = cp.peach,
-						bg = transparent_background and cp.none or cp.base,
-						style = { "bold", "underline" },
-					},
 
 					-- For treesitter
 					["@keyword.return"] = { fg = cp.pink, style = clear },

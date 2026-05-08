@@ -17,28 +17,30 @@ lang["ray-x/go.nvim"] = {
 }
 lang["iamcco/markdown-preview.nvim"] = {
 	lazy = true,
+	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 	ft = "markdown",
-	build = ":call mkdp#util#install()",
+	build = function()
+		vim.fn["mkdp#util#install"]()
+	end,
 }
-lang["mrcjkb/rustaceanvim"] = {
-	lazy = true,
-	ft = "rust",
-	version = "*",
-	init = require("lang.rust"),
-	dependencies = "nvim-lua/plenary.nvim",
+lang["MeanderingProgrammer/render-markdown.nvim"] = {
+	ft = { "markdown", "Avante" },
+	opts = {
+		file_types = { "markdown", "Avante" },
+	},
+	config = require("lang.render-markdown"),
 }
-lang["Saecki/crates.nvim"] = {
-	lazy = true,
-	event = "BufReadPost Cargo.toml",
-	config = require("lang.crates"),
-	dependencies = "nvim-lua/plenary.nvim",
-}
-lang["chrisbra/csv.vim"] = {
-	lazy = true,
-	ft = "csv",
-}
-lang["microsoft/python-type-stubs"] = {
-	lazy = true,
-	ft = "python",
-}
+-- lang["mrcjkb/rustaceanvim"] = {
+-- 	lazy = true,
+-- 	ft = "rust",
+-- 	version = "*",
+-- 	init = require("lang.rust"),
+-- 	dependencies = "nvim-lua/plenary.nvim",
+-- }
+-- lang["Saecki/crates.nvim"] = {
+-- 	lazy = true,
+-- 	event = "BufReadPost Cargo.toml",
+-- 	config = require("lang.crates"),
+-- 	dependencies = "nvim-lua/plenary.nvim",
+-- }
 return lang

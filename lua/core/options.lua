@@ -95,6 +95,7 @@ local function load_options()
 		conceallevel = 0,
 		expandtab = true,
 		foldenable = true,
+		foldmethod = "expr",
 		formatoptions = "1jcroql",
 		linebreak = true,
 		number = true,

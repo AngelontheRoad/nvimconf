@@ -20,8 +20,6 @@ local M = {}
 function M.lsp(buf)
 	local map = {
 		-- LSP-related keymaps, ONLY effective in buffers with LSP(s) attached
-		["n|<leader>li"] = map_cr("LspInfo"):with_silent():with_buffer(buf):with_desc("lsp: Info"),
-		["n|<leader>lr"] = map_cr("LspRestart"):with_silent():with_buffer(buf):with_nowait():with_desc("lsp: Restart"),
 		["n|go"] = map_cr("Trouble symbols toggle win.position=right")
 			:with_silent()
 			:with_buffer(buf)
@@ -67,14 +65,14 @@ function M.lsp(buf)
 			:with_desc("lsp: Preview definition"),
 		["n|gD"] = map_cr("Lspsaga goto_definition"):with_silent():with_buffer(buf):with_desc("lsp: Goto definition"),
 		["n|gh"] = map_callback(function()
-				helpers.picker("lsp_references")
+				require("snacks").picker.lsp_references()
 			end)
 			:with_noremap()
 			:with_nowait()
 			:with_silent()
 			:with_desc("lsp: show finder"),
 		["n|gm"] = map_callback(function()
-				helpers.picker("lsp_implementations")
+				require("snacks").picker.lsp_implementations()
 			end)
 			:with_noremap()
 			:with_nowait()

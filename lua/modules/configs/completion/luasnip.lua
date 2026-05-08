@@ -5,11 +5,19 @@ return function()
 	end
 
 	require("modules.utils").load_plugin("luasnip", {
-		history = true,
+		keep_roots = true,
+		link_roots = true,
+		link_children = true,
+		exit_roots = false,
 		update_events = "TextChanged,TextChangedI",
 		delete_check_events = "TextChanged,InsertLeave",
 	}, false, require("luasnip").config.set_config)
+
+	require("luasnip.loaders.from_vscode").lazy_load({
+		paths = {
+			snippet_path,
+		},
+	})
 	require("luasnip.loaders.from_lua").lazy_load()
-	require("luasnip.loaders.from_vscode").lazy_load()
 	require("luasnip.loaders.from_snipmate").lazy_load()
 end

@@ -19,7 +19,6 @@ return function()
 		options = {
 			disable_when_touch = false,
 			disabled_filetypes = {
-				"alpha",
 				"AvanteInput",
 				"checkhealth",
 				"dap-repl",
@@ -27,11 +26,11 @@ return function()
 				"help",
 				"log",
 				"notify",
-				"NvimTree",
+				"oil",
 				"Outline",
 				"qf",
-				"TelescopePrompt",
-				"toggleterm",
+				"snacks_dashboard",
+				"snacks_terminal",
 				"undotree",
 				"vimwiki",
 			},

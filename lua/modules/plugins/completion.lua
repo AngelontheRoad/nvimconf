@@ -3,16 +3,27 @@ completion["Wansmer/symbol-usage.nvim"] = {
 	lazy = true,
 	event = "LspAttach",
 	config = function()
-		require("symbol-usage").setup({})
+		require("symbol-usage").setup()
 		vim.api.nvim_create_user_command("E", function()
 			require("symbol-usage").refresh()
 		end, {})
 	end,
 }
-
+completion["mason-org/mason.nvim"] = {
+	lazy = true,
+	cmd = {
+		"Mason",
+		"MasonInstall",
+		"MasonUninstall",
+		"MasonUninstallAll",
+		"MasonUpdate",
+		"MasonLog",
+	},
+	config = require("completion.mason").setup,
+}
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
+	event = { "BufReadPre", "BufNewFile" },
 	config = require("completion.lsp"),
 	dependencies = {
 		{ "mason-org/mason.nvim" },
@@ -27,7 +38,9 @@ completion["nvimdev/lspsaga.nvim"] = {
 	dependencies = "nvim-tree/nvim-web-devicons",
 }
 completion["rachartier/tiny-inline-diagnostic.nvim"] = {
-	lazy = false,
+	lazy = true,
+	event = "VeryLazy",
+	priority = 1000,
 	config = require("completion.tiny-inline-diagnostic"),
 }
 completion["stevearc/conform.nvim"] = {
@@ -42,24 +55,11 @@ completion["mfussenegger/nvim-lint"] = {
 	config = require("completion.nvim-lint"),
 }
 
--- completion["joechrisellis/lsp-format-modifications.nvim"] = {
--- 	lazy = true,
--- 	event = "LspAttach",
--- }
-
--- completion["nvimtools/none-ls.nvim"] = {
--- 	lazy = true,
--- 	event = { "CursorHold", "CursorHoldI" },
--- 	config = require("completion.null-ls"),
--- 	dependencies = {
--- 		"nvim-lua/plenary.nvim",
--- 		"jay-babu/mason-null-ls.nvim",
--- 	},
--- }
-completion["hrsh7th/nvim-cmp"] = {
+completion["saghen/blink.cmp"] = {
 	lazy = true,
-	event = { "InsertEnter", "CmdlineEnter" },
-	config = require("completion.cmp"),
+	event = { "VeryLazy", "InsertEnter", "CmdlineEnter" },
+	config = require("completion.blink"),
+	version = "*",
 	dependencies = {
 		{
 			"L3MON4D3/LuaSnip",
@@ -67,16 +67,12 @@ completion["hrsh7th/nvim-cmp"] = {
 			config = require("completion.luasnip"),
 			dependencies = "rafamadriz/friendly-snippets",
 		},
-		{ "lukas-reineke/cmp-under-comparator" },
-		{ "saadparwaiz1/cmp_luasnip" },
-		{ "hrsh7th/cmp-nvim-lsp" },
-		{ "andersevenrud/cmp-tmux" },
-		{ "hrsh7th/cmp-path" },
-		{ "f3fora/cmp-spell" },
-		{ "hrsh7th/cmp-buffer" },
-		{ "hrsh7th/cmp-cmdline" },
-		{ "kdheepak/cmp-latex-symbols" },
+		"mikavilpas/blink-ripgrep.nvim",
+		"bydlw98/blink-cmp-env",
+		"disrupted/blink-cmp-conventional-commits",
+		"xzbdmw/colorful-menu.nvim",
 	},
+	opts_extend = { "sources.default" },
 }
 
 completion["yetone/avante.nvim"] = {
@@ -87,30 +83,7 @@ completion["yetone/avante.nvim"] = {
 		or "make",
 	config = require("completion.avante"),
 	dependencies = {
-		{
-			"folke/snacks.nvim",
-			priority = 1000,
-			lazy = false,
-			---@type snacks.Config
-			opts = {
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-				bigfile = { enabled = false },
-				dashboard = { enabled = false },
-				explorer = { enabled = false },
-				image = { enabled = true },
-				indent = { enabled = false },
-				input = { enabled = true },
-				picker = { enabled = false },
-				notifier = { enabled = false },
-				quickfile = { enabled = false },
-				scope = { enabled = false },
-				scroll = { enabled = false },
-				statuscolumn = { enabled = false },
-				words = { enabled = false },
-			},
-		},
+		"folke/snacks.nvim",
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
 		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
@@ -131,15 +104,16 @@ completion["yetone/avante.nvim"] = {
 				},
 			},
 		},
-		{
-			"MeanderingProgrammer/render-markdown.nvim",
-			ft = { "markdown", "Avante" },
-			opts = {
-				file_types = { "markdown", "Avante" },
-			},
-			config = require("lang.render-markdown"),
-		},
+		"MeanderingProgrammer/render-markdown.nvim",
 	},
+}
+
+-- Adding *nvim config dir*, *nvim runtime dir*, *all plugin dir(with /lua dir)* to get
+-- hover docs and function signatures, but it takes too much time to load all dirs, use it if needed.
+completion["folke/lazydev.nvim"] = {
+	lazy = true,
+	ft = "lua",
+	config = require("completion.lazydev"),
 }
 
 return completion

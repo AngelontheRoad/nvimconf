@@ -192,54 +192,38 @@ settings["dap_deps"] = {
 -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
 ---@type string[]
 settings["treesitter_deps"] = {
-	"bash",
-	"c",
-	"cpp",
-	"css",
-	"go",
-	"gomod",
-	"html",
-	"javascript",
-	"json",
-	"latex",
-	"lua",
-	"make",
-	"markdown",
-	"markdown_inline",
-	"python",
-	"rust",
-	"typescript",
-	"vimdoc",
-	"vue",
-	"yaml",
-}
-
--- GUI settings for clients like `neovide` or `neovim-qt`.
--- NOTE: Only the following GUI options are supported; others will be ignored.
----@type { font_name: string, font_size: number }
-settings["gui_config"] = {
-	font_name = "JetBrainsMono Nerd Font Mono",
-	font_size = 10,
-}
-
--- Specific settings for `neovide`.
--- Remove the `neovide_` prefix (with trailing underscore) from all entries below.
--- Supported entries: https://neovide.dev/configuration.html
----@type table<string, boolean|number|string>
-settings["neovide_config"] = {
-	no_idle = false,
-	input_ime = true,
-	fullscreen = true,
-	padding_left = 8,
-	confirm_quit = true,
-	cursor_vfx_mode = "torpedo",
-	cursor_trail_size = 0.05,
-	cursor_antialiasing = true,
-	cursor_animation_length = 0.03,
-	hide_mouse_when_typing = true,
-	input_macos_alt_is_meta = false,
-	cursor_vfx_particle_speed = 20.0,
-	cursor_vfx_particle_density = 5.0,
+	awk = true,
+	bash = true,
+	c = true,
+	cmake = true,
+	cpp = true,
+	css = true,
+	-- gh_actions_expressions = true,
+	git_config = true,
+	gitignore = true,
+	go = true,
+	gomod = true,
+	gosum = true,
+	gotmpl = true,
+	html = true,
+	javascript = true,
+	json = true,
+	latex = true,
+	lua = true,
+	make = true,
+	markdown = true,
+	markdown_inline = true,
+	python = true,
+	regex = true,
+	rust = true,
+	ssh_config = true,
+	tmux = true,
+	toml = true,
+	typescript = true,
+	vim = true,
+	vimdoc = true,
+	vue = true,
+	yaml = true,
 }
 
 -- Set the dashboard startup image here.

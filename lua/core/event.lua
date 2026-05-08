@@ -1,21 +1,5 @@
 local autocmd = {}
 
--- Autoclose NvimTree
-vim.api.nvim_create_autocmd("BufEnter", {
-	group = vim.api.nvim_create_augroup("NvimTreeAutoClose", { clear = true }),
-	pattern = "NvimTree_*",
-	callback = function()
-		local layout = vim.fn.winlayout()
-		if
-			layout[1] == "leaf"
-			and vim.bo[vim.api.nvim_win_get_buf(layout[2])].filetype == "NvimTree"
-			and layout[3] == nil
-		then
-			vim.cmd({ cmd = "quit", mods = { confirm = true } })
-		end
-	end,
-})
-
 -- Autoclose some filetype with <q>
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = {
@@ -23,12 +7,14 @@ vim.api.nvim_create_autocmd("FileType", {
 		"help",
 		"man",
 		"notify",
+		"snacks_notif",
 		"nofile",
 		"terminal",
 		"prompt",
-		"toggleterm",
+		"snacks_terminal",
 		"startuptime",
 		"tsplayground",
+		"yazi",
 	},
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
@@ -55,14 +41,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- Start treesitter for installed parsers
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = require("core.settings").treesitter_deps,
-	callback = function(args)
-		vim.treesitter.start(args.buf)
-	end,
-})
-
 -- Autojump to last edit
 vim.api.nvim_create_autocmd("BufReadPost", {
 	callback = function()
@@ -74,9 +52,14 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	end,
 })
 
+--- Process autocmd definitions using nvim_create_autocmd.
+--- Each definition entry: { event(s), pattern, command_or_callback }
+---   - event(s): string (comma-separated) or table of strings
+---   - pattern: string or table of strings
+---   - command_or_callback: string (vimscript) or function (lua callback)
+---     Prefix command with "nested " to set nested = true.
 function autocmd.nvim_create_augroups(definitions)
 	for group_name, definition in pairs(definitions) do
-		-- Prepend an underscore to avoid name clashes
 		local group = vim.api.nvim_create_augroup("_" .. group_name, { clear = true })
 		for _, def in ipairs(definition) do
 			local events = type(def[1]) == "table" and def[1] or vim.split(def[1], ",", { plain = true })
@@ -102,6 +85,20 @@ end
 
 function autocmd.load_autocmds()
 	local vim_path = require("core.global").vim_path
+	local no_undofile = function(event)
+		vim.bo[event.buf].undofile = false
+	end
+
+	local ignored_fts = { snacks_dashboard = true, clap_ = true }
+	local function is_ignored_ft()
+		local ft = vim.bo.filetype
+		for ft_pattern in pairs(ignored_fts) do
+			if ft:find(ft_pattern) then
+				return true
+			end
+		end
+		return false
+	end
 
 	local definitions = {
 		bufs = {
@@ -113,65 +110,107 @@ function autocmd.load_autocmds()
 			},
 			-- Reload Vim script automatically if setlocal autoread
 			{
-				{"BufWritePost","FileWritePost"},
+				{ "BufWritePost", "FileWritePost" },
 				"*.vim",
 				[[nested if &l:autoread > 0 | source <afile> | echo 'source ' . bufname('%') | endif]],
 			},
-			{ "BufWritePre", "*~", "setlocal noundofile" },
-			{ "BufWritePre", "/tmp/*", "setlocal noundofile" },
-			{ "BufWritePre", "*.tmp", "setlocal noundofile" },
-			{ "BufWritePre", "*.bak", "setlocal noundofile" },
-			{ "BufWritePre", "MERGE_MSG", "setlocal noundofile" },
-			{ "BufWritePre", "description", "setlocal noundofile" },
-			{ "BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile" },
+			{ "BufWritePre", "*~", "no_undofile" },
+			{ "BufWritePre", "/tmp/*", "no_undofile" },
+			{ "BufWritePre", "*.tmp", "no_undofile" },
+			{ "BufWritePre", "*.bak", "no_undofile" },
+			{ "BufWritePre", "MERGE_MSG", "no_undofile" },
+			{ "BufWritePre", "description", "no_undofile" },
+			{ "BufWritePre", "COMMIT_EDITMSG", "no_undofile" },
 			-- Auto change directory
 			-- { "BufEnter", "*", "silent! lcd %:p:h" },
-			-- Auto toggle fcitx5
-			-- {"InsertLeave", "* :silent", "!fcitx5-remote -c"},
-			-- {"BufCreate", "*", ":silent !fcitx5-remote -c"},
-			-- {"BufEnter", "*", ":silent !fcitx5-remote -c "},
-			-- {"BufLeave", "*", ":silent !fcitx5-remote -c "}
 		},
 		wins = {
 			-- Highlight current line only in focused window
 			{
-				{"WinEnter","BufEnter","InsertLeave"},
+				{ "WinEnter", "BufEnter", "InsertLeave" },
 				"*",
-				[[if ! &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal cursorline | endif]],
+				function()
+					if not vim.wo.cursorline and not is_ignored_ft() and not vim.wo.previewwindow then
+						vim.wo.cursorline = true
+					end
+				end,
 			},
 			{
-				{"WinLeave","BufLeave","InsertEnter"},
+				{ "WinLeave", "BufLeave", "InsertEnter" },
 				"*",
-				[[if &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal nocursorline | endif]],
+				function()
+					if vim.wo.cursorline and not is_ignored_ft() and not vim.wo.previewwindow then
+						vim.wo.cursorline = false
+					end
+				end,
 			},
 			-- Attempt to write shada when leaving nvim
 			{
 				"VimLeave",
 				"*",
-				[[if has('nvim') | wshada | else | wviminfo! | endif]],
+				function()
+					vim.cmd("wshada")
+				end,
 			},
 			-- Check if a file has changed when its window is in focus, being more proactive than 'autoread'
-			{ "FocusGained", "*", "checktime" },
+			{
+				"FocusGained",
+				"*",
+				function()
+					vim.cmd.checktime()
+				end,
+			},
 			-- Maintain uniform window dimensions when resizing Vim windows
-			{ "VimResized", "*", [[tabdo wincmd =]] },
+			{
+				"VimResized",
+				"*",
+				function()
+					vim.cmd("tabdo wincmd =")
+				end,
+			},
 		},
 		ft = {
-			{ "FileType", "*", "setlocal formatoptions-=cro" },
-			{ "FileType", "alpha", "setlocal showtabline=0" },
-			{ "FileType", "markdown", "setlocal wrap" },
-			{ "FileType", "dap-repl", "lua require('dap.ext.autocompl').attach()" },
 			{
 				"FileType",
-				{"c,cpp"},
-				"nnoremap <silent> <buffer> <leader>h <Cmd>ClangdSwitchSourceHeader<CR>",
-				"nnoremap <silent> <buffer> <leader>i <Cmd>ClangdShowSymbolInfo<CR>",
+				"*",
+				function(event)
+					vim.bo[event.buf].formatoptions = vim.bo[event.buf].formatoptions:gsub("[cro]", "")
+				end,
+			},
+			{
+				"FileType",
+				"snacks_dashboard",
+				function()
+					vim.wo.showtabline = 0
+				end,
+			},
+			{
+				"FileType",
+				"dap-repl",
+				function()
+					require("dap.ext.autocompl").attach()
+				end,
+			},
+			{
+				"FileType",
+				{ "c", "cpp" },
+				function(event)
+					vim.keymap.set(
+						"n",
+						"<leader>h",
+						"<Cmd>ClangdSwitchSourceHeader<CR>",
+						{ buffer = event.buf, silent = true }
+					)
+				end,
 			},
 		},
 		yank = {
 			{
 				"TextYankPost",
 				"*",
-				[[silent! lua vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 300 })]],
+				function()
+					vim.hl.on_yank({ higroup = "Incsearch", timeout = 300 })
+				end,
 			},
 		},
 	}

@@ -12,6 +12,13 @@ return function()
 		focus = false, -- do not focus the window when opened
 		follow = true,
 		restore = true,
+		indent_guides = true,
+		multiline = true,
+		max_items = 200,
+		preview = {
+			type = "main",
+			scratch = true,
+		},
 		icons = {
 			indent = {
 				fold_open = icons.ui.ArrowOpen,
@@ -32,6 +39,20 @@ return function()
 						},
 					},
 				},
+			},
+			symbols = {
+				desc = "document symbols",
+				mode = "lsp_document_symbols",
+				focus = false,
+				win = { position = "right" },
+			},
+			incoming_calls = {
+				desc = "incoming calls",
+				mode = "lsp_incoming_calls",
+			},
+			outgoing_calls = {
+				desc = "outgoing calls",
+				mode = "lsp_outgoing_calls",
 			},
 		},
 	})

@@ -4,8 +4,12 @@ return function()
 	local opts = {
 		options = {
 			always_show_bufferline = true,
-			close_command = "BufDel! %d",
-			right_mouse_command = "BufDel! %d",
+			close_command = function(n)
+				require("snacks").bufdelete(n)
+			end,
+			right_mouse_command = function(n)
+				require("snacks").bufdelete(n)
+			end,
 			tab_size = 20,
 			separator_style = "thin",
 			show_buffer_icons = true,
@@ -15,7 +19,9 @@ return function()
 			diagnostics_indicator = function(count)
 				return "(" .. count .. ")"
 			end,
-			numbers = nil,
+			numbers = function(opts)
+				return string.format("%s", opts.raise(opts.ordinal))
+			end,
 			max_name_length = 20,
 			max_prefix_length = 13,
 			buffer_close_icon = icons.ui.Close,
@@ -23,12 +29,6 @@ return function()
 			right_trunc_marker = icons.ui.Right,
 			modified_icon = icons.ui.Modified_alt,
 			offsets = {
-				{
-					filetype = "NvimTree",
-					text = "File Explorer",
-					text_align = "center",
-					padding = 0,
-				},
 				{
 					filetype = "trouble",
 					text = "LSP Outline",
@@ -46,11 +46,9 @@ return function()
 		local cp = require("modules.utils").get_palette() -- Get the palette.
 
 		local catppuccin_hl_overwrite = {
-			highlights = require("catppuccin.groups.integrations.bufferline").get({
-				styles = { "italic", "bold" },
+			highlights = require("catppuccin.special.bufferline").get_theme({
 				custom = {
 					all = {
-						-- Hint
 						hint = { fg = cp.rosewater },
 						hint_visible = { fg = cp.rosewater },
 						hint_selected = { fg = cp.rosewater },
@@ -59,7 +57,7 @@ return function()
 						hint_diagnostic_selected = { fg = cp.rosewater },
 					},
 				},
-			}),
+			})(),
 		}
 
 		opts = vim.tbl_deep_extend("force", opts, catppuccin_hl_overwrite)

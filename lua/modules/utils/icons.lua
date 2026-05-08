@@ -191,6 +191,7 @@ local data = {
 		luasnip = "󰃐",
 		nvim_lsp = "",
 		path = "",
+		ripgrep = "󱎸",
 		spell = "󰓆",
 		tmux = "",
 		treesitter = "",

@@ -50,6 +50,24 @@ return function()
 				close = "<Esc>",
 			},
 		},
+		-- Finder: https://nvimdev.github.io/lspsaga/finder/
+		finder = {
+			max_height = 0.5,
+			left_width = 0.3,
+			default = "ref+imp",
+			layout = "float",
+			silent = false,
+			keys = {
+				shuttle = "[]",
+				toggle_or_open = "<CR>",
+				vsplit = "v",
+				split = "s",
+				tabe = "t",
+				tabnew = "T",
+				quit = "q",
+				close = "<Esc>",
+			},
+		},
 		-- Code Action: https://nvimdev.github.io/lspsaga/codeaction/
 		code_action = {
 			num_shortcut = true,
@@ -130,7 +148,7 @@ return function()
 			collapse = icons.ui.ArrowOpen,
 			code_action = icons.ui.CodeAction,
 			actionfix = icons.ui.Spell,
-			lines = { "┗", "┣", "┃", "━", "┏", },
+			lines = { "┗", "┣", "┃", "━", "┏" },
 			imp_sign = icons.kind.Implementation,
 			kind = {
 				-- Kind
@@ -176,7 +194,7 @@ return function()
 		-- Scrolling Keymaps: https://nvimdev.github.io/lspsaga/misc/#scrolling-keymaps
 		scroll_preview = {
 			scroll_down = "<C-d>",
-			scroll_up = "<C-u>",
+			scroll_up = "<C-f>",
 		},
 		request_timeout = 3000,
 	})

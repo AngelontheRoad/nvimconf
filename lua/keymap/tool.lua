@@ -3,8 +3,9 @@ local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
-local vim_path = require("core.global").vim_path
 local helpers = require("keymap.helpers")
+local term = require("snacks").terminal
+local picker = require("snacks").picker
 
 local mappings = {
 	plugins = {
@@ -13,61 +14,59 @@ local mappings = {
 		["n|gpl"] = map_cr("G pull"):with_noremap():with_silent():with_desc("git: Pull"),
 		["n|<leader>gG"] = map_cu("Git"):with_noremap():with_silent():with_desc("git: Open git-fugitive"),
 
-		-- Plugin: edgy
-		["n|<C-n>"] = map_callback(function()
-				require("edgy").toggle("left")
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("filetree: Nvimtree Toggle"),
-
-		["n|<C-y>"] = map_cr("Yazi toggle"):with_noremap():with_silent():with_desc("filetree: Yazi toggle"),
+		-- Plugin: yazi
+		["n|yz"] = map_cr("Yazi toggle"):with_noremap():with_silent():with_desc("filetree: Yazi toggle"),
 
 		-- Plugin: sniprun
 		["v|<F5>"] = map_cr("SnipRun"):with_noremap():with_silent():with_desc("tool: Run code by range"),
 		["n|<F5>"] = map_cu([[%SnipRun]]):with_noremap():with_silent():with_desc("tool: Run code by file"),
 
-		-- Plugin: toggleterm
+		-- Plugin: snacks.terminal
 		["t|<Esc><Esc>"] = map_cmd([[<C-\><C-n>]]):with_noremap():with_silent(), -- switch to normal mode in terminal.
-		["n|<C-\\>"] = map_cr("ToggleTerm direction=horizontal")
-			:with_noremap()
-			:with_silent()
-			:with_desc("terminal: Toggle horizontal"),
-		["i|<C-\\>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=horizontal<CR>")
-			:with_noremap()
-			:with_silent()
-			:with_desc("terminal: Toggle horizontal"),
-		["t|<C-\\>"] = map_cmd("<Cmd>ToggleTerm<CR>")
-			:with_noremap()
-			:with_silent()
-			:with_desc("terminal: Toggle horizontal"),
-		["n|<A-\\>"] = map_cr("ToggleTerm direction=vertical")
-			:with_noremap()
-			:with_silent()
-			:with_desc("terminal: Toggle vertical"),
-		["i|<A-\\>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=vertical<CR>")
-			:with_noremap()
-			:with_silent()
-			:with_desc("terminal: Toggle vertical"),
-		["t|<A-\\>"] = map_cmd("<Cmd>ToggleTerm<CR>")
-			:with_noremap()
-			:with_silent()
-			:with_desc("terminal: Toggle vertical"),
-		["n|<A-d>"] = map_cr("ToggleTerm direction=float")
-			:with_noremap()
-			:with_silent()
-			:with_desc("terminal: Toggle float"),
-		["i|<A-d>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=float<CR>")
-			:with_noremap()
-			:with_silent()
-			:with_desc("terminal: Toggle float"),
-		["t|<A-d>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle float"),
-		["n|<leader>gg"] = map_callback(function()
-				helpers.toggle_lazygit()
+		["n|<C-\\>"] = map_callback(function()
+				term.toggle(nil, { win = { position = "bottom" } })
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("git: Toggle lazygit"),
+			:with_desc("terminal: Toggle horizontal"),
+		["i|<C-\\>"] = map_callback(function()
+				vim.cmd("stopinsert")
+				term.toggle(nil, { win = { position = "bottom" } })
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("terminal: Toggle horizontal"),
+		["t|<C-\\>"] = map_callback(function()
+				term.toggle()
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("terminal: Toggle horizontal"),
+		["n|<A-d>"] = map_callback(function()
+				term.toggle(nil, { win = { style = "float" } })
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("terminal: Toggle float"),
+		["i|<A-d>"] = map_callback(function()
+				vim.cmd("stopinsert")
+				term.toggle(nil, { win = { style = "float" } })
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("terminal: Toggle float"),
+		["t|<A-d>"] = map_callback(function()
+				term.toggle()
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("terminal: Toggle float"),
+		["n|<leader>gg"] = map_callback(function()
+				require("snacks").lazygit()
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("terminal: Toggle lazygit"),
 
 		-- Plugin: trouble
 		["n|gt"] = map_cr("Trouble diagnostics toggle")
@@ -95,82 +94,49 @@ local mappings = {
 			:with_silent()
 			:with_desc("lsp: Show symbols hierarchy"),
 
-		-- Plugin: telescope
-		["n|<C-p>"] = map_callback(function()
-				helpers.picker("keymaps", {
-					lhs_filter = function(lhs)
-						return not string.find(lhs, "Þ")
-					end,
-				})
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("tool: Toggle command panel"),
-		["n|<leader>fc"] = map_callback(function()
-				helpers.telescope_collections(require("telescope.themes").get_dropdown())
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("tool: Open Telescope collections"),
+		-- Plugin: snacks.picker
 		["n|<leader>ff"] = map_callback(function()
-				require("search").open({ collection = "file" })
+				picker.smart()
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("tool: Find files"),
+			:with_desc("find: Files"),
+		["n|<leader>fb"] = map_callback(function()
+				picker.buffers()
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("find: Buffers"),
 		["n|<leader>fp"] = map_callback(function()
-				require("search").open({ collection = "pattern" })
+				picker.grep()
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("tool: Find patterns"),
+			:with_desc("find: Live grep"),
 		["v|<leader>fs"] = map_callback(function()
-				local is_config = vim.uv.cwd() == vim_path
-				if require("core.settings").search_backend == "fzf" then
-					require("fzf-lua").grep_project({
-						search = require("fzf-lua.utils").get_visual_selection(),
-						rg_opts = "--column --line-number --no-heading --color=always --smart-case"
-							.. (is_config and " --no-ignore --hidden --glob '!.git/*'" or ""),
-					})
-				else
-					require("telescope-live-grep-args.shortcuts").grep_visual_selection(
-						is_config and { additional_args = { "--no-ignore" } } or {}
-					)
-				end
+				picker.grep_word()
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("tool: Find word under cursor"),
-		["n|<leader>fg"] = map_callback(function()
-				require("search").open({ collection = "git" })
+			:with_desc("find: Search selection"),
+		["n|<leader>fu"] = map_callback(function()
+				picker.undo()
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("tool: Locate Git objects"),
-		["n|<leader>fd"] = map_callback(function()
-				require("search").open({ collection = "dossier" })
+			:with_desc("find: Undo history"),
+		["n|<leader>fr"] = map_callback(function()
+				picker.resume()
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("tool: Retrieve dossiers"),
-		["n|<leader>fm"] = map_callback(function()
-				require("search").open({ collection = "misc" })
+			:with_desc("find: Resume last"),
+		["n|<C-p>"] = map_callback(function()
+				helpers.command_panel()
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("tool: Miscellaneous"),
-		["n|<leader>fr"] = map_cr("Telescope resume")
-			:with_noremap()
-			:with_silent()
-			:with_desc("tool: Resume last telescope search"),
-		["n|<leader>fR"] = map_callback(function()
-				if require("core.settings").search_backend == "fzf" then
-					require("fzf-lua").resume()
-				end
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("tool: Resume last fzf search"),
+			:with_desc("tool: Command panel"),
 
 		-- Plugin: dap
 		-- use C-w_q to close float window

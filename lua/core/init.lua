@@ -28,22 +28,6 @@ local leader_map = function()
 	vim.api.nvim_set_keymap("x", " ", "", { noremap = true })
 end
 
-local gui_config = function()
-	if next(settings.gui_config) then
-		vim.api.nvim_set_option_value(
-			"guifont",
-			settings.gui_config.font_name .. ":h" .. settings.gui_config.font_size,
-			{}
-		)
-	end
-end
-
-local neovide_config = function()
-	for name, config in pairs(settings.neovide_config) do
-		vim.g["neovide_" .. name] = config
-	end
-end
-
 local clipboard_config = function()
 	if global.is_mac then
 		vim.g.clipboard = {
@@ -84,15 +68,13 @@ local shell_config = function()
 	if global.is_windows then
 		if not (vim.fn.executable("pwsh") == 1 or vim.fn.executable("powershell") == 1) then
 			vim.notify(
-				[[
+				[[paste
 Failed to setup terminal config
-
 PowerShell is either not installed, missing from PATH, or not executable;
-cmd.exe will be used instead for `:!` (shell bang) and toggleterm.nvim.
-
+cmd.exe will be used instead for `:!` (shell bang) and terminal.
 You're recommended to install PowerShell for better experience.]],
 				vim.log.levels.WARN,
-				{ title = "[core] Runtime Warning" }
+				{ title = "[core] Runtime error" }
 			)
 			return
 		end
@@ -113,8 +95,6 @@ local load_core = function()
 	createdir()
 	leader_map()
 
-	gui_config()
-	neovide_config()
 	clipboard_config()
 	shell_config()
 

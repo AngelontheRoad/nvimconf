@@ -9,5 +9,6 @@ return function()
 		mode = "cursor",
 		-- Ensure compatibility with Glance's preview window
 		zindex = 50,
+		multiwindow = true,
 	})
 end

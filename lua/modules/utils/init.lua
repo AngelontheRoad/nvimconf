@@ -49,9 +49,8 @@ local function init_palette()
 				palette = nil
 				init_palette()
 				-- Also refresh hard-coded hl groups
-				M.gen_alpha_hl()
+				M.gen_dashboard_hl()
 				M.gen_lspkind_hl()
-				pcall(vim.cmd.AlphaRedraw)
 			end,
 		})
 	end
@@ -245,13 +244,9 @@ function M.gen_lspkind_hl()
 end
 
 -- Generate highlight groups for alpha. Existing attributes will NOT be overwritten
-function M.gen_alpha_hl()
+function M.gen_dashboard_hl()
 	local colors = M.get_palette()
-
-	set_global_hl("AlphaHeader", colors.blue)
-	set_global_hl("AlphaButtons", colors.green)
-	set_global_hl("AlphaShortcut", colors.pink, nil, true)
-	set_global_hl("AlphaFooter", colors.yellow)
+	set_global_hl("SnacksDashboardHeader", colors.blue)
 end
 
 -- Generate highlight groups for cursorword. Existing attributes will NOT be overwritten
@@ -261,6 +256,15 @@ function M.gen_cursorword_hl()
 	-- Do not highlight `MiniCursorwordCurrent`
 	set_global_hl("MiniCursorword", nil, M.darken(colors.surface1, 0.7, colors.base))
 	set_global_hl("MiniCursorwordCurrent", nil)
+end
+
+---Get LSP capabilities merged with blink.cmp capabilities.
+function M.get_lsp_capabilities()
+	return vim.tbl_deep_extend(
+		"force",
+		vim.lsp.protocol.make_client_capabilities(),
+		require("blink.cmp").get_lsp_capabilities({}, false)
+	)
 end
 
 ---Setup and enable a language server in one call.
@@ -292,26 +296,6 @@ function M.tobool(value)
 		)
 		return nil
 	end
-end
-
---- Function to recursively merge src into dst
---- Unlike vim.tbl_deep_extend(), this function extends if the original value is a list
----@paramm dst table @Table which will be modified and appended to
----@paramm src table @Table from which values will be inserted
----@return table @Modified table
-local function tbl_recursive_merge(dst, src)
-	for key, value in pairs(src) do
-		if type(dst[key]) == "table" and type(value) == "function" then
-			dst[key] = value(dst[key])
-		elseif type(dst[key]) == "table" and vim.islist(dst[key]) and key ~= "dashboard_image" then
-			vim.list_extend(dst[key], value)
-		elseif type(dst[key]) == "table" and type(value) == "table" and not vim.islist(dst[key]) then
-			tbl_recursive_merge(dst[key], value)
-		else
-			dst[key] = value
-		end
-	end
-	return dst
 end
 
 ---@param plugin_name string @Module name of the plugin (used to setup itself)

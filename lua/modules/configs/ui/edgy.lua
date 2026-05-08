@@ -34,32 +34,21 @@ return function()
 		},
 		left = {
 			{
-				ft = "NvimTree",
-				pinned = true,
-				collapsed = false,
-				size = { height = 0.6, width = 40 },
-				open = "NvimTreeOpen",
-			},
-			{
 				ft = "trouble",
 				pinned = true,
 				collapsed = false,
-				size = { height = 0.4, width = 40 },
-				open = function()
-					return vim.b.buftype == "" and "Trouble symbols toggle win.position=right"
-				end,
+				size = { width = 40 },
+				open = "Trouble symbols win.position=right",
 				filter = trouble_filter("right"),
 			},
 		},
 		bottom = {
 			{ ft = "qf", size = { height = 0.3 } },
 			{
-				ft = "toggleterm",
+				ft = "snacks_terminal",
 				size = { height = 0.3 },
 				filter = function(_, win)
-					local cfg = vim.api.nvim_win_get_config(win)
-					local term = require("toggleterm.terminal").get(1)
-					return cfg.relative == "" and term and term.direction == "horizontal"
+					return vim.api.nvim_win_get_config(win).relative == ""
 				end,
 			},
 			{

@@ -1,47 +1,66 @@
 local tool = {}
-local settings = require("core.settings")
 
-tool["tpope/vim-fugitive"] = {
+tool["aaronhallaert/advanced-git-search.nvim"] = {
 	lazy = true,
-	cmd = { "Git", "G" },
+	cmd = { "AdvancedGitSearch" },
+	config = function()
+		require("advanced_git_search.snacks").setup({
+			diff_plugin = "diffview",
+			git_flags = { "-c", "delta.side-by-side=true" },
+			entry_default_author_or_date = "author",
+		})
+	end,
+	dependencies = {
+		"tpope/vim-rhubarb",
+		"tpope/vim-fugitive",
+		"sindrets/diffview.nvim",
+	},
 }
--- This is specifically for fcitx5 users who code in languages other than English
--- tool["pysan3/fcitx5.nvim"] = {
--- 	lazy = true,
--- 	event = "BufReadPost",
--- 	cond = vim.fn.executable("fcitx5-remote") == 1,
--- 	config = require("tool.fcitx5"),
--- }
 tool["Bekaboo/dropbar.nvim"] = {
 	lazy = false,
 	config = require("tool.dropbar"),
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
-		"nvim-telescope/telescope-fzf-native.nvim",
 	},
 }
-tool["nvim-tree/nvim-tree.lua"] = {
+tool["benlubas/molten-nvim"] = {
+	lazy = true,
+	cond = (vim.fn.has("wsl") ~= "0"),
+	version = "^1.0.0",
+	ft = { "python", "markdown" },
+	-- cmd = { "MoltenInfo", "MoltenInit" },
+	build = ":UpdateRemotePlugins",
+	init = require("tool.molten"),
+	-- use snacks instead
+}
+tool["stevearc/oil.nvim"] = {
+	lazy = false,
+	config = require("tool.oil"),
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+}
+tool["stevearc/overseer.nvim"] = {
 	lazy = true,
 	cmd = {
-		"NvimTreeToggle",
-		"NvimTreeOpen",
-		"NvimTreeFindFile",
-		"NvimTreeFindFileToggle",
-		"NvimTreeRefresh",
+		"OverseerRun",
+		"OverseerToggle",
+		"OverseerBuild",
+		"OverseerInfo",
+		"OverseerClose",
+		"OverseerOpen",
+		"OverseerTaskAction",
+		"OverseerQuickAction",
 	},
-	config = require("tool.nvim-tree"),
-}
-tool["mikavilpas/yazi.nvim"] = {
-	lazy = true,
-	event = "VeryLazy",
-	dependencies = {
-		{ "nvim-lua/plenary.nvim", lazy = true },
-	},
+	config = require("tool.overseer"),
 }
 tool["ibhagwan/smartyank.nvim"] = {
 	lazy = true,
 	event = "BufReadPost",
 	config = require("tool.smartyank"),
+}
+tool["folke/snacks.nvim"] = {
+	priority = 1000,
+	lazy = false,
+	config = require("editor.snacks"),
 }
 tool["michaelb/sniprun"] = {
 	lazy = true,
@@ -52,69 +71,25 @@ tool["michaelb/sniprun"] = {
 	cmd = { "SnipRun", "SnipReset", "SnipInfo" },
 	config = require("tool.sniprun"),
 }
-tool["akinsho/toggleterm.nvim"] = {
-	lazy = true,
-	cmd = {
-		"ToggleTerm",
-		"ToggleTermSetName",
-		"ToggleTermToggleAll",
-		"ToggleTermSendVisualLines",
-		"ToggleTermSendCurrentLine",
-		"ToggleTermSendVisualSelection",
-	},
-	config = require("tool.toggleterm"),
-}
 tool["folke/trouble.nvim"] = {
 	lazy = true,
 	cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
 	config = require("tool.trouble"),
+}
+tool["tpope/vim-fugitive"] = {
+	lazy = true,
+	cmd = { "Git", "G" },
 }
 tool["folke/which-key.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("tool.which-key"),
 }
-tool["ibhagwan/fzf-lua"] = {
+tool["mikavilpas/yazi.nvim"] = {
 	lazy = true,
-	cond = (settings.search_backend == "fzf"),
-	cmd = "FzfLua",
-	config = require("tool.fzf-lua"),
-	dependencies = { "nvim-tree/nvim-web-devicons" },
-}
-
-----------------------------------------------------------------------
---                        Telescope Plugins                         --
-----------------------------------------------------------------------
-tool["nvim-telescope/telescope.nvim"] = {
-	lazy = true,
-	cmd = "Telescope",
-	config = require("tool.telescope"),
+	event = "VeryLazy",
 	dependencies = {
-		{ "nvim-lua/plenary.nvim" },
-		{ "nvim-tree/nvim-web-devicons" },
-		{ "jvgrootveld/telescope-zoxide" },
-		{ "debugloop/telescope-undo.nvim" },
-		{ "nvim-telescope/telescope-frecency.nvim" },
-		{ "nvim-telescope/telescope-live-grep-args.nvim" },
-		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-		{
-			"ayamir/search.nvim",
-			config = require("tool.search"),
-		},
-		{
-			"DrKJeff16/project.nvim",
-			event = { "CursorHold", "CursorHoldI" },
-			config = require("tool.project"),
-		},
-		{
-			"aaronhallaert/advanced-git-search.nvim",
-			cmd = { "AdvancedGitSearch" },
-			dependencies = {
-				"tpope/vim-rhubarb",
-				"tpope/vim-fugitive",
-				"sindrets/diffview.nvim",
-			},
-		},
+		{ "nvim-lua/plenary.nvim", lazy = true },
 	},
 }
 
@@ -143,36 +118,6 @@ tool["mfussenegger/nvim-dap"] = {
 			config = require("tool.dap.dapui"),
 		},
 	},
-}
-
-----------------------------------------------------------------------
---                        Myself Plugins                            --
-----------------------------------------------------------------------
-tool["benlubas/molten-nvim"] = {
-	lazy = true,
-	cond = (vim.fn.has("wsl") ~= "0"),
-	version = "^1.0.0",
-	ft = { "python", "markdown" },
-	-- cmd = { "MoltenInfo", "MoltenInit" },
-	build = ":UpdateRemotePlugins",
-	init = require("tool.molten"),
-	-- use snacks instead
-	-- dependencies = { { "3rd/image.nvim", config = require("tool.image") } },
-}
-
-tool["stevearc/overseer.nvim"] = {
-	lazy = true,
-	cmd = {
-		"OverseerRun",
-		"OverseerRunCmd",
-		"OverseerToggle",
-		"OverseerBuild",
-		"OverseerInfo",
-		"OverseerClose",
-		"OverseerOpen",
-		"OverseerTaskAction",
-	},
-	config = require("tool.overseer"),
 }
 
 return tool

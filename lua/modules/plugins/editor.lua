@@ -2,31 +2,13 @@ local editor = {}
 
 editor["olimorris/persisted.nvim"] = {
 	lazy = true,
-	cmd = {
-		"SessionToggle",
-		"SessionStart",
-		"SessionStop",
-		"SessionSave",
-		"SessionLoad",
-		"SessionLoadLast",
-		"SessionLoadFromFile",
-		"SessionDelete",
-	},
+	event = "BufReadPre", -- Ensure the plugin loads only when a buffer has been loaded
 	config = require("editor.persisted"),
 }
 editor["m4xshen/autoclose.nvim"] = {
 	lazy = true,
-	event = "InsertEnter",
+	event = "BufReadPost",
 	config = require("editor.autoclose"),
-}
-editor["pteroctopus/faster.nvim"] = {
-	lazy = false,
-	cond = require("core.settings").load_big_files_faster,
-	config = require("editor.faster"),
-}
-editor["ojroques/nvim-bufdel"] = {
-	lazy = true,
-	cmd = { "BufDel", "BufDelAll", "BufDelOthers" },
 }
 -- NOTE: `flash.nvim` is a powerful plugin that can be used as partial or complete replacements for:
 --  > `hop.nvim`,
@@ -39,11 +21,6 @@ editor["folke/flash.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("editor.flash"),
-}
-editor["numToStr/Comment.nvim"] = {
-	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
-	config = require("editor.comment"),
 }
 editor["sindrets/diffview.nvim"] = {
 	lazy = true,
@@ -60,30 +37,26 @@ editor["echasnovski/mini.cursorword"] = {
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("editor.cursorword"),
 }
-editor["smoka7/hop.nvim"] = {
-	lazy = true,
-	version = "*",
-	event = { "CursorHold", "CursorHoldI" },
-	config = require("editor.hop"),
-}
+-- editor["smoka7/hop.nvim"] = {
+-- 	lazy = true,
+-- 	version = "*",
+-- 	event = { "CursorHold", "CursorHoldI" },
+-- 	config = require("editor.hop"),
+-- }
 editor["brenoprata10/nvim-highlight-colors"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("editor.highlight-colors"),
-}
-editor["romainl/vim-cool"] = {
-	lazy = true,
-	event = { "CursorMoved", "InsertEnter" },
 }
 editor["lambdalisue/suda.vim"] = {
 	lazy = true,
 	cmd = { "SudaRead", "SudaWrite" },
 	init = require("editor.suda"),
 }
-editor["tpope/vim-sleuth"] = {
-	lazy = true,
-	event = { "BufNewFile", "BufReadPost", "BufFilePost" },
-}
+-- editor["tpope/vim-sleuth"] = {
+-- 	lazy = true,
+-- 	event = { "BufNewFile", "BufReadPost", "BufFilePost" },
+-- }
 editor["MagicDuck/grug-far.nvim"] = {
 	lazy = true,
 	cmd = "GrugFar",
@@ -95,16 +68,25 @@ editor["kylechui/nvim-surround"] = {
 	event = "VeryLazy",
 	config = require("editor.nvim-surround"),
 }
-editor["pixelneo/vim-python-docstring"] = {
-	lazy = true,
-	ft = { "python" },
-	-- event = "BufEnter *.py",
-	init = require("editor.vim-python-docstring"),
-}
 
 ----------------------------------------------------------------------
 --                  :treesitter related plugins                    --
 ----------------------------------------------------------------------
+editor["jmbuhr/otter.nvim"] = {
+	lazy = true,
+	ft = { "toml", "markdown", "quarto", "org", "norg" },
+	dependencies = "nvim-treesitter/nvim-treesitter",
+	-- config = function()
+	-- 	vim.api.nvim_create_autocmd("FileType", {
+	-- 		pattern = { "toml", "markdown", "quarto", "org", "norg" },
+	-- 		group = vim.api.nvim_create_augroup("EmbedToml", { clear = true }),
+	-- 		callback = function()
+	-- 			require("otter").activate()
+	-- 		end,
+	-- 	})
+	-- end,
+}
+
 editor["nvim-treesitter/nvim-treesitter"] = {
 	lazy = false, -- nvim-ts cannot lazy load now
 	branch = "main",
@@ -115,7 +97,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 	end,
 	config = require("editor.treesitter"),
 	dependencies = {
-		{ "mfussenegger/nvim-treehopper" },
+		-- { "mfussenegger/nvim-treehopper" },
 		{
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			branch = "main",
@@ -145,6 +127,11 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		{
 			"Wansmer/treesj",
 			config = require("editor.treesj"),
+		},
+		{
+			"danymat/neogen",
+			cmd = "Neogen",
+			config = require("editor.neogen"),
 		},
 	},
 }

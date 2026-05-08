@@ -15,6 +15,11 @@ return function()
 			current = true,
 			-- for the current window, label targets closer to the cursor first
 			distance = true,
+			rainbow = {
+				enabled = true,
+				-- number between 1 and 9
+				shade = 5,
+			},
 		},
 		modes = {
 			search = { enabled = false },
@@ -25,13 +30,13 @@ return function()
 				-- hide after jump when not using jump labels
 				autohide = false,
 				-- show jump labels
-				jump_labels = false,
+				jump_labels = true,
 				-- set to `false` to use the current line only
 				multi_line = true,
 				-- When using jump labels, don't use these keys
 				-- This allows using those keys directly after the motion
 				label = { exclude = "hjkliardc" },
-				keys = { "f", "F", ";", "," },
+				keys = { "f", "F", "t", "T" },
 			},
 		},
 	})
