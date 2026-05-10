@@ -49,12 +49,12 @@ return function()
 						desc = "Find text",
 						action = ":lua require('snacks').picker.grep()",
 					},
-					-- {
-					-- 	icon = icons.ui.CloudDownload,
-					-- 	key = "u",
-					-- 	desc = "Update",
-					-- 	action = ":Lazy sync",
-					-- },
+					{
+						icon = icons.ui.CloudDownload,
+						key = "u",
+						desc = "Update",
+						action = ":Lazy sync",
+					},
 					{
 						icon = icons.ui.SignOut,
 						key = "q",
@@ -64,9 +64,51 @@ return function()
 				},
 			},
 			sections = {
-				{ section = "header", hl = "SnacksDashboardHeader" },
-				{ section = "keys", gap = 1, padding = 1 },
-				{ section = "startup" },
+				{
+					{ section = "header", hl = "SnacksDashboardHeader" },
+					{ section = "startup" },
+				},
+				{
+					pane = 2,
+					{
+						function()
+							return {
+								align = "center",
+								padding = 1,
+								text = {
+									{ "│ ", hl = "Special" },
+									{ "╲ ││\n", hl = "String" },
+									{ "││", hl = "Special" },
+									{ "╲╲││\n", hl = "String" },
+									{ "││ ", hl = "Special" },
+									{ "╲ │", hl = "String" },
+								},
+							}
+						end,
+						function()
+							local v = vim.version()
+							return {
+								align = "center",
+								text = {
+									{
+										string.format("NVIM v%d.%d.%d", v.major, v.minor, v.patch),
+										hl = "String",
+									},
+								},
+							}
+						end,
+					},
+					{
+						align = "center",
+						text = {
+							{
+								"────────────────────────────────────────────────────────────",
+								hl = "NonText",
+							},
+						},
+					},
+					{ section = "keys", gap = 1, padding = 1 },
+				},
 			},
 		},
 		explorer = { enabled = false },
