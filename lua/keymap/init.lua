@@ -37,6 +37,7 @@ local mappings = {
 bind.nvim_load_mapping(mappings.core)
 
 -- Builtin & Plugin keymaps
+-- require("keymap.avante")
 require("keymap.completion")
 require("keymap.editor")
 require("keymap.git")

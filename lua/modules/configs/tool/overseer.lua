@@ -1,5 +1,5 @@
 return function()
-	require("overseer").setup({
+	require("modules.utils").load_plugin("overseer", {
 		-- Patch nvim-dap to support preLaunchTask and postDebugTask
 		dap = true,
 		-- Configure the task output buffer and window
@@ -51,7 +51,7 @@ return function()
 				["<C-v>"] = { "keymap.open", opts = { dir = "vsplit" }, desc = "Open task output in vsplit" },
 				["<C-s>"] = { "keymap.open", opts = { dir = "split" }, desc = "Open task output in split" },
 				["<C-t>"] = { "keymap.open", opts = { dir = "tab" }, desc = "Open task output in tab" },
-				["<C-f>"] = { "keymap.open", opts = { dir = "float" }, desc = "Open task output in float" },
+				-- ["<C-f>"] = { "keymap.open", opts = { dir = "float" }, desc = "Open task output in float" },
 				["<C-x>"] = {
 					"keymap.run_action",
 					opts = { action = "open output in quickfix" },
@@ -60,8 +60,8 @@ return function()
 				["p"] = "keymap.toggle_preview",
 				["{"] = "keymap.prev_task",
 				["}"] = "keymap.next_task",
-				-- ["<C-k>"] = "keymap.scroll_output_up",
-				-- ["<C-j>"] = "keymap.scroll_output_down",
+				["<C-f>"] = "keymap.scroll_output_up",
+				["<C-d>"] = "keymap.scroll_output_down",
 				["g."] = "keymap.toggle_show_wrapped",
 				["q"] = { "<CMD>close<CR>", desc = "Close task list" },
 			},
@@ -127,12 +127,5 @@ return function()
 		-- Set to 0 to disable caching.
 		template_cache_threshold_ms = 200,
 		log_level = vim.log.levels.WARN,
-		-- Overseer can wrap any call to vim.system and vim.fn.jobstart as a task.
-		experimental_wrap_builtins = {
-			enabled = false,
-			condition = function(cmd, caller, opts)
-				return true
-			end,
-		},
 	})
 end

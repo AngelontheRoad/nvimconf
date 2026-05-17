@@ -43,4 +43,14 @@ lang["MeanderingProgrammer/render-markdown.nvim"] = {
 -- 	config = require("lang.crates"),
 -- 	dependencies = "nvim-lua/plenary.nvim",
 -- }
+
+lang["kawre/leetcode.nvim"] = {
+	lazy = vim.fn.argv(0, -1) ~= "leetcode.nvim",
+	opts = {
+		arg = "leetcode.nvim",
+		cn = { enabled = true },
+		picker = { provider = "snacks-picker" },
+	},
+}
+
 return lang

@@ -2,5 +2,5 @@
 return {
 	cmd = { "bash-language-server", "start" },
 	single_file_support = true,
-	filetypes = { "bash", "sh", "zsh" },
+	filetypes = { "bash", "sh" },
 }

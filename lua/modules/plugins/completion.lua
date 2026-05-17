@@ -75,39 +75,6 @@ completion["saghen/blink.cmp"] = {
 	opts_extend = { "sources.default" },
 }
 
-completion["yetone/avante.nvim"] = {
-	event = "VeryLazy",
-	lazy = true,
-	version = false,
-	build = vim.fn.has("win32") ~= 0 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
-		or "make",
-	config = require("completion.avante"),
-	dependencies = {
-		"folke/snacks.nvim",
-		"nvim-lua/plenary.nvim",
-		"MunifTanjim/nui.nvim",
-		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-		{
-			-- support for image pasting
-			"HakonHarnes/img-clip.nvim",
-			event = "VeryLazy",
-			opts = {
-				-- recommended settings
-				default = {
-					embed_image_as_base64 = false,
-					prompt_for_file_name = false,
-					drag_and_drop = {
-						insert_mode = true,
-					},
-					-- required for Windows users
-					use_absolute_path = true,
-				},
-			},
-		},
-		"MeanderingProgrammer/render-markdown.nvim",
-	},
-}
-
 -- Adding *nvim config dir*, *nvim runtime dir*, *all plugin dir(with /lua dir)* to get
 -- hover docs and function signatures, but it takes too much time to load all dirs, use it if needed.
 completion["folke/lazydev.nvim"] = {

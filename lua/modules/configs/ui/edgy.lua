@@ -44,13 +44,13 @@ return function()
 		},
 		bottom = {
 			{ ft = "qf", size = { height = 0.3 } },
-			{
-				ft = "snacks_terminal",
-				size = { height = 0.3 },
-				filter = function(_, win)
-					return vim.api.nvim_win_get_config(win).relative == ""
-				end,
-			},
+			-- {
+			-- 	ft = "snacks_terminal",
+			-- 	size = { height = 0.3 },
+			-- 	filter = function(_, win)
+			-- 		return vim.api.nvim_win_get_config(win).relative == ""
+			-- 	end,
+			-- },
 			{
 				ft = "help",
 				size = { height = 0.3 },

@@ -207,14 +207,23 @@ local opts = {
 				---@module "blink-ripgrep"
 				---@type blink-ripgrep.Options
 				opts = {
-					prefix_min_len = 2,
+					prefix_min_len = 3,
 					backend = {
 						use = "ripgrep",
 						ripgrep = {
-							context_size = 5,
-							max_filesize = "1M",
+							max_filesize = "200K",
+							context_size = 3,
+							additional_rg_options = { "--max-count=5" },
+							ignore_paths = {
+								"/home/chris",
+								"/home/chris/.config",
+								"/home/chris/.local",
+								"/home/chris/.xwechat",
+								"/etc",
+							},
 						},
 					},
+					debug = false,
 				},
 				score_offset = -15,
 				max_items = 3,
