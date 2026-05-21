@@ -1,8 +1,6 @@
 return function()
-	local snippet_path = vim.fn.stdpath("config") .. "/snips/"
-	if not vim.tbl_contains(vim.opt.rtp:get(), snippet_path) then
-		vim.opt.rtp:append(snippet_path)
-	end
+	local vim_path = require("core.global").vim_path
+	local snippet_path = vim_path .. "/snips/"
 
 	require("modules.utils").load_plugin("luasnip", {
 		keep_roots = true,
@@ -18,6 +16,8 @@ return function()
 			snippet_path,
 		},
 	})
+	-- load friendly-snippets
+	require("luasnip.loaders.from_vscode").lazy_load()
 	require("luasnip.loaders.from_lua").lazy_load()
 	require("luasnip.loaders.from_snipmate").lazy_load()
 end
