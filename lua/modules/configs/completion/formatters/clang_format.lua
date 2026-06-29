@@ -4,5 +4,6 @@ local project_root = vim.fs.root(vim.fn.getcwd(), { ".git" }) or vim.fn.getcwd()
 if not vim.uv.fs_stat(vim.fs.joinpath(project_root, ".clang-format")) then
 	-- return { "-style={ BasedOnStyle: LLVM, IndentWidth: 4 }" }
 	return { "-style={ BasedOnStyle: LLVM}" }
+else
+	return { "-style=file" }
 end
-return {}

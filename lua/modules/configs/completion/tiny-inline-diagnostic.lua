@@ -11,7 +11,7 @@ return function()
 			show_code = true,
 			add_messages = {
 				messages = true,
-				display_count = true,
+				display_count = false,
 				use_max_severity = false,
 				show_multiple_glyphs = true,
 			},
