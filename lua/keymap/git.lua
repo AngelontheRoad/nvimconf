@@ -54,7 +54,7 @@ function M.gitsigns(bufnr)
 	local map = {
 		["n|]g"] = map_callback(function()
 				if vim.wo.diff then
-					return "]g"
+					return "]c"
 				end
 				vim.schedule(function()
 					gitsigns.nav_hunk("next")
@@ -67,7 +67,7 @@ function M.gitsigns(bufnr)
 			:with_desc("git: Goto next hunk"),
 		["n|[g"] = map_callback(function()
 				if vim.wo.diff then
-					return "[g"
+					return "[c"
 				end
 				vim.schedule(function()
 					gitsigns.nav_hunk("prev")

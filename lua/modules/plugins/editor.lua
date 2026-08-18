@@ -1,22 +1,19 @@
+---@module [TODO:description]
+---@author [TODO:description]
+---@license [TODO:description]
+
 local editor = {}
 
 editor["olimorris/persisted.nvim"] = {
 	lazy = true,
-	event = "BufReadPre", -- Ensure the plugin loads only when a buffer has been loaded
+	cmd = "Persisted",
 	config = require("editor.persisted"),
 }
-editor["m4xshen/autoclose.nvim"] = {
-	lazy = true,
-	event = "BufReadPost",
-	config = require("editor.autoclose"),
-}
--- NOTE: `flash.nvim` is a powerful plugin that can be used as partial or complete replacements for:
---  > `hop.nvim`,
---  > `wilder.nvim`
---  > `nvim-treehopper`
--- Considering its steep learning curve as well as backward compatibility issues...
---  > We have no plan to remove the above plugins for the time being.
--- But as usual, you can always tweak the plugin to your liking.
+-- editor["m4xshen/autoclose.nvim"] = {
+-- 	lazy = true,
+-- 	event = "BufReadPost",
+-- 	config = require("editor.autoclose"),
+-- }
 editor["folke/flash.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
@@ -27,22 +24,26 @@ editor["sindrets/diffview.nvim"] = {
 	cmd = { "DiffviewOpen", "DiffviewClose" },
 	config = require("editor.diffview"),
 }
-editor["echasnovski/mini.align"] = {
+editor["nvim-mini/mini.ai"] = {
+	version = "*",
+	config = require("editor.ai_textobj"),
+}
+editor["nvim-mini/mini.align"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("editor.align"),
 }
-editor["echasnovski/mini.cursorword"] = {
+editor["nvim-mini/mini.cursorword"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("editor.cursorword"),
 }
--- editor["smoka7/hop.nvim"] = {
--- 	lazy = true,
--- 	version = "*",
--- 	event = { "CursorHold", "CursorHoldI" },
--- 	config = require("editor.hop"),
--- }
+editor["nvim-mini/mini.surround"] = {
+	lazy = true,
+	event = { "BufReadPost", "BufNewFile" },
+	version = false,
+	config = require("editor.surround"),
+}
 editor["brenoprata10/nvim-highlight-colors"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
@@ -62,13 +63,6 @@ editor["MagicDuck/grug-far.nvim"] = {
 	cmd = "GrugFar",
 	config = require("editor.grug-far"),
 }
-editor["kylechui/nvim-surround"] = {
-	version = "*", -- Use for stability; omit to use `main` branch for the latest features
-	lazy = true,
-	event = "VeryLazy",
-	config = require("editor.nvim-surround"),
-}
-
 ----------------------------------------------------------------------
 --                  :treesitter related plugins                    --
 ----------------------------------------------------------------------
@@ -90,11 +84,7 @@ editor["jmbuhr/otter.nvim"] = {
 editor["nvim-treesitter/nvim-treesitter"] = {
 	lazy = false, -- nvim-ts cannot lazy load now
 	branch = "main",
-	build = function()
-		if #vim.api.nvim_list_uis() > 0 then
-			vim.cmd.TSUpdate()
-		end
-	end,
+	build = ":TSUpdate",
 	config = require("editor.treesitter"),
 	dependencies = {
 		-- { "mfussenegger/nvim-treehopper" },
@@ -103,10 +93,10 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 			branch = "main",
 			config = require("editor.ts-textobjects"),
 		},
-		{
-			"andymass/vim-matchup",
-			init = require("editor.matchup"),
-		},
+		-- {
+		-- 	"andymass/vim-matchup",
+		-- 	init = require("editor.matchup"),
+		-- },
 		{
 			"windwp/nvim-ts-autotag",
 			config = require("editor.autotag"),

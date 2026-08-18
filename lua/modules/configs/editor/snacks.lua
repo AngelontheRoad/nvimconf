@@ -12,7 +12,6 @@ return function()
 		-- or leave it empty to use the default settings
 		-- refer to the configuration section below
 		bigfile = { enabled = true },
-		bufdelete = { enabled = true },
 		dashboard = {
 			enabled = true,
 			preset = {
@@ -119,12 +118,6 @@ return function()
 				char = "│",
 				only_scope = false,
 			},
-			animate = {
-				enabled = true,
-				style = "out",
-				easing = "linear",
-				duration = { step = 20, total = 300 },
-			},
 			scope = {
 				enabled = true,
 				char = "┃",
@@ -159,7 +152,6 @@ return function()
 			end,
 		},
 		input = { enabled = true },
-		lazygit = { enabled = true },
 		picker = {
 			enabled = true,
 			sources = {
@@ -214,7 +206,7 @@ return function()
 		},
 		quickfile = { enabled = true },
 		scope = { enabled = false },
-		scratch = { enabled = true },
+		scratch = { enabled = false },
 		scroll = {
 			enabled = true,
 			animate = {
@@ -235,4 +227,8 @@ return function()
 		},
 		words = { enabled = false },
 	})
+
+	vim.api.nvim_create_user_command("SnacksNotifier", function()
+		require("snacks").notifier.show_history()
+	end, { desc = "Show notification history" })
 end

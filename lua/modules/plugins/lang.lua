@@ -17,18 +17,17 @@ lang["ray-x/go.nvim"] = {
 }
 lang["iamcco/markdown-preview.nvim"] = {
 	lazy = true,
-	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-	ft = "markdown",
-	build = function()
-		vim.fn["mkdp#util#install"]()
-	end,
+	ft = { "markdown" },
+	build = ":call mkdp#util#install()",
+	init = require("lang.markdown-preview"),
 }
-lang["MeanderingProgrammer/render-markdown.nvim"] = {
-	ft = { "markdown", "Avante" },
-	opts = {
-		file_types = { "markdown", "Avante" },
+lang["OXY2DEV/markview.nvim"] = {
+	lazy = false,
+	config = require("lang.markview"),
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+		"nvim-treesitter/nvim-treesitter",
 	},
-	config = require("lang.render-markdown"),
 }
 -- lang["mrcjkb/rustaceanvim"] = {
 -- 	lazy = true,

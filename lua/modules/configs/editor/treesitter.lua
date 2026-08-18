@@ -1,5 +1,4 @@
 return vim.schedule_wrap(function()
-	vim.api.nvim_set_option_value("indentexpr", "v:lua.require'nvim-treesitter'.indentexpr()", {})
 	require("modules.utils").load_plugin("nvim-treesitter", {})
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = "*",
@@ -7,9 +6,20 @@ return vim.schedule_wrap(function()
 		callback = function(args)
 			local ft = vim.bo[args.buf].filetype
 			local lang = vim.treesitter.language.get_lang(ft) or ft
-			if require("core.settings").treesitter_deps[lang] then
-				pcall(vim.treesitter.start, args.buf, lang)
+			-- Gate on what is actually available rather than on `treesitter_deps`, which only
+			-- drives install()/update(): parsers shipped by external grammars (d2, ghostty)
+			-- are never listed there, and parsers dropped upstream keep their stale .so.
+			local ok, added = pcall(vim.treesitter.language.add, lang)
+			if not ok or added == false then
+				return
 			end
+			if not vim.treesitter.query.get(lang, "highlights") then
+				return
+			end
+			if vim.treesitter.query.get(lang, "indents") then
+				vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+			end
+			pcall(vim.treesitter.start, args.buf, lang)
 		end,
 	})
 	local parsers = vim.tbl_keys(require("core.settings").treesitter_deps)

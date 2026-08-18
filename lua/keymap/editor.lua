@@ -139,21 +139,6 @@ local mappings = {
 			:with_noremap()
 			:with_desc("editn: Select child treesitter node or inner incremental lsp selections"),
 
-		-- Plugin: snacks.scratch
-		["n|<leader>e"] = map_callback(function()
-				require("snacks").scratch()
-			end)
-			:with_silent()
-			:with_noremap()
-			:with_desc("editn: Toggle Scratch Buffer"),
-
-		["n|<leader>E"] = map_callback(function()
-				require("snacks").scratch.select()
-			end)
-			:with_silent()
-			:with_noremap()
-			:with_desc("editn: Toggle Scratch Buffer"),
-
 		-- Plugin suda.vim
 		["n|<C-S-s>"] = map_cu("SudaWrite"):with_silent():with_noremap():with_desc("edit: Save file using sudo"),
 

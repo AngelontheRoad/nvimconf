@@ -40,7 +40,6 @@ completion["nvimdev/lspsaga.nvim"] = {
 completion["rachartier/tiny-inline-diagnostic.nvim"] = {
 	lazy = true,
 	event = "VeryLazy",
-	priority = 1000,
 	config = require("completion.tiny-inline-diagnostic"),
 }
 completion["stevearc/conform.nvim"] = {
@@ -58,13 +57,11 @@ completion["mfussenegger/nvim-lint"] = {
 completion["saghen/blink.cmp"] = {
 	lazy = true,
 	event = { "VeryLazy", "InsertEnter", "CmdlineEnter" },
-	config = require("completion.blink"),
+	branch = "main",
 	build = function()
-		-- build the fuzzy matcher, wait up to 60 seconds
-		-- you can use `gb` in `:Lazy` to rebuild the plugin as needed
-		require("blink.cmp").build():wait(60000)
+		require("blink.cmp").build():pwait()
 	end,
-	version = "*",
+	config = require("completion.blink"),
 	dependencies = {
 		{ "saghen/blink.lib" },
 		{

@@ -24,14 +24,14 @@ local mappings = {
 		-- Plugin: snacks.terminal
 		["t|<Esc><Esc>"] = map_cmd([[<C-\><C-n>]]):with_noremap():with_silent(), -- switch to normal mode in terminal.
 		["n|<C-\\>"] = map_callback(function()
-				term.toggle(nil, { win = { position = "bottom" } })
+				term.toggle(nil, { count = 1, win = { position = "bottom", height = 0.3 } })
 			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle horizontal"),
 		["i|<C-\\>"] = map_callback(function()
 				vim.cmd("stopinsert")
-				term.toggle(nil, { win = { position = "bottom" } })
+				term.toggle(nil, { count = 1, win = { position = "bottom", height = 0.3 } })
 			end)
 			:with_noremap()
 			:with_silent()
@@ -42,15 +42,34 @@ local mappings = {
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle horizontal"),
+		["n|<A-\\>"] = map_callback(function()
+				term.toggle(nil, { count = 2, win = { position = "right", width = 0.3 } })
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("terminal: Toggle horizontal"),
+		["i|<A-\\>"] = map_callback(function()
+				vim.cmd("stopinsert")
+				term.toggle(nil, { count = 2, win = { position = "right", width = 0.3 } })
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("terminal: Toggle horizontal"),
+		["t|<A-\\>"] = map_callback(function()
+				term.toggle()
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("terminal: Toggle horizontal"),
 		["n|<A-d>"] = map_callback(function()
-				term.toggle(nil, { win = { style = "float" } })
+				term.toggle(nil, { count = 3, win = { style = "float" } })
 			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle float"),
 		["i|<A-d>"] = map_callback(function()
 				vim.cmd("stopinsert")
-				term.toggle(nil, { win = { style = "float" } })
+				term.toggle(nil, { count = 3, win = { style = "float" } })
 			end)
 			:with_noremap()
 			:with_silent()
@@ -278,10 +297,10 @@ local mappings = {
 			:with_noremap()
 			:with_silent()
 			:with_desc("overseer: Toggle the overseer window"),
-		["n|<leader>oi"] = map_cr("OverseerInfo")
+		["n|<leader>oa"] = map_cr("OverseerTaskAction")
 			:with_noremap()
 			:with_silent()
-			:with_desc("overseer: Show overseer info"),
+			:with_desc("overseer: Show task action"),
 		["n|<leader>or"] = map_cr("OverseerRun"):with_noremap():with_silent():with_desc("overseer: Run command"),
 	},
 }

@@ -19,7 +19,7 @@ return function()
 		options = {
 			disable_when_touch = false,
 			disabled_filetypes = {
-				"AvanteInput",
+				-- "AvanteInput",
 				"checkhealth",
 				"dap-repl",
 				"diff",

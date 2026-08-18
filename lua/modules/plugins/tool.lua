@@ -116,13 +116,11 @@ tool["stevearc/overseer.nvim"] = {
 	lazy = true,
 	cmd = {
 		"OverseerRun",
+		"OverseerShell",
 		"OverseerToggle",
-		"OverseerBuild",
-		"OverseerInfo",
 		"OverseerClose",
 		"OverseerOpen",
 		"OverseerTaskAction",
-		"OverseerQuickAction",
 	},
 	config = require("tool.overseer"),
 }
